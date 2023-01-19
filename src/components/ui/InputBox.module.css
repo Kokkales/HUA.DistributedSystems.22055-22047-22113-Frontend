@@ -1,0 +1,31 @@
+input {
+    /* opacity: 0; */
+    width: 100%;
+    height: 35px;
+    display: block;
+    /* margin: 10px auto; */
+    border-radius: 5px;
+    background-color: rgba(0, 255, 13, 0.3);
+    border: none;
+    color: #fff;
+    padding: 15px;
+    transition: 0.5s;
+    /* text-transform: capitalize; */
+}
+
+input::placeholder {
+    color: rgb(188, 8, 8);
+}
+
+input:focus {
+    background: rgb(210, 165, 165);
+    color: rgb(152, 149, 149);
+}
+
+input:focus::placeholder {
+    color: #000;
+}
+
+.forgotMyPasswordLink {
+    decoration: none;
+}
