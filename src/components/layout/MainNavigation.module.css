@@ -1,0 +1,75 @@
+.navBar {
+    position: relative;
+    width: 100%;
+    /* background-color: rgba(154, 154, 204, 0.539); */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    /* border-bottom: 1px solid black; */
+    padding: 24px;
+}
+
+.navBar::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 400px;
+    right: 100px;
+    border-bottom: 2px solid black;
+    width: 50%;
+}
+
+
+/* .navBar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-bottom: 2px solid blue;
+    width: -50%;
+} */
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: right;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+
+/* li a {
+    font-size: 20px;
+    display: block;
+    margin-left: 20px;
+    color: red;
+
+
+background-color: rgba(154, 154, 204, 0.539);} */
+
+li.class>* {
+    font-size: 20px;
+    display: block;
+    margin-left: 20px;
+    /* color: black; */
+    /* background-color: rgba(154, 154, 204, 0.539); */
+}
+
+li a:hover {
+    /* color: red; */
+    /* background-color: red; */
+}
+
+.logo {
+    font-size: 34px;
+    /* padding: 24px; */
+}

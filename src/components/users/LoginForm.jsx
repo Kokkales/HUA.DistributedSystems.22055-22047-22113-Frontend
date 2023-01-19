@@ -1,8 +1,11 @@
 import Card from '../ui/Card';
-import InputBox from '../ui/InputBox';
+import TextField from '../ui/TextField';
 import classes from './LoginForm.module.css';
+import PrimaryButton from '../ui/PrimaryButton';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import PrimaryLink from '../ui/PrimaryLink';
+import SecondaryLink from '../ui/SecondaryLink';
 
 function LoginForm(props) {
   return (
@@ -13,40 +16,29 @@ function LoginForm(props) {
             <h1>Login</h1>
           </div>
           <div className={classes.taxNumberInput}>
-            <div>
-              <label htmlFor="title">Tax Number</label>
-              <InputBox>
-                <input
-                  type="text"
-                  placeholder="e.g 123456"
-                  required
-                  id="taxNumber"
-                />
-              </InputBox>
-            </div>
+            <TextField
+              labelHtmlFor="taxNumber"
+              labelText="Tax Number"
+              inputType="text"
+              inputPlaceholder="e.g 123456"
+            ></TextField>
           </div>
           <div className={classes.passwordInput}>
-            <div>
-              <label htmlFor="title">Password</label>
-              <InputBox>
-                <input type="password" required id="password" />
-              </InputBox>
-            </div>
+            <TextField
+              labelHtmlFor="password"
+              labelText="Password"
+              inputType="password"
+              inputPlaceholder=""
+            ></TextField>
           </div>
           <div className={classes.submitBtn}>
-            <div>
-              <button>Login</button>
-            </div>
+            <PrimaryButton text="Login" />
           </div>
           <div className={classes.registerHereLink}>
-            <div>
-              <Link to="/">Register Here!</Link>
-            </div>
+            <PrimaryLink linkTo="/register" text="Register Here!" />
           </div>
           <div className={classes.forgotMyPasswordLink}>
-            <div>
-              <Link to="/">Forgot My Password!</Link>
-            </div>
+            <SecondaryLink linkTo="/" text="Forgot My Password" />
           </div>
         </form>
       </div>
