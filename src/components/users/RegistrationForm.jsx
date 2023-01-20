@@ -1,13 +1,13 @@
 import Card from '../ui/Card';
 import TextField from '../ui/TextField';
-import classes from './LoginForm.module.css';
+import classes from './RegistrationForm.module.css';
 import PrimaryButton from '../ui/PrimaryButton';
 
 // import { Link } from 'react-router-dom';
 import PrimaryLink from '../ui/PrimaryLink';
 import SecondaryLink from '../ui/SecondaryLink';
 
-function LoginForm(props) {
+function RegistrationForm(props) {
   return (
     <Card>
       <div className={classes.content}>
@@ -80,7 +80,10 @@ function LoginForm(props) {
             ></TextField>
           </div>
           <div className={classes.submitBtn}>
-            <PrimaryButton text="Register" />
+            {/* <PrimaryButton text="Register" /> */}
+            <PrimaryButton>
+              <button>Register</button>
+            </PrimaryButton>
           </div>
           <div className={classes.registerHereLink}>
             <PrimaryLink linkTo="/" text="Already Registered? Login Here!" />
@@ -91,4 +94,4 @@ function LoginForm(props) {
   );
 }
 
-export default LoginForm;
+export default RegistrationForm;

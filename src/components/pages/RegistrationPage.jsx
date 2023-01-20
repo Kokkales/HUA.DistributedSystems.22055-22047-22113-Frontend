@@ -1,7 +1,5 @@
-// import LoginForm from '../users/LoginForm';
 import RegistrationForm from '../users/RegistrationForm';
-import LoginLayout from '../layout/LoginLayout';
-// import RegisterLayout from '../layout/RegisterLayout';
+import LoginLayout from '../layout/auth_layout/LoginLayout';
 
 function RegistrationPage(props) {
   return (

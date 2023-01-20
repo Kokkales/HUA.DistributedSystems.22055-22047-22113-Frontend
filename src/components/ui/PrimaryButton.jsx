@@ -2,10 +2,10 @@ import classes from './PrimaryButton.module.css';
 
 function PrimaryButton(props) {
   return (
-    <button>
-      {props.text}
+    <div>
+      {/* {props.text} */}
       {props.children}
-    </button>
+    </div>
   );
 }
 
