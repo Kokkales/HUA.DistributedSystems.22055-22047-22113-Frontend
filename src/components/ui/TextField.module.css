@@ -1,4 +1,4 @@
-input {
+.inputTextBox {
     /* opacity: 0; */
     width: 100%;
     height: 35px;
@@ -13,15 +13,15 @@ input {
     /* text-transform: capitalize; */
 }
 
-input::placeholder {
+.inputTextBox::placeholder {
     color: black;
 }
 
-input:focus {
+.inputTextBox:focus {
     background-color: rgba(154, 154, 204, 0.539);
     color: rgb(10, 10, 10);
 }
 
-input:focus::placeholder {
+.inputTextBox:focus::placeholder {
     color: #000;
 }

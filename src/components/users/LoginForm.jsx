@@ -7,11 +7,9 @@ import SecondaryLink from '../ui/SecondaryLink';
 import { Link } from 'react-router-dom';
 
 function LoginForm(props) {
-  function loginHandler(event) {
-    event.preventDefault();
-    console.log('Login button clicked');
-    console.log('Request to server for auth if true then link to profile');
-    <Link to="/register">link</Link>;
+  function handler(e) {
+    e.preventDefault();
+    console.log('Clicked');
   }
   return (
     <Card>
@@ -38,8 +36,8 @@ function LoginForm(props) {
           </div>
           <div className={classes.submitBtn}>
             {/* <PrimaryButton text="Login" onClick={handler} /> */}
-            <PrimaryButton>
-              <button onClick={loginHandler}>login</button>
+            <PrimaryButton name="login" onClick={handler}>
+              {/* <button>login</button> */}
             </PrimaryButton>
           </div>
           <div className={classes.registerHereLink}>

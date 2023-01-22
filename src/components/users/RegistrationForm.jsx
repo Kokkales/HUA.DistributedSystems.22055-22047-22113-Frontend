@@ -81,9 +81,7 @@ function RegistrationForm(props) {
           </div>
           <div className={classes.submitBtn}>
             {/* <PrimaryButton text="Register" /> */}
-            <PrimaryButton>
-              <button>Register</button>
-            </PrimaryButton>
+            <PrimaryButton name="Register" />
           </div>
           <div className={classes.registerHereLink}>
             <PrimaryLink linkTo="/" text="Already Registered? Login Here!" />

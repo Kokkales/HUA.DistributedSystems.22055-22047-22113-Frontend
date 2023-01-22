@@ -1,5 +1,5 @@
-button {
-    width: 120px;
+.primaryButton {
+    width: 100px;
     height: 30px;
     background-color: rgba(237, 148, 32, 0.539);
     color: black;
@@ -8,7 +8,7 @@ button {
     border-radius: 6px;
 }
 
-button:hover {
+.primaryButton:hover {
     cursor: pointer;
     background-color: rgba(154, 154, 204, 0.539);
     color: black;

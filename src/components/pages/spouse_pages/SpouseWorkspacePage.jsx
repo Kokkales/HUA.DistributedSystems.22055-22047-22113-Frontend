@@ -1,6 +1,6 @@
 import Layout from '../../layout/Layout';
 
-function SpouseWorkspace(props) {
+function SpouseWorkspacePage(props) {
   return (
     <Layout>
       <div>This is SpouseWorkspace</div>
@@ -8,4 +8,4 @@ function SpouseWorkspace(props) {
   );
 }
 
-export default SpouseWorkspace;
+export default SpouseWorkspacePage;

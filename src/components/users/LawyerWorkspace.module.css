@@ -1,0 +1,98 @@
+.workspace {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 15% 85%;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    height: 78vh;
+    padding: 20px;
+}
+
+.newDivorces {
+    grid-area: 1 / 1 / 2 / 2;
+    /* border-right: 1px solid black; */
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newDivorces button,
+.searchAllBox button,
+.searchButton {
+    width: 120px;
+    height: 30px;
+    background-color: rgba(237, 148, 32, 0.539);
+    color: black;
+    border: none;
+    /* border: 1px solid black; */
+    border-radius: 6px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: rgba(154, 154, 204, 0.539);
+    color: black;
+    border: none;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+.pendingDivorces {
+    grid-area: 2 / 1 / 3 / 2;
+    border-right: 1px solid black;
+    /* background-color: brown; */
+    padding: 20px;
+}
+
+.acceptedDivorces {
+    grid-area: 2 / 2 / 3 / 3;
+    border-right: 1px solid black;
+    /* background-color: yellow; */
+    padding: 20px;
+}
+
+.rejectedDivorces {
+    grid-area: 2 / 3 / 3 / 4;
+    /* background-color: pink; */
+    padding: 20px;
+}
+
+.findDivorces {
+    grid-area: 1 / 2 / 2 / 4;
+    /* background-color: green; */
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.searchAllBox {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchAllButton {
+    background-color: red;
+}
+
+.searchBox {
+    grid-area: 1 / 2 / 2 / 3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchButton {}
+
+.searchBarTextbox {
+    width: 200px;
+    height: 30px;
+    /* background-color: green; */
+}

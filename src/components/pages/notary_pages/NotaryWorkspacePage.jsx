@@ -1,6 +1,6 @@
 import Layout from '../../layout/Layout';
 
-function NotaryWorkspace(props) {
+function NotaryWorkspacePage(props) {
   return (
     <Layout>
       <div>This is NotaryWorkspace</div>
@@ -8,4 +8,4 @@ function NotaryWorkspace(props) {
   );
 }
 
-export default NotaryWorkspace;
+export default NotaryWorkspacePage;

@@ -6,6 +6,7 @@ function TextField(props) {
     <div>
       <label htmlFor={props.labelHtmlFor}>{props.labelText}</label>
       <input
+        className={classes.inputTextBox}
         type={props.inputType}
         placeholder={props.inputPlaceholder}
         required
