@@ -1,7 +1,23 @@
 import PrimaryButton from '../ui/PrimaryButton';
 import classes from './UserProfile.module.css';
+import EditProfileForm from './EditProfileForm.jsx';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function UserProfile(props) {
+  const navigate = useNavigate();
+  const [isEdit, setIsEdit] = useState(false);
+  function editProfileHandler(event) {
+    event.preventDefault();
+    //link to edit prfile form
+    setIsEdit(true);
+    console.log('Edit button clicked');
+  }
+
+  function openForm() {
+    setIsEdit(false);
+  }
+
   return (
     <div className={classes.profile}>
       {/* <div className={classes.fullName}> */}
@@ -29,14 +45,12 @@ function UserProfile(props) {
           <p>Lawyer</p>
         </div>
         <div className={classes.infoContext}>
-          {/* <PrimaryButton>
-            <button>Edit Profile</button>
-          </PrimaryButton> */}
           <div className={classes.editButton}>
-            <PrimaryButton name="Edit Profile" />
+            <PrimaryButton name="Edit Profile" onClick={editProfileHandler} />
           </div>
         </div>
       </section>
+      {isEdit && <EditProfileForm isShown={isEdit} formState={openForm} />}
     </div>
   );
 }

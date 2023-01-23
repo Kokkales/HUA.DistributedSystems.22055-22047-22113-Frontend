@@ -2,58 +2,29 @@ import Card from '../ui/Card';
 import TextField from '../ui/TextField';
 import classes from './EditProfileForm.module.css';
 import PrimaryButton from '../ui/PrimaryButton';
-
-// import { Link } from 'react-router-dom';
-import PrimaryLink from '../ui/PrimaryLink';
-import SecondaryLink from '../ui/SecondaryLink';
 import LoginLayout from '../layout/auth_layout/LoginLayout';
-import { Link } from 'react-router-dom';
+import Modal from '../ui/Modal';
+
+import { useState } from 'react';
 
 function EditProfileForm(props) {
+  const isShown = props.isShown;
   function saveEditHandler(event) {
     event.preventDefault();
-    console.log('edit button clicked');
-    <Link to="user/profile" />;
+    //POST changes
+    if (isShown) {
+      console.log('close the form');
+    }
+    props.formState(isShown);
+    console.log('new data saved - button clicked');
   }
   return (
-    <LoginLayout>
-      <Card>
-        <div className={classes.content}>
+    <Modal>
+      <LoginLayout>
+        <div className={classes.modalContent}>
           <form className={classes.form}>
             <div className={classes.loginHeader}>
               <h1>Edit Profile Form</h1>
-            </div>
-            <div className={classes.taxNumberInput}>
-              <TextField
-                labelHtmlFor="taxNumber"
-                labelText="Tax Number"
-                inputType="text"
-                inputPlaceholder="e.g 123456"
-              ></TextField>
-            </div>
-            <div className={classes.taxNumberInput}>
-              <TextField
-                labelHtmlFor="identityCardNumber"
-                labelText="Identiy Card Number"
-                inputType="text"
-                inputPlaceholder="e.g AD4365"
-              ></TextField>
-            </div>
-            <div className={classes.taxNumberInput}>
-              <TextField
-                labelHtmlFor="firstName"
-                labelText="First Name"
-                inputType="text"
-                inputPlaceholder="e.g Katerina"
-              ></TextField>
-            </div>
-            <div className={classes.taxNumberInput}>
-              <TextField
-                labelHtmlFor="lastName"
-                labelText="Last Name"
-                inputType="text"
-                inputPlaceholder="e.g Konstantidi"
-              ></TextField>
             </div>
             <div className={classes.taxNumberInput}>
               <TextField
@@ -88,15 +59,12 @@ function EditProfileForm(props) {
               ></TextField>
             </div>
             <div className={classes.submitBtn}>
-              {/* <PrimaryButton text="Register" /> */}
-              <PrimaryButton>
-                <button onClick={saveEditHandler}>Save</button>
-              </PrimaryButton>
+              <PrimaryButton name="Save" onClick={saveEditHandler} />
             </div>
           </form>
         </div>
-      </Card>
-    </LoginLayout>
+      </LoginLayout>
+    </Modal>
   );
 }
 

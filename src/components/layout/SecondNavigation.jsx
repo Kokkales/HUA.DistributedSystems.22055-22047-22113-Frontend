@@ -8,7 +8,7 @@ function SecondNavigation() {
         <li>
           <PageLink
             className="linkStyle"
-            linkTo="/spouse/workspace" //variable in the place of spouse
+            linkTo="/lawyer/workspace" //variable in the place of spouse
             text="Workspace"
           />
         </li>

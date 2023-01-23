@@ -8,6 +8,10 @@ import PrimaryLink from '../ui/PrimaryLink';
 import SecondaryLink from '../ui/SecondaryLink';
 
 function RegistrationForm(props) {
+  function RegistrationHandler(event) {
+    event.preventDefault();
+    console.log('Registration button clicked');
+  }
   return (
     <Card>
       <div className={classes.content}>
@@ -81,7 +85,7 @@ function RegistrationForm(props) {
           </div>
           <div className={classes.submitBtn}>
             {/* <PrimaryButton text="Register" /> */}
-            <PrimaryButton name="Register" />
+            <PrimaryButton name="Register" onClick={RegistrationHandler} />
           </div>
           <div className={classes.registerHereLink}>
             <PrimaryLink linkTo="/" text="Already Registered? Login Here!" />

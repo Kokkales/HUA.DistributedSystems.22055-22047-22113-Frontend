@@ -1,7 +1,15 @@
 import classes from './SearchBar.module.css';
 
 function SearchBar(props) {
-  return <div className={classes.searchBar}>{props.children}</div>;
+  return (
+    <input
+      className={classes.searchBar}
+      type={props.type}
+      placeholder={props.placeholder}
+    >
+      {props.children}
+    </input>
+  );
 }
 
 export default SearchBar;

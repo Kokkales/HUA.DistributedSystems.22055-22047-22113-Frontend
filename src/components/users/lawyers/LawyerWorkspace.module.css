@@ -1,9 +1,9 @@
 .workspace {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 15% 85%;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
+    grid-template-rows: 8% 92%;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
     height: 78vh;
     padding: 20px;
 }
@@ -13,8 +13,8 @@
     /* border-right: 1px solid black; */
     /* background-color: red; */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .newDivorces button,
@@ -70,12 +70,13 @@ h1 {
     grid-row-gap: 0px;
 }
 
-.searchAllBox {
+
+/* .searchAllBox {
     grid-area: 1 / 1 / 2 / 2;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
+    justify-content: flex-end;
+} */
 
 .searchAllButton {
     background-color: red;
@@ -85,14 +86,16 @@ h1 {
     grid-area: 1 / 2 / 2 / 3;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-end;
 }
 
 .searchButton {}
 
+
+/*
 .searchBarTextbox {
     width: 200px;
     height: 30px;
-    /* background-color: green; */
-}
+    background-color: green;
+} */

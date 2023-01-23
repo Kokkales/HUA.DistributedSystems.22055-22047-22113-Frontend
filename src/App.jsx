@@ -7,6 +7,7 @@ import SpouseWorkspacePage from './components/pages/spouse_pages/SpouseWorkspace
 import NotaryWorkspacePage from './components/pages/notary_pages/NotaryWorkspacePage';
 import AdminWorkspacePage from './components/pages/admin_pages/AdminWorkspacePage';
 import EditProfileForm from './components/users/EditProfileForm';
+import CreateDivorcePage from './components/pages/lawyer_pages/CreateDivorcePage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<LoginPage />} />{' '}
       <Route path="register" element={<RegistrationPage />} />{' '}
       <Route path="lawyer/workspace" element={<LawyerWorkspacePage />} />{' '}
+      <Route path="lawyer/new-divorce" element={<CreateDivorcePage />} />{' '}
       <Route path="notary/workspace" element={<NotaryWorkspacePage />} />{' '}
       <Route path="spouse/workspace" element={<SpouseWorkspacePage />} />{' '}
       <Route path="admin/workspace" element={<AdminWorkspacePage />} />{' '}

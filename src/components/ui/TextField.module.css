@@ -1,9 +1,9 @@
 .inputTextBox {
     /* opacity: 0; */
     width: 100%;
-    height: 35px;
+    height: 30px;
     display: block;
-    margin: 10px auto;
+    margin: auto auto;
     border-radius: 5px;
     background-color: rgba(82, 82, 171, 0.539);
     border: none;

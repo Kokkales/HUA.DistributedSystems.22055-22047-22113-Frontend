@@ -5,11 +5,14 @@ import PrimaryButton from '../ui/PrimaryButton';
 import PrimaryLink from '../ui/PrimaryLink';
 import SecondaryLink from '../ui/SecondaryLink';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm(props) {
-  function handler(e) {
-    e.preventDefault();
-    console.log('Clicked');
+  const navigate = useNavigate();
+  function LoginHandler(event) {
+    event.preventDefault();
+    console.log('Login button clicked');
+    navigate('/user/profile');
   }
   return (
     <Card>
@@ -35,10 +38,7 @@ function LoginForm(props) {
             ></TextField>
           </div>
           <div className={classes.submitBtn}>
-            {/* <PrimaryButton text="Login" onClick={handler} /> */}
-            <PrimaryButton name="login" onClick={handler}>
-              {/* <button>login</button> */}
-            </PrimaryButton>
+            <PrimaryButton name="login" onClick={LoginHandler} />
           </div>
           <div className={classes.registerHereLink}>
             <PrimaryLink linkTo="/register" text="Register Here!" />
