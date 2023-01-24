@@ -1,9 +1,10 @@
 import Layout from '../../layout/Layout';
+import SpouseWorkspace from '../../users/spouses/SpouseWorkspace';
 
 function SpouseWorkspacePage(props) {
   return (
     <Layout>
-      <div>This is SpouseWorkspace</div>
+      <SpouseWorkspace />
     </Layout>
   );
 }

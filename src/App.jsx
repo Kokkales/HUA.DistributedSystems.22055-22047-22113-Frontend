@@ -8,6 +8,7 @@ import NotaryWorkspacePage from './components/pages/notary_pages/NotaryWorkspace
 import AdminWorkspacePage from './components/pages/admin_pages/AdminWorkspacePage';
 import EditProfileForm from './components/users/EditProfileForm';
 import CreateDivorcePage from './components/pages/lawyer_pages/CreateDivorcePage';
+import StatisticsPage from './components/pages/admin_pages/StatisticsPage';
 
 function App() {
   return (
@@ -15,10 +16,14 @@ function App() {
       <Route path="/" element={<LoginPage />} />{' '}
       <Route path="register" element={<RegistrationPage />} />{' '}
       <Route path="lawyer/workspace" element={<LawyerWorkspacePage />} />{' '}
-      <Route path="lawyer/new-divorce" element={<CreateDivorcePage />} />{' '}
+      <Route
+        path="lawyer/workspace/new-divorce"
+        element={<CreateDivorcePage />}
+      />{' '}
       <Route path="notary/workspace" element={<NotaryWorkspacePage />} />{' '}
       <Route path="spouse/workspace" element={<SpouseWorkspacePage />} />{' '}
       <Route path="admin/workspace" element={<AdminWorkspacePage />} />{' '}
+      <Route path="admin/workspace/statistics" element={<StatisticsPage />} />{' '}
       <Route path="user/profile" element={<ProfilePage />} />{' '}
       <Route path="user/editProfileForm" element={<EditProfileForm />} />{' '}
     </Routes>

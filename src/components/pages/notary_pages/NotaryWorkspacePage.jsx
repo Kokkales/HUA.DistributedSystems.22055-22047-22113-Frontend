@@ -1,9 +1,10 @@
 import Layout from '../../layout/Layout';
+import NotaryWorkspace from '../../users/notaries/NotaryWorkspace';
 
 function NotaryWorkspacePage(props) {
   return (
     <Layout>
-      <div>This is NotaryWorkspace</div>
+      <NotaryWorkspace />
     </Layout>
   );
 }
