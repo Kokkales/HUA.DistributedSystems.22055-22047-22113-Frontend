@@ -9,7 +9,7 @@ function UserProfile(props) {
   const [isEdit, setIsEdit] = useState(false);
   function editProfileHandler(event) {
     event.preventDefault();
-    //link to edit prfile form
+    //link to edit profile form
     setIsEdit(true);
     console.log('Edit button clicked');
   }

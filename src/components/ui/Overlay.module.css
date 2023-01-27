@@ -7,7 +7,7 @@
     /* Stay in place */
     z-index: 1;
     /* Sit on top */
-    /* padding-top: 100px; */
+    padding: 50px;
     /* Location of the box */
     left: 0;
     top: 0;
@@ -22,15 +22,24 @@
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(3px);
     /* Black w/ opacity */
+    display: flex;
+    align-self: center;
+    justify-content: center;
 }
 
 
 /* Modal Content */
 
-.modalContent {
-    background-color: #fefefe;
+
+/* .modalContent {
+    position: fixed;
+    left: 20px;
+    right: 20px;
+    background-color: red;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-}
+    height: 80%;
+    height: auto;
+} */

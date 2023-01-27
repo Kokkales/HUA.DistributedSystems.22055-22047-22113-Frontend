@@ -12,7 +12,7 @@ function LoginForm(props) {
   function LoginHandler(event) {
     event.preventDefault();
     console.log('Login button clicked');
-    navigate('/user/profile');
+    navigate('/lawyer/workspace');
   }
   return (
     <Card>
