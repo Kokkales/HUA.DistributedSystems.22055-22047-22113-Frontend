@@ -1,5 +1,8 @@
 .main {
+    /* background-color: red; */
+    border-radius: 5px;
     margin: 5rem auto;
-    width: 50%;
+    /*margin top&bottom right&left*/
+    width: auto;
     max-width: 30rem;
 }

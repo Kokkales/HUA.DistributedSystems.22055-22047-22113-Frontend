@@ -16,38 +16,36 @@ function LoginForm(props) {
   }
   return (
     <Card>
-      <div className={classes.content}>
-        <form className={classes.form}>
-          <div className={classes.loginHeader}>
-            <h1>Login</h1>
-          </div>
-          <div className={classes.taxNumberInput}>
-            <TextField
-              labelHtmlFor="taxNumber"
-              labelText="Tax Number"
-              inputType="text"
-              inputPlaceholder="e.g 123456"
-            ></TextField>
-          </div>
-          <div className={classes.passwordInput}>
-            <TextField
-              labelHtmlFor="password"
-              labelText="Password"
-              inputType="password"
-              inputPlaceholder=""
-            ></TextField>
-          </div>
-          <div className={classes.submitBtn}>
-            <PrimaryButton name="login" onClick={LoginHandler} />
-          </div>
-          <div className={classes.registerHereLink}>
-            <PrimaryLink linkTo="/register" text="Register Here!" />
-          </div>
-          <div className={classes.forgotMyPasswordLink}>
-            <SecondaryLink linkTo="/" text="Forgot My Password" />
-          </div>
-        </form>
-      </div>
+      <form className={classes.loginForm}>
+        <div className={classes.loginHeader}>
+          <h1>Login</h1>
+        </div>
+        <div className={classes.taxNumberInput}>
+          <TextField
+            labelHtmlFor="taxNumber"
+            labelText="Tax Number"
+            inputType="text"
+            inputPlaceholder="e.g 123456"
+          ></TextField>
+        </div>
+        <div className={classes.passwordInput}>
+          <TextField
+            labelHtmlFor="password"
+            labelText="Password"
+            inputType="password"
+            inputPlaceholder=""
+          ></TextField>
+        </div>
+        <div className={classes.submitBtn}>
+          <PrimaryButton name="login" onClick={LoginHandler} />
+        </div>
+        <div className={classes.registerHereLink}>
+          <PrimaryLink linkTo="/register" text="Register Here!" />
+        </div>
+        <div className={classes.forgotMyPasswordLink}>
+          <SecondaryLink linkTo="/" text="Forgot My Password" />
+        </div>
+      </form>
     </Card>
   );
 }

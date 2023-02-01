@@ -1,6 +1,29 @@
 footer {
+    position: fixed;
+    bottom: 0rem;
     width: 100%;
     /* min-height: 100vh; */
     height: 5vh;
-    /* background-color: red; */
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.fullName {
+    /* background-color: green; */
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyright {
+    /* background-color: orange; */
+    grid-area: 2 / 1 / 3 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -3,9 +3,12 @@ import classes from './MainFooter.module.css';
 function MainFooter(props) {
   return (
     <footer>
-      <p>First Name - Last Name</p>
-      <p>@Copyright</p>
-      {props.children}
+      <div className={classes.fullName}>
+        <p>Katerina Konstantidi</p>
+      </div>
+      <div className={classes.copyright}>
+        <p>@Copyright</p>
+      </div>
     </footer>
   );
 }

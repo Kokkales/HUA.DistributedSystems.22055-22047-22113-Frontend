@@ -1,7 +1,7 @@
-.form {
+.loginForm {
     background-color: white;
-    padding: 1rem;
-    border-radius: 5px;
+    border-radius: 6px;
+    padding: 20px;
 }
 
 .loginHeader,

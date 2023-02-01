@@ -1,7 +1,8 @@
 .divorce {
-    width: 80%;
-    height: 70px;
+    /* width: 90%; */
+    height: 5rem;
     padding: 8px;
+    /* margin: 20px 0px; */
     border-radius: 8px;
     /* margin: 10px; */
     /* background-color: green; */
@@ -16,7 +17,7 @@
 .divorce:hover {
     cursor: pointer;
     width: 100%;
-    height: 80px;
+    height: 6rem;
 }
 
 .status {

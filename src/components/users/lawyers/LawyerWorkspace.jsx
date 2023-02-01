@@ -70,26 +70,31 @@ function LawyerWorkspace(props) {
           <PrimaryButton name="Search" onClick={searchDivorceHandler} />
         </div>
       </section>
-      <section className={classes.pendingDivorces}>
+      <section className={classes.draftDivorces}>
         <h1 className={classes.satustTitle}>Draft</h1>
         <div className={classes.divorceList}>
           {/* <DraftDivorceList items={draftLoadedDivorces} /> */}
           <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
           <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
           <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
+          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
+          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
+          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
+          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
         </div>
       </section>
-      <section className={classes.acceptedDivorces}>
+      <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
           {/* <PendingDivorceList items={pendingLoadedDivorces} onClick={pendingDivorceHandlerOnClickShow}/> */}
-          <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
+          <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />{' '}
+          {/* pass all props including the onClick*/}
           <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
           <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
           <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
         </div>
       </section>
-      <section className={classes.rejectedDivorces}>
+      <section className={classes.completedDivorces}>
         <h1 className={classes.satustTitle}>Closed</h1>
         <div className={classes.divorceList}>
           {/* <CompletedDivorceList items={completedLoadedDivorces} /> */}
