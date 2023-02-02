@@ -4,7 +4,8 @@ footer {
     width: 100%;
     /* min-height: 100vh; */
     height: 5vh;
-    background-color: white;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 1fr);

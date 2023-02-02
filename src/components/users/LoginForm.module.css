@@ -1,5 +1,5 @@
 .loginForm {
-    background-color: white;
+    background-color: var(--form-bg-color);
     border-radius: 6px;
     padding: 20px;
 }

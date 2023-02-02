@@ -1,7 +1,8 @@
 .navBar {
     position: relative;
     width: 100%;
-    background-color: white;
+    /* background-color: var(--main-bg-color); */
+    color: var(--main-text-color);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
@@ -52,5 +53,6 @@ li a:hover {
 
 .logo {
     font-size: 34px;
+    color: var(--logo-color);
     /* padding: 24px; */
 }

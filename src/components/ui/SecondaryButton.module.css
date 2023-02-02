@@ -1,7 +1,7 @@
 .secondaryButton {
     width: 100px;
     height: 30px;
-    background-color: rgba(154, 154, 204, 0.539);
+    background-color: var(--secondaryBtn-bg-color);
     /* background-color: rgba(237, 148, 32, 0.539); */
     color: black;
     border: none;

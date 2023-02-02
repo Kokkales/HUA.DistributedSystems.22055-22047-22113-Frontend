@@ -3,3 +3,59 @@
     padding: 0px;
     box-sizing: border-box;
 }
+
+
+/* COLORS USED */
+
+
+/* .check {
+    color: #172121;
+    color: #444554;
+    color: #7f7b82;
+    color: #bfacb5;
+    color: #e5d0cc;
+} */
+
+
+/* #424B54 */
+
+
+/* .check {
+    color: #424B54;
+    color: #E1CE7A;
+    color: #EBCFB2;
+    color: #C5BAAF;
+    color: #FFFFFF;
+} */
+
+:root {
+    /* font-family */
+    font-family: Arial, Helvetica, sans-serif;
+    /* Main */
+    --main-bg-color: #c5baaf;
+    --logo-color: #424b54;
+    --main-text-color: #424b54;
+    /* Buttons */
+    --primaryBtn-bg-color: #7f7b82;
+    --primaryBtn-text-color: #424b54;
+    --primaryBtn-bg-hover-color: orange;
+    --primaryBtn-text-hover-color: orange;
+    --secondaryBtn-bg-color: #bfacb5;
+    --secondaryBtn-text-color: orange;
+    --secondaryBtn-bg-hover-color: orange;
+    --secondaryBtn-text-hover-color: orange;
+    /* Cards */
+    --card-bg-color: #ffffff;
+    --card-text-color: #424b54;
+    /* Links */
+    --link-text-color: #424b54;
+    /* Categotry titles e.g */
+    --category--title-color: #424b54;
+    /* Forms */
+    --form-bg-color: #c5baaf;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    /* color: var(--main-text-color); */
+}

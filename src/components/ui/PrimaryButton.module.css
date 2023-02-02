@@ -1,11 +1,12 @@
 .primaryButton {
     width: 100px;
     height: 30px;
-    background-color: rgba(237, 148, 32, 0.539);
+    background-color: var(--primaryBtn-bg-color);
     color: black;
     border: none;
     /* border: 1px solid black; */
     border-radius: 6px;
+    color: var(--primaryBtn-text-color);
 }
 
 .primaryButton:hover {

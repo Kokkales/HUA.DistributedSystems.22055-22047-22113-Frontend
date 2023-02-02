@@ -1,5 +1,5 @@
 .editForm {
-    background-color: white;
+    background-color: var(--form-bg-color);
     border-radius: 6px;
     width: 25rem;
     height: auto;

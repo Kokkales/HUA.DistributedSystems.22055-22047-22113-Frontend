@@ -6,6 +6,7 @@
     grid-row-gap: 10px;
     height: 80vh;
     padding: 20px;
+    /* background-color: var(--form-bg-color); */
 }
 
 .newDivorces {
@@ -22,8 +23,7 @@
 .searchButton {
     width: 120px;
     height: 30px;
-    background-color: rgba(237, 148, 32, 0.539);
-    color: black;
+    /* color: black; */
     border: none;
     /* border: 1px solid black; */
     border-radius: 6px;
@@ -50,6 +50,7 @@ h1 {
     grid-area: 1 / 1 / 2 / 2;
     position: absolute;
     font-size: 32px;
+    color: var(--category--title-color);
 }
 
 .divorceList {
