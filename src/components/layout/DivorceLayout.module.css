@@ -1,5 +1,6 @@
 .divorceLayout {
-    background-color: var(--form-bg-color);
-    width: 150vh;
-    height: 80vh;
+  background-color: var(--form-bg-color);
+  width: 150vh;
+  height: 80vh;
+  border-radius: 6px;
 }

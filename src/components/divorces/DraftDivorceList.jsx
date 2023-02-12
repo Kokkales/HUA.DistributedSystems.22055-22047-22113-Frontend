@@ -3,14 +3,16 @@ import DivorceItem from './DivorceItem';
 
 function DraftDivorceList(props) {
   return (
-    <ul className={classes.list}>
-      {props.items.map((meetup) => (
+    <ul>
+      {props.items.map((divorce) => (
         <DivorceItem
-        // key={meetup.id}
-        // id={meetup.id}
-        // image={meetup.image}
-        // title={meetup.title}
-        // address={meetup.address}
+          // key={meetup.id}
+          id={divorce.id}
+          status={divorce.status}
+          spouseOne={divorce.spouseOneName}
+          spouseTwo={divorce.spouseTwoName}
+          // image={meetup.image}
+          onClick={props.onClick}
         />
       ))}
     </ul>

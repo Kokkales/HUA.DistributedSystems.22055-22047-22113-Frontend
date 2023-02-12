@@ -16,6 +16,7 @@ function WatchPendingDivorce(props) {
     }
     props.formState(isShown);
     console.log('divorce watced - exit button clicked');
+    console.log('fullDivorce ' + props.spouseok);
   }
   return (
     <Overlay>
@@ -24,32 +25,61 @@ function WatchPendingDivorce(props) {
           <div className={classes.completeDivorce}>
             <section className={classes.mainCharacters}>
               <div className={classes.divorceNames}>
-                <h1>Katerina Konstantinidi vs Iasonas Tsoukalas</h1>
+                <div className={classes.spouseOne}>
+                  <h1>{props.spouseok} vs </h1>
+                </div>
+                <div className={classes.spouseTwo}>
+                  {/* <h1>{props.spouseTwo}</h1> */}
+                </div>
               </div>
               <div className={classes.exitX}>
                 <div onClick={exitHandler}>X</div>
               </div>
             </section>
             <section className={classes.involvedParties}>
-              <div>Lawyer1: Nikos Xaskaris</div>
-              <div>Lawyer2: Akis georgis</div>
-              <div>Notary: Orestis Kritsotakis</div>
+              <h2>Parties</h2>
+              <div>
+                <h3 className={classes.label}>Lawyer1:</h3>
+                <div className={classes.info}> Nikos Xaskaris</div>
+              </div>
+              <div>
+                <div className={classes.label}>Lawyer2:</div>
+                <div className={classes.info}> Orestis Kritsotakis</div>
+              </div>
+              <div>
+                <div className={classes.label}>Notary:</div>
+                <div className={classes.info}> Alkis Georgis</div>
+              </div>
             </section>
             <section className={classes.contractDetails}>
+              <h2>Details</h2>
               <div>
-                Contract details: The broke up reason is because ypu didn't make
-                adeal with me in MONOPOLY
+                <div className={classes.label}>Application Date:</div>
+                <div className={classes.info}>26/01/2023</div>
               </div>
-              <div>Application Date: 26/01/2023</div>
-              <div>integration Date: 30/01/2023</div>
+              <div>
+                <div className={classes.label}>Contract Details:</div>
+                <div className={classes.info}>
+                  The broke up reason is because ypu didn't make adeal with me
+                  in MONOPOLY. Lorem ipsum, dolor sit amet consectetur
+                  adipisicing elit. Deserunt dolorem asperiores ea, delectus
+                  voluptatem unde ab eos dolore nesciunt similique odio
+                  quibusdam eum facere nemo fuga ex perferendis vitae minus?
+                </div>
+              </div>
             </section>
             <section className={classes.status}>
-              <div>Status: Rejected</div>
+              <h2>Result</h2>
+              <div>
+                <div className={classes.info}>Rejected</div>
+              </div>
             </section>
             <section className={classes.options}>
-              <PrimaryButton name="Edit" onClick={exitHandler} />
-              <PrimaryButton name="Cancel" onClick={exitHandler} />
-              <PrimaryButton name="Close" onClick={exitHandler} />
+              <div>
+                <PrimaryButton name="Edit" onClick={exitHandler} />
+                <PrimaryButton name="Cancel" onClick={exitHandler} />
+                <PrimaryButton name="Close" onClick={exitHandler} />
+              </div>
             </section>
           </div>
         </DivorceLayout>

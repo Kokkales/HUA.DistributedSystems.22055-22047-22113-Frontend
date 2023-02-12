@@ -64,6 +64,8 @@ function NotaryWorkspace(props) {
           <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
           <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
           <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
+          <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
+          <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
         </div>
       </section>
       <section className={classes.closedDivorces}>

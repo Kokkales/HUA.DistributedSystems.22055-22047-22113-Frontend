@@ -1,52 +1,59 @@
 .divorce {
-    /* width: 90%; */
-    height: 5rem;
-    padding: 8px;
-    /* margin: 20px 0px; */
-    border-radius: 8px;
-    /* margin: 10px; */
-    /* background-color: green; */
-    display: grid;
-    grid-template-columns: 10% 45% 45%;
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    transition: 0.6s;
+  /* width: 90%; */
+  height: 5rem;
+  padding: 8px;
+  /* margin: 20px 0px; */
+  border-radius: 8px;
+  /* margin: 10px; */
+  /* background-color: green; */
+  display: grid;
+  grid-template-columns: 8% 35% 20% 37%;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  transition: 0.6s;
 }
 
 .divorce:hover {
-    cursor: pointer;
-    width: 100%;
-    height: 6rem;
+  cursor: pointer;
+  width: 100%;
+  height: 6rem;
 }
 
 .status {
-    grid-area: 1 / 1 / 3 / 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seperate {
+  grid-area: 1 / 3 / 2 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .spouseOne {
-    grid-area: 1 / 2 / 2 / 3;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  grid-area: 1 / 2 / 2 / 3;
+  /* padding: 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: end;
 }
 
 .spouseTwo {
-    grid-area: 1 / 3 / 2 / 4;
-    /* padding: 10px; */
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  grid-area: 1 / 4 / 2 / 5;
+  /* padding: 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: start;
 }
 
 .submitDate {
-    grid-area: 2 / 2 / 3 / 4;
-    /* padding: 10px; */
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  grid-area: 2 / 2 / 3 / 4;
+  /* padding: 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

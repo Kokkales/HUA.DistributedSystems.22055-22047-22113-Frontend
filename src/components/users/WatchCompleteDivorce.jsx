@@ -41,7 +41,6 @@ function WatchCompleteDivorce(props) {
                 adeal with me in MONOPOLY
               </div>
               <div>Application Date: 26/01/2023</div>
-              <div>integration Date: 30/01/2023</div>
             </section>
             <section className={classes.status}>
               <div>Status: Rejected</div>

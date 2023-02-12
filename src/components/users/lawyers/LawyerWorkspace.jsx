@@ -8,12 +8,58 @@ import { useState } from 'react';
 import WatchPendingDivorce from '../WatchPendingDivorce';
 import WatchDraftDivorce from '../WatchDraftDivorce';
 import WatchCompleteDivorce from '../WatchCompleteDivorce';
+import { useEffect } from 'react';
+import DraftDivorceList from '../../divorces/DraftDivorceList';
+import PendingDivorceList from '../../divorces/PendingDivorceList';
+import CompletedDivorceList from '../../divorces/CompletedDivorceList';
 
 function LawyerWorkspace(props) {
-  // 1. create useState([]) for draft,pending and completed divorces
-  // 2. Fetch all the divorces from backend with a get request (useEffect())
-  //3. seperate divorces depending on their status: pending, draft, completed, cancelled and put them to different lists
-  //4. save each list to useState list variable e.g if we have -> [dreaftLoadedDivorces,setDraftLoadedDivorces] and get request saves to draftDivorces the drafts the the code is: setDraftLoadedDivorces(draftDivorces);
+  const [loadedDraft, setLoadedDraft] = useState([]);
+  const [loadedPending, setLoadedPending] = useState([]);
+  const [loadedCompleted, setLoadedComlpeted] = useState([]);
+  let fullDivorce;
+
+  //GET some divorce information
+  useEffect(() => {
+    // setIsLoading(true);
+    fetch('http://localhost:8887/divorce/myDivorces?taxNumber=123456789')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log('ok');
+        console.log(data);
+        const drafts = [];
+        const pendings = [];
+        const completed = [];
+        for (const key in data) {
+          const divorce = {
+            id: key,
+            ...data[key],
+          };
+          if (data[key].status === 'Pending') {
+            pendings.push(divorce);
+          }
+          if (data[key].status === 'Draft') {
+            drafts.push(divorce);
+          }
+          if (
+            data[key].status === 'Completed' ||
+            data[key].status === 'Cancelled'
+          ) {
+            completed.push(divorce);
+          }
+          // meetups.push(meetup);
+        }
+        console.log(drafts);
+        console.log(pendings);
+        console.log(completed);
+        // setIsLoading(false);
+        setLoadedDraft(drafts);
+        setLoadedPending(pendings);
+        setLoadedComlpeted(completed);
+      });
+  }, []);
 
   const navigate = useNavigate();
   function newDivorceHandler(event) {
@@ -39,6 +85,22 @@ function LawyerWorkspace(props) {
 
   function pendingDivorceHandlerOnClickShow(event) {
     event.preventDefault();
+    //request all the information of the certain divorce
+    fetch('http://localhost:8887/divorce/findById?id=1')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        spouse = data.spouseOneName;
+        console.log(spouse);
+        // fullDivorce = {
+        //   id: data.id,
+        //   spouseOne: data.spouseOneName,
+        //   spouseTwo: data.spouseTwoName,
+        // };
+        // console.log(fullDivorce.spouseOne);
+        // meetups.push(meetup);
+      });
     console.log('Pending divorce button clicked');
     //shows in the screen the pending divorce and the reasons why it is pending
     //(1.lawyer2 acception, spouse2 acception, spouse1 acception, notary acception)
@@ -73,37 +135,37 @@ function LawyerWorkspace(props) {
       <section className={classes.draftDivorces}>
         <h1 className={classes.satustTitle}>Draft</h1>
         <div className={classes.divorceList}>
-          {/* <DraftDivorceList items={draftLoadedDivorces} /> */}
-          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
-          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
-          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
-          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
-          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
-          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
-          <DivorceItem onClick={draftDivorceHandlerOnClickShow} />
+          <DraftDivorceList
+            items={loadedDraft}
+            onClick={draftDivorceHandlerOnClickShow}
+          />
         </div>
       </section>
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-          {/* <PendingDivorceList items={pendingLoadedDivorces} onClick={pendingDivorceHandlerOnClickShow}/> */}
-          <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />{' '}
-          {/* pass all props including the onClick*/}
-          <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
-          <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
-          <DivorceItem onClick={pendingDivorceHandlerOnClickShow} />
+          <PendingDivorceList
+            items={loadedPending}
+            onClick={pendingDivorceHandlerOnClickShow}
+          />
         </div>
       </section>
       <section className={classes.completedDivorces}>
         <h1 className={classes.satustTitle}>Closed</h1>
         <div className={classes.divorceList}>
-          {/* <CompletedDivorceList items={completedLoadedDivorces} /> */}
-          <DivorceItem onClick={completedHandlerOnClickShow} />
-          <DivorceItem onClick={completedHandlerOnClickShow} />
+          <CompletedDivorceList
+            items={loadedCompleted}
+            onClick={completedHandlerOnClickShow}
+          />
         </div>
       </section>
       {isPendingWatch && (
-        <WatchPendingDivorce isShown={isPendingWatch} formState={openPending} />
+        <WatchPendingDivorce
+          isShown={isPendingWatch}
+          spouseok={spouse}
+          formState={openPending}
+          // spouseTwo={fullDivorce.spouseTwoName}
+        />
       )}
       {isDraftWatch && (
         <WatchDraftDivorce isShown={isDraftWatch} formState={openDraft} />

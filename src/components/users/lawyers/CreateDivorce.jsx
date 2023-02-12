@@ -8,7 +8,7 @@ function CreateDivorce(props) {
   return (
     <div className={classes.content}>
       <div>Create a new Divorce</div>
-      {/* <section className={classes.involved}>
+      <section className={classes.involved}>
         <h1 className={classes.subTitles}>Involved Parties</h1>
         <Card>
           <div className={classes.spouseOne}>
@@ -84,7 +84,7 @@ function CreateDivorce(props) {
       <section className={classes.options}>
         <SecondaryButton name="Draft" />
         <PrimaryButton name="Create" />
-      </section> */}
+      </section>
     </div>
   );
 }
