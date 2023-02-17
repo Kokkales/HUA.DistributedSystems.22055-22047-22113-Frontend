@@ -1,0 +1,21 @@
+.divorce {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80% 20%;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.pendingDivorce {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.options {
+  grid-area: 2 / 1 / 3 / 2;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

@@ -6,7 +6,7 @@ function PendingDivorceList(props) {
     <ul>
       {props.items.map((divorce) => (
         <DivorceItem
-          // key={meetup.id}
+          key={divorce.id}
           id={divorce.id}
           status={divorce.status}
           spouseOne={divorce.spouseOneName}

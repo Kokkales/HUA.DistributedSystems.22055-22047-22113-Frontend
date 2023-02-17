@@ -3,8 +3,8 @@ import PrimaryButton from '../../ui/PrimaryButton';
 import SearchBar from '../../ui/SearchBar';
 import classes from './SpouseWorkspace.module.css';
 import { useState } from 'react';
-import WatchCompleteDivorce from '../WatchCompleteDivorce';
-import WatchPendingDivorce from '../WatchPendingDivorce';
+import WatchCompleteDivorce from '../../divorces/WatchCompleteDivorce';
+import WatchPendingDivorce from '../../divorces/WatchPendingDivorce';
 import { useNavigate } from 'react-router-dom';
 
 function SpouseWorkspace(props) {
