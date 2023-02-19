@@ -8,6 +8,13 @@
   padding: 20px;
 }
 
+h1 {
+  grid-area: 1 / 1 / 2 / 2;
+  position: absolute;
+  font-size: 32px;
+  color: var(--category--title-color);
+}
+
 .options {
   grid-area: 1 / 1 / 2 / 3;
   /* background-color: rgb(82, 119, 135); */
@@ -15,6 +22,15 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+}
+
+.pendingDivorces,
+.completedDivorces {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10% 90%;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
 
 .pendingDivorces {
@@ -30,6 +46,12 @@
   padding: 20px;
 }
 
-h1 {
-  position: absolute;
+.divorceList {
+  grid-area: 2 / 1 / 3 / 2;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.divorceList::-webkit-scrollbar {
+  display: none;
 }

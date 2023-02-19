@@ -1,84 +1,126 @@
-.content {
-    position: relative;
-    display: grid;
-    grid-template-columns: 60% 40%;
-    grid-template-rows: 80% 20%;
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    padding: 20px;
-    height: 78vh;
+.createDivorce {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  height: 80vh;
+  padding: 20px;
 }
 
-.involved,
-.contractDetails,
+.addMembers {
+  /* background-color: green; */
+  grid-area: 1 / 1 / 4 / 2;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 10% 45% 45%;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.involvedCard {
+  /* background-color: red; */
+  border-radius: 6px;
+  padding: 5px;
+  width: 50vh;
+  height: auto;
+}
+
+.involvedCard > * {
+  margin: 1vh;
+}
+
+.addinvolvedtitle {
+  grid-area: 1 / 1 / 2 / 3;
+}
+
+.spouseOneCard {
+  grid-area: 2 / 1 / 3 / 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* width: max-content; */
+  height: max-content;
+}
+
+.spouseTwoCard {
+  grid-area: 2 / 2 / 3 / 3;
+  display: flex;
+  justify-content: center;
+  height: max-content;
+}
+
+.notaryCard {
+  grid-area: 3 / 1 / 4 / 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: max-content;
+}
+
+.lawyerTwoCard {
+  grid-area: 3 / 2 / 4 / 3;
+  display: flex;
+  justify-content: center;
+  height: max-content;
+}
+
+.addDetails {
+  grid-area: 1 / 2 / 4 / 3;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10% 80% 10%;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.contractDetailsTitle {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.details {
+  grid-area: 2 / 1 / 3 / 2;
+  /* background-color: red;
+  height: 200px; */
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.taxTextField {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardFindButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .options {
-    padding: 20px;
+  grid-area: 3 / 1 / 4 / 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
 
-.contractDetails {
-    grid-area: 1 / 2 / 2 / 3;
-    /* background-color: green; */
+.draftButton {
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.options {
-    grid-area: 2 / 2 / 3 / 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    /* background-color: yellow; */
-}
-
-.involved {
-    grid-area: 1 / 1 / 3 / 2;
-    /* background-color: red; */
-    border-right: 1px solid black;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 10% 45% 45%;
-    grid-column-gap: 10px;
-    grid-row-gap: 0px;
-}
-
-.involved h1 {
-    grid-area: 1 / 1 / 2 / 3;
-    /* background-color: green; */
-}
-
-.spouseOne {
-    grid-area: 2 / 1 / 3 / 2;
-    /* background-color: yellow; */
-    /* height: auto; */
-}
-
-.spouseTwo {
-    grid-area: 2 / 2 / 3 / 3;
-    /* background-color: orange; */
-}
-
-.involved div {
-    padding: 10px;
-}
-
-.lawyerTwo {
-    grid-area: 3 / 1 / 4 / 2;
-    /* background-color: pink; */
-}
-
-.notary {
-    grid-area: 3 / 2 / 4 / 3;
-    /* background-color: brown; */
-}
-
-.userControl {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-direction: row;
-}
-
-.userControl p {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+.createButton {
+  grid-area: 1 / 2 / 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

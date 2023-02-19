@@ -50,7 +50,7 @@ function DivorceItem(props) {
   }
   // onClick={props.onClick}
   return (
-    <Card className={classes.divorce}>
+    <Card>
       <div className={classes.divorce} onClick={onClickHandler}>
         <div className={classes.status}>
           <div>{props.status}</div>

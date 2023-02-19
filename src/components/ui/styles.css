@@ -1,0 +1,42 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  /* padding:  25%; */
+  /* margin-top: 20px; */
+  gap: 30px;
+}
+
+.editor-wrapper {
+  /* border: 1px solid white; */
+  border-radius: 8px;
+  border: none;
+  height: 50vh;
+}
+
+.message-toolbar {
+  border-bottom: 1px solid black;
+  border-radius: 8px 8px 0px 0px;
+  margin-bottom: 0px;
+  width: 100%;
+  padding: 10px 5px;
+}
+
+.message-editor {
+  border-radius: 0px 0px 8px 8px;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+  padding: 0px 10px;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.message-editor::-webkit-scrollbar {
+  display: none;
+}
+
+.rdw-option-wrapper {
+  min-width: 35px;
+  height: 30px;
+}

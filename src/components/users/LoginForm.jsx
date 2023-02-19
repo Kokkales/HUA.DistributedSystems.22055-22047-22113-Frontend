@@ -4,7 +4,6 @@ import classes from './LoginForm.module.css';
 import PrimaryButton from '../ui/PrimaryButton';
 import PrimaryLink from '../ui/PrimaryLink';
 import SecondaryLink from '../ui/SecondaryLink';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm(props) {
@@ -14,6 +13,7 @@ function LoginForm(props) {
     console.log('Login button clicked');
     navigate('/lawyer/workspace');
   }
+
   return (
     <Card>
       <form className={classes.loginForm}>
