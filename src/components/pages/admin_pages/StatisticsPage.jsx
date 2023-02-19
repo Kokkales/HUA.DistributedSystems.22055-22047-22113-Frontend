@@ -4,7 +4,7 @@ import Statistics from '../../users/admin/Statistics';
 function StatisticsPage(props) {
   return (
     <Layout>
-      <Statistics />
+      <Statistics role="admin" />
     </Layout>
   );
 }

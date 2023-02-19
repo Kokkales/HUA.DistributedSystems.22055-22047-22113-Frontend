@@ -5,6 +5,7 @@ import PendingDivorceList from '../../divorces/PendingDivorceList';
 import CompletedDivorceList from '../../divorces/CompletedDivorceList';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import DivorceItem from '../../divorces/DivorceItem';
 
 function SpouseWorkspace(props) {
   const [loadedPending, setLoadedPending] = useState([]);
@@ -56,13 +57,16 @@ function SpouseWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-          <PendingDivorceList items={loadedPending} />
+          {/* <PendingDivorceList items={loadedPending} /> */}
+          <DivorceItem role={props.role} type="pending" />
         </div>
       </section>
       <section className={classes.closedDivorces}>
         <h1 className={classes.statusTitle}>Completed</h1>
         <div className={classes.divorceList}>
-          <CompletedDivorceList items={loadedCompleted} />
+          {/* <CompletedDivorceList items={loadedCompleted} />
+           */}
+          <DivorceItem role={props.role} type="completed" />
         </div>
       </section>
     </div>

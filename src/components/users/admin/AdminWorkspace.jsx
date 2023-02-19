@@ -51,13 +51,13 @@ function AdminWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Users</h1>
         <div className={classes.divorceList}>
-          <CompletedDivorceList items={loadedDivorces} />
+          {/* <CompletedDivorceList items={loadedDivorces} /> */}
         </div>
       </section>
       <section className={classes.closedDivorces}>
         <h1 className={classes.statusTitle}>Divorces</h1>
         <div className={classes.divorceList}>
-          <CompletedDivorceList items={loadedDivorces} />
+          {/* <CompletedDivorceList items={loadedDivorces} /> */}
         </div>
       </section>
     </div>

@@ -4,7 +4,7 @@ import NotaryWorkspace from '../../users/notaries/NotaryWorkspace';
 function NotaryWorkspacePage(props) {
   return (
     <Layout>
-      <NotaryWorkspace />
+      <NotaryWorkspace role="notary" />
     </Layout>
   );
 }

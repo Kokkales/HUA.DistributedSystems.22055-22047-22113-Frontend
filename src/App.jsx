@@ -15,7 +15,8 @@ function App() {
     <Routes>
       <Route path="/" element={<LoginPage />} />{' '}
       <Route path="register" element={<RegistrationPage />} />{' '}
-      <Route path="lawyer/workspace" element={<LawyerWorkspacePage />} />{' '}
+      <Route path="lawyer/workspace" element={<LawyerWorkspacePage />} />
+      {''}
       <Route
         path="lawyer/workspace/new-divorce"
         element={<CreateDivorcePage />}

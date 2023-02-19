@@ -1,9 +1,7 @@
 import Card from '../ui/Card';
 import classes from './DivorceItem.module.css';
 import { useState, useEffect } from 'react';
-import WatchPendingDivorce from './WatchPendingDivorce';
-import WatchDraftDivorce from './WatchDraftDivorce';
-import WatchCompleteDivorce from './WatchCompleteDivorce';
+import WatchDivorce from './WatchDivorce';
 
 function DivorceItem(props) {
   const [isPendingWatch, setIsPendingWatch] = useState(false);
@@ -25,27 +23,27 @@ function DivorceItem(props) {
     console.log('I clicked');
     console.log(props.id);
     //request all the information of the certain divorce
-    await fetch('http://localhost:8887/divorce/findById?id=' + `${props.id}`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Returned Data : ' + JSON.stringify(data.status));
-        const divorce = {
-          id: data.id,
-          status: data.status,
-          spouseOne: data.spouseOneName,
-          spouseTwo: data.spouseTwoName,
-          contractDetails: data.contractDetails,
-          date: data.date,
-          lawyerLeadName: data.lawyerLeadName,
-          lawyerSecName: data.lawyerName,
-          notaryName: data.notaryName,
-        };
-        setFullDivorce(divorce);
-        console.log('Spouse One Check : ' + fullDivorce);
-        // meetups.push(meetup);
-      });
+    // await fetch('http://localhost:8887/divorce/findById?id=' + `${props.id}`)
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log('Returned Data : ' + JSON.stringify(data.status));
+    //     const divorce = {
+    //       id: data.id,
+    //       status: data.status,
+    //       spouseOne: data.spouseOneName,
+    //       spouseTwo: data.spouseTwoName,
+    //       contractDetails: data.contractDetails,
+    //       date: data.date,
+    //       lawyerLeadName: data.lawyerLeadName,
+    //       lawyerSecName: data.lawyerName,
+    //       notaryName: data.notaryName,
+    //     };
+    //     setFullDivorce(divorce);
+    //     console.log('Spouse One Check : ' + fullDivorce);
+    //     // meetups.push(meetup);
+    //   });
     setIsPendingWatch(true);
   }
   // onClick={props.onClick}
@@ -66,20 +64,30 @@ function DivorceItem(props) {
         </div>
       </div>
       {isPendingWatch && (
-        <WatchPendingDivorce
+        <WatchDivorce
+          role={props.role}
+          type={props.type}
           isShown={isPendingWatch}
           formState={openPending}
           data={fullDivorce}
         />
       )}
       {isDraftWatch && (
-        <WatchDraftDivorce isShown={isDraftWatch} formState={openDraft} />
+        <WatchDivorce
+          role={props.role}
+          type={props.type}
+          isShown={isDraftWatch}
+          formState={openDraft}
+          data={fullDivorce}
+        />
       )}
       {isCompleteWatch && (
-        <WatchCompleteDivorce
+        <WatchDivorce
+          role={props.role}
           isShown={isCompleteWatch}
           formState={openComplete}
-          spouseOne={fullDivorce.spouseOne}
+          // spouseOne={fullDivorce.spouseOne}
+          type={props.type}
         />
       )}
     </Card>

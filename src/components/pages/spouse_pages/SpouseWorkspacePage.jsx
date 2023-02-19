@@ -4,7 +4,7 @@ import SpouseWorkspace from '../../users/spouses/SpouseWorkspace';
 function SpouseWorkspacePage(props) {
   return (
     <Layout>
-      <SpouseWorkspace />
+      <SpouseWorkspace role="spouse" />
     </Layout>
   );
 }

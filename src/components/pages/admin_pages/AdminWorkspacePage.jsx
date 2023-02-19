@@ -4,7 +4,7 @@ import AdminWorkspace from '../../users/admin/AdminWorkspace';
 function AdminWorkspacePage(props) {
   return (
     <Layout>
-      <AdminWorkspace />
+      <AdminWorkspace role="admin" />
     </Layout>
   );
 }

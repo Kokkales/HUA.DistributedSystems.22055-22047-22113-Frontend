@@ -13,6 +13,7 @@ function PendingDivorceList(props) {
           spouseTwo={divorce.spouseTwoName}
           // image={meetup.image}
           onClick={props.onClick}
+          role={props.role}
         />
       ))}
     </ul>

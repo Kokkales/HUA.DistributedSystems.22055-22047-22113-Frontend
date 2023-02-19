@@ -4,7 +4,7 @@ import LawyerWorkspace from '../../users/lawyers/LawyerWorkspace';
 function LawyerWorkspacePage(props) {
   return (
     <Layout>
-      <LawyerWorkspace />
+      <LawyerWorkspace role="lawyer" />
     </Layout>
   );
 }

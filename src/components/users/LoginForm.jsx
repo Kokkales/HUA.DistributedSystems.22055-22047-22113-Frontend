@@ -11,6 +11,9 @@ function LoginForm(props) {
   function LoginHandler(event) {
     event.preventDefault();
     console.log('Login button clicked');
+    //take the data and send request for authentication
+    //save the tax number and the faculty
+    //depending on the faculty render the apprpopriate page
     navigate('/lawyer/workspace');
   }
 
