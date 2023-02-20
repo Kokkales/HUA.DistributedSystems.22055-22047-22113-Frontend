@@ -1,12 +1,10 @@
 * {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-
 /* COLORS USED */
-
 
 /* .check {
     color: #172121;
@@ -16,9 +14,7 @@
     color: #e5d0cc;
 } */
 
-
 /* #424B54 */
-
 
 /* .check {
     color: #424B54;
@@ -28,34 +24,53 @@
     color: #FFFFFF;
 } */
 
+/*
+
+color:#F8F9FA
+color:#E9ECEF
+color:#DEE2E6
+color:#CED4DA
+color:#ADB5BD
+color:#6C757D
+color:#495057
+color:#343A40
+color:#212529
+
+
+*/
+
 :root {
-    /* font-family */
-    font-family: Arial, Helvetica, sans-serif;
-    /* Main */
-    --main-bg-color: #c5baaf;
-    --logo-color: #424b54;
-    --main-text-color: #424b54;
-    /* Buttons */
-    --primaryBtn-bg-color: #7f7b82;
-    --primaryBtn-text-color: #424b54;
-    --primaryBtn-bg-hover-color: orange;
-    --primaryBtn-text-hover-color: orange;
-    --secondaryBtn-bg-color: #bfacb5;
-    --secondaryBtn-text-color: orange;
-    --secondaryBtn-bg-hover-color: orange;
-    --secondaryBtn-text-hover-color: orange;
-    /* Cards */
-    --card-bg-color: #ffffff;
-    --card-text-color: #424b54;
-    /* Links */
-    --link-text-color: #424b54;
-    /* Categotry titles e.g */
-    --category--title-color: #424b54;
-    /* Forms */
-    --form-bg-color: #c5baaf;
+  /* font-family */
+  font-family: Arial, Helvetica, sans-serif;
+  /* Main */
+  --main-bg-color: #e9ecef;
+  --logo-color: #212529;
+  --main-text-color: #212529;
+  /* Buttons */
+  --primaryBtn-bg-color: #7f7b82;
+  --primaryBtn-text-color: #212529;
+  --primaryBtn-bg-hover-color: rgb(73, 80, 87);
+  --primaryBtn-text-hover-color: #495057;
+  --secondaryBtn-bg-color: #bfacb5;
+  --secondaryBtn-text-color: #495057;
+  --secondaryBtn-bg-hover-color: #495057;
+  --secondaryBtn-text-hover-color: #495057;
+  --reminderBtn-bg-color: #6c757d;
+  --reminderBtn-text-color: black;
+  --reminderBtn-bg-hover-color: rgba(73, 80, 87, 0.546);
+  /* Cards */
+  --card-bg-color: rgb(255, 255, 255);
+  --card-text-color: #212529;
+  /* Links */
+  --link-text-color: #212529;
+  /* Categotry titles e.g */
+  --category--title-color: #212529;
+  /* Forms */
+  --form-bg-color: #dee2e6;
+  /* --divorce--bg-color: red; */
 }
 
 body {
-    background-color: var(--main-bg-color);
-    /* color: var(--main-text-color); */
+  background-color: var(--main-bg-color);
+  /* color: var(--main-text-color); */
 }

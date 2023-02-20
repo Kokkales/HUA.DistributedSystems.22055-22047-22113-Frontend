@@ -1,0 +1,17 @@
+.reminderButton {
+  width: 40px;
+  height: 40px;
+  background-color: var(--reminderBtn-bg-color);
+  color: black;
+  border: none;
+  /* border: 1px solid black; */
+  border-radius: 8px;
+  color: var(--reminderBtn-text-color);
+}
+
+.reminderButton:hover {
+  cursor: pointer;
+  background-color: var(--reminderBtn-bg-hover-color);
+  color: black;
+  border: none;
+}

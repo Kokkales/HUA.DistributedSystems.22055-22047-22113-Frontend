@@ -1,17 +1,17 @@
 .primaryButton {
-    width: 100px;
-    height: 30px;
-    background-color: var(--primaryBtn-bg-color);
-    color: black;
-    border: none;
-    /* border: 1px solid black; */
-    border-radius: 6px;
-    color: var(--primaryBtn-text-color);
+  width: 100px;
+  height: 30px;
+  background-color: var(--primaryBtn-bg-color);
+  color: black;
+  border: none;
+  /* border: 1px solid black; */
+  border-radius: 8px;
+  color: var(--primaryBtn-text-color);
 }
 
 .primaryButton:hover {
-    cursor: pointer;
-    background-color: rgba(154, 154, 204, 0.539);
-    color: black;
-    border: none;
+  cursor: pointer;
+  /* background-color: rgba(154, 154, 204, 0.539); */
+  color: black;
+  border: none;
 }

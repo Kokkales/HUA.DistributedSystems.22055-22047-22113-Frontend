@@ -1,9 +1,10 @@
 // import classes from './PendingDivorceList.module.css';
 import DivorceItem from './DivorceItem';
+import DivorceList from './DivorceListLayout';
 
 function PendingDivorceList(props) {
   return (
-    <ul>
+    <DivorceList>
       {props.items.map((divorce) => (
         <DivorceItem
           key={divorce.id}
@@ -14,9 +15,10 @@ function PendingDivorceList(props) {
           // image={meetup.image}
           onClick={props.onClick}
           role={props.role}
+          type={props.type}
         />
       ))}
-    </ul>
+    </DivorceList>
   );
 }
 

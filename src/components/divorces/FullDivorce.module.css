@@ -1,19 +1,13 @@
 .completeDivorce {
-  height: 80%;
-  display: grid;
+  height: 100%;
   /* grid-template-columns: 30% 40% 30%;
   grid-template-rows: 20% 60% 20%; */
+  background-color: var(--form-bg-color);
+  border-radius: 8px;
   display: grid;
-  grid-template-columns: 30% 40% 30%;
-  grid-template-rows: 20% 80%;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-}
-
-.parent {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: 10% 80% 10%;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
@@ -40,22 +34,27 @@
   grid-area: 1 / 1 / 2 / 2;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  margin-right: 8px;
 }
 
 .spouseTwo {
   grid-area: 1 / 2 / 2 / 3;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 }
 
 .exitX {
-  font-size: 32px;
+  font-size: 24px;
   grid-area: 1 / 2 / 2 / 3;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.exitX :hover {
+  cursor: pointer;
 }
 
 h1 {
@@ -73,12 +72,45 @@ h2 {
   padding: 10px;
 }
 
+.involvedInfo {
+  /* background-color: red; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ones {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.twos {
+  /* border-top: 1px solid black; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.externals {
+}
+
 .label {
+  margin-bottom: 3px;
+}
+
+.involvedName {
+  margin-bottom: 3px;
+}
+
+.roleStatus {
   margin-bottom: 5px;
 }
 
-.info {
-  margin-bottom: 10px;
+.comment {
+  margin-bottom: 5px;
 }
 
 .contractDetails {
@@ -88,8 +120,140 @@ h2 {
   padding: 10px;
 }
 
+.info {
+  margin-bottom: 3vh;
+}
+
 .status {
   /* background-color: pink; */
   grid-area: 2 / 3 / 3 / 4;
   padding: 10px;
 }
+
+/* vkfju */
+
+.options {
+  grid-area: 3 / 1 / 4 / 4;
+  background-color: green;
+  border-radius: 8px;
+  height: max-content;
+  background-color: var(--form-bg-color);
+  padding: 10px;
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;*/
+}
+
+/* LAWYER OPTIONS */
+
+.draftLawyerOptions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.pendingLawyerOptions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.cancelPendingLawyerButton {
+  grid-area: 1 / 2 / 2 / 3;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exitPendingLawyerButton {
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remindPendingLawyerButton {
+  grid-area: 1 / 3 / 2 / 4;
+  /* background-color: green; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.completedLawyerOptions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* NOTARY OPTIONS */
+
+.pendingNotaryOptions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.acceptPendingNotaryButton {
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+.closePendingNotaryButton {
+  grid-area: 1 / 2 / 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 10px;
+}
+
+/* SPOUSE OPTIONS */
+
+.pendingSpouseOptions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.exitPendingSpouseButton {
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.objectedPendingSpouseButton {
+  grid-area: 1 / 2 / 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rejectedPendingSpouseButton {
+  grid-area: 1 / 3 / 2 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.acceptedPendingSpouseButton {
+  grid-area: 1 / 4 / 2 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ADMIN OPTIONS */
