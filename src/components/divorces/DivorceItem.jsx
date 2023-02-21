@@ -5,7 +5,8 @@ import FullDivorce from './FullDivorce';
 
 function DivorceItem(props) {
   const [isWatch, setIsWatch] = useState(false);
-  const [fullDivorce, setFullDivorce] = useState({});
+
+  console.log('Item id= ' + props.id);
 
   function openDivorce() {
     setIsWatch(false);
@@ -14,30 +15,10 @@ function DivorceItem(props) {
   async function onClickHandler(event) {
     event.preventDefault();
     console.log('I clicked');
-    console.log(props.id);
-    console.log('Type: ' + props.status);
-    //request all the information of the certain divorce
-    await fetch('http://localhost:8887/divorce/findById?id=' + `${props.id}`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Returned Data : ' + JSON.stringify(data.status));
-        const divorce = {
-          id: data.id,
-          status: data.status,
-          spouseOne: data.spouseOneName,
-          spouseTwo: data.spouseTwoName,
-          contractDetails: data.contractDetails,
-          date: data.date,
-          lawyerLeadName: data.lawyerLeadName,
-          lawyerSecName: data.lawyerName,
-          notaryName: data.notaryName,
-        };
-        setFullDivorce(divorce);
-        console.log('Spouse One Check : ' + fullDivorce);
-        // meetups.push(meetup);
-      });
+    // console.log(props.id);
+    // console.log('Type: ' + props.status);
+    // console.log('Divorce Item role passed: ' + props.role);
+
     setIsWatch(true);
   }
   // onClick={props.onClick}
@@ -136,9 +117,9 @@ function DivorceItem(props) {
         <FullDivorce
           role={props.role}
           type={props.type}
-          isShown={isWatch}
+          // isShown={isWatch}
           formState={openDivorce}
-          data={fullDivorce}
+          divorceId={props.id}
         />
       )}
     </Card>

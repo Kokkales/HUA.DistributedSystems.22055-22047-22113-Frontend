@@ -14,49 +14,51 @@ function LawyerWorkspace(props) {
   const [loadedPending, setLoadedPending] = useState([]);
   const [loadedCompleted, setLoadedComlpeted] = useState([]);
   console.log(props.role);
-  //GET some divorce information
-  useEffect(() => {
-    // setIsLoading(true);
-    fetch(
-      'http://localhost:8887/divorce/myDivorces?taxNumber=123456789&faculty=SPOUSE_TWO'
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log('ok');
-        console.log(data);
-        const drafts = [];
-        const pendings = [];
-        const completed = [];
-        for (const key in data) {
-          const divorce = {
-            key: key,
-            ...data[key],
-          };
-          if (data[key].status === 'Pending') {
-            pendings.push(divorce);
-          }
-          if (data[key].status === 'Draft') {
-            drafts.push(divorce);
-          }
-          if (
-            data[key].status === 'Completed' ||
-            data[key].status === 'Cancelled'
-          ) {
-            completed.push(divorce);
-          }
-          // meetups.push(meetup);
-        }
-        console.log('Drafts: ' + drafts);
-        console.log('Pendings: ' + pendings);
-        console.log('Completed: ' + completed);
-        // setIsLoading(false);
-        setLoadedDraft(drafts);
-        setLoadedPending(pendings);
-        setLoadedComlpeted(completed);
-      });
-  }, []);
+  // GET some divorce information
+  // useEffect(() => {
+  //   // setIsLoading(true);
+  //   fetch(
+  //     'http://localhost:8887/divorce/myDivorces?taxNumber=123456789&faculty=SPOUSE_TWO'
+  //   )
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log('ok');
+  //       console.log(data);
+  //       const drafts = [];
+  //       const pendings = [];
+  //       const completed = [];
+  //       for (const key in data) {
+  //         const divorce = {
+  //           key: key,
+  //           ...data[key],
+  //         };
+  //         if (data[key].status === 'Pending') {
+  //           pendings.push(divorce);
+  //         }
+  //         if (data[key].status === 'Draft') {
+  //           drafts.push(divorce);
+  //         }
+  //         if (
+  //           data[key].status === 'Completed' ||
+  //           data[key].status === 'Cancelled'
+  //         ) {
+  //           completed.push(divorce);
+  //         }
+  //         // meetups.push(meetup);
+  //       }
+  //       console.log('Drafts: ' + drafts);
+  //       console.log('Pendings: ' + pendings);
+  //       console.log('Completed: ' + completed);
+  //       // setIsLoading(false);
+  //       setLoadedDraft(drafts);
+  //       setLoadedPending(pendings);
+  //       setLoadedComlpeted(completed);
+  //     });
+  // }, []);
+
+  // props.type=
 
   const navigate = useNavigate();
   function newDivorceHandler(event) {
@@ -82,19 +84,20 @@ function LawyerWorkspace(props) {
       <section className={classes.draftDivorces}>
         <h1 className={classes.satustTitle}>Draft</h1>
         <div className={classes.divorceList}>
-          {/* <DraftDivorceList items={loadedDraft} /> */}
-          <DivorceItem type="draft" role={props.role} />
-          {loadedDraft.length === 0 && <p>There are no Draft divorces</p>}
+          <DraftDivorceList items={loadedDraft} />
+          <DivorceItem type="draft" role={props.role} id="1" />
+          {/* {loadedDraft.length === 0 && <p>There are no Draft divorces</p>} */}
         </div>
       </section>
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-          <PendingDivorceList
+          {/* <PendingDivorceList
             items={loadedPending}
             role={props.role}
-            type="pending"
-          />
+            type="Pending"
+          /> */}
+          <DivorceItem type="pending" role={props.role} />
           {loadedPending.length === 0 && <p>There are no Pending divorces</p>}
         </div>
       </section>

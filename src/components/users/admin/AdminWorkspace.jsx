@@ -12,28 +12,28 @@ function AdminWorkspace(props) {
   const navigate = useNavigate();
 
   //GET some divorce information
-  useEffect(() => {
-    // setIsLoading(true);
-    fetch('http://localhost:8887/divorce/findall', { mode: 'no-cors' })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log('ok');
-        console.log(data);
-        const divorces = [];
-        for (const key in data) {
-          const divorce = {
-            key: key,
-            ...data[key],
-          };
-          divorces.push(divorce);
-        }
-        console.log('Divorces: ' + divorces);
-        // setIsLoading(false);
-        setLoadedDivorces(divorces);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // setIsLoading(true);
+  //   fetch('http://localhost:8887/divorce/findall', { mode: 'no-cors' })
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log('ok');
+  //       console.log(data);
+  //       const divorces = [];
+  //       for (const key in data) {
+  //         const divorce = {
+  //           key: key,
+  //           ...data[key],
+  //         };
+  //         divorces.push(divorce);
+  //       }
+  //       console.log('Divorces: ' + divorces);
+  //       // setIsLoading(false);
+  //       setLoadedDivorces(divorces);
+  //     });
+  // }, []);
 
   function newDivorceHandler(event) {
     event.preventDefault();

@@ -12,6 +12,8 @@ function DraftDivorceList(props) {
           status={divorce.status}
           spouseOne={divorce.spouseOneName}
           spouseTwo={divorce.spouseTwoName}
+          role={props.role}
+          type={props.type}
           // image={meetup.image}
           onClick={props.onClick}
         />

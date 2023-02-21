@@ -4,19 +4,93 @@ import Card from '../ui/Card';
 import DivorceLayout from '../layout/DivorceLayout';
 import PrimaryButton from '../ui/PrimaryButton';
 import ReminderButton from '../ui/ReminderButton';
+import { useState, useEffect } from 'react';
+import EditDivorce from '../users/lawyers/EditDivorce';
 // import classes from './WatchDivorce.module.css';
 
 function FullDivorce(props) {
+  const [editIsWatch, setEditIsWatch] = useState(false);
+  const [fullDivorce, setFullDivorce] = useState({});
+  const [divorceData, setDivorceData] = useState();
   const isShown = props.isShown;
   console.log('Type: ' + props.type);
+  console.log('Role' + props.role);
+  console.log('Divorce id: ' + props.divorceId);
+
+  // request all the information of the certain divorce
+  // useEffect(() => {
+  //   fetch('http://localhost:8887/divorce/findById?id=' + `${props.divorceId}`)
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log('Returned Data : ' + JSON.stringify(data.status));
+  //       const divorce = {
+  //         id: data.id,
+  //         status: data.status,
+  //         spouseOne: data.spouseOneName,
+  //         spouseTwo: data.spouseTwoName,
+  //         contractDetails: data.contractDetails,
+  //         date: data.date,
+  //         lawyerLeadName: data.lawyerLeadName,
+  //         lawyerSecName: data.lawyerName,
+  //         notaryName: data.notaryName,
+  //       };
+  //       setDivorceData(divorce);
+  //       console.log('Spouse One Check : ' + divorceData);
+  //       // meetups.push(meetup);
+  //     });
+  // }, []);
+
+  function openEditForm() {
+    setEditIsWatch(false);
+  }
+
+  // EXIT BUTTON
   function exitHandler(event) {
-    console.log('exit pending button clicked');
+    console.log('exit button clicked');
     event.preventDefault();
     //POST changes
     if (isShown) {
       console.log('closed the divorce');
     }
     props.formState(isShown);
+  }
+  // EDIT BUTTON
+  function editHandler(event) {
+    console.log('edit button clicked');
+    setEditIsWatch(true);
+    event.preventDefault();
+  }
+  //DELETE BUTTON
+  function deleteHandler(event) {
+    console.log('delete button clicked');
+    //send divorce_id
+    event.preventDefault();
+  }
+  //REMINDER BUTTON
+  function reminderHandler(event) {
+    console.log('reminder button clicked');
+    event.preventDefault();
+  }
+  //ACCEPT BUTTON
+  function acceptHandler(event) {
+    console.log('acception button clicked');
+    event.preventDefault();
+  }
+  //REJECT BUTTON
+  function rejectHandler(event) {
+    console.log('rjection button clicked');
+    event.preventDefault();
+  }
+  //OBJECT BUTTON
+  function objectHandler(event) {
+    console.log('objection button clicked');
+    event.preventDefault();
+  }
+  function acceptNotaryHandler(event) {
+    console.log('notary acception button clicked');
+    event.preventDefault();
   }
 
   return (
@@ -25,12 +99,12 @@ function FullDivorce(props) {
         <DivorceLayout>
           <div className={classes.completeDivorce}>
             <section className={classes.mainCharacters}>
-              <div className={classes.divorceNames}>
+              {/*}  <div className={classes.divorceNames}>
                 <div className={classes.spouseOne}>
-                  <h1>{props.data.spouseOne} vs</h1>
+                  <h1>{divorceData.spouseOne} vs</h1>
                 </div>
                 <div className={classes.spouseTwo}>
-                  <h1>{props.data.spouseTwo}</h1>
+                  <h1>{divorceData.spouseTwo}</h1>
                 </div>
               </div>
               <div className={classes.exitX}>
@@ -57,10 +131,10 @@ function FullDivorce(props) {
                 <div className={classes.involvedInfo}>
                   <h3 className={classes.label}>Spouse1:</h3>
                   <p className={classes.involvedName}>
-                    {props.data.lawyerLeadName}
+                    {divorceData.lawyerLeadName}
                   </p>
                   <div className={classes.roleStatus}>
-                    {props.data.spouseOneStatus}ok
+                    {divorceData.spouseOneStatus}ok
                   </div>
                   <div className={classes.comment}>
                     <h4>Comment</h4>
@@ -70,10 +144,10 @@ function FullDivorce(props) {
                 <div className={classes.involvedInfo}>
                   <h3 className={classes.label}>Lawyer1:</h3>
                   <p className={classes.involvedName}>
-                    {props.data.lawyerLeadName}
+                    {divorceData.lawyerLeadName}
                   </p>
                   <div className={classes.roleStatus}>
-                    {props.data.spouseOneStatus}ok
+                    {divorceData.spouseOneStatus}ok
                   </div>
                   <div className={classes.comment}>
                     <h4>Comment</h4>
@@ -85,10 +159,10 @@ function FullDivorce(props) {
                 <div className={classes.involvedInfo}>
                   <h3 className={classes.label}>Spouse2:</h3>
                   <p className={classes.involvedName}>
-                    {props.data.lawyerLeadName}
+                    {divorceData.lawyerLeadName}
                   </p>
                   <div className={classes.roleStatus}>
-                    {props.data.spouseOneStatus}ok
+                    {divorceData.spouseOneStatus}ok
                   </div>
                   <div className={classes.comment}>
                     <h4>Comment</h4>
@@ -98,10 +172,10 @@ function FullDivorce(props) {
                 <div className={classes.involvedInfo}>
                   <h3 className={classes.label}>Lawyer2:</h3>
                   <p className={classes.involvedName}>
-                    {props.data.lawyerLeadName}
+                    {divorceData.lawyerLeadName}
                   </p>
                   <div className={classes.roleStatus}>
-                    {props.data.spouseOneStatus}ok
+                    {divorceData.spouseOneStatus}ok
                   </div>
                   <div className={classes.comment}>
                     <h4>Comment</h4>
@@ -114,33 +188,33 @@ function FullDivorce(props) {
               <h2>Details</h2>
               <div>
                 <h3 className={classes.label}>Application Date:</h3>
-                <div className={classes.info}>{props.data.date}</div>
+                <div className={classes.info}>{divorceData.date}</div>
               </div>
               <div>
                 <h3 className={classes.label}>Contract Details:</h3>
-                <h3 className={classes.info}>{props.data.contractDetails}</h3>
+                <h3 className={classes.info}>{divorceData.contractDetails}</h3>
               </div>
             </section>
             <section className={classes.status}>
               <h2>Result</h2>
               <div>
                 <h3>Status</h3>
-                <div className={classes.info}>{props.data.status}</div>
+                <div className={classes.info}>{divorceData.status}</div>
               </div>
               <div className={classes.externals}>
                 <div className={classes.notaryInfo}>
                   <h3 className={classes.label}>Notary:</h3>
                   <p className={classes.involvedName}>
-                    {props.data.lawyerLeadName}
+                    {divorceData.lawyerLeadName}
                   </p>
                   <div className={classes.roleStatus}>
-                    {props.data.spouseOneStatus}ok
+                    {divorceData.spouseOneStatus}ok
                   </div>
                 </div>
                 <div>
                   <h3>Notorial Deed Number:</h3>
                 </div>
-              </div>
+              </div> */}
             </section>
             <section className={classes.options}>
               {/* Lawyer Options */}
@@ -148,10 +222,10 @@ function FullDivorce(props) {
                 <section className={classes.options}>
                   <div className={classes.draftLawyerOptions}>
                     <div className={classes.cancelPendingLawyerButton}>
-                      <PrimaryButton name="Edit" onClick={exitHandler} />
+                      <PrimaryButton name="Edit" onClick={editHandler} />
                     </div>
                     <div className={classes.exitPendingLawyerButton}>
-                      <PrimaryButton name="Delete" onClick={exitHandler} />
+                      <PrimaryButton name="Delete" onClick={deleteHandler} />
                     </div>
                     <div className={classes.remindPendingLawyerButton}>
                       <PrimaryButton name="Exit" onClick={exitHandler} />
@@ -165,11 +239,11 @@ function FullDivorce(props) {
                     <div className={classes.cancelPendingLawyerButton}>
                       <PrimaryButton
                         name="Cancel Divorce"
-                        onClick={exitHandler}
+                        onClick={deleteHandler}
                       />
                     </div>
                     <div className={classes.exitPendingLawyerButton}>
-                      <ReminderButton onClick={exitHandler} />
+                      <ReminderButton onClick={reminderHandler} />
                     </div>
                     <div className={classes.remindPendingLawyerButton}>
                       <PrimaryButton name="Exit" onClick={exitHandler} />
@@ -189,7 +263,10 @@ function FullDivorce(props) {
                 <section className={classes.options}>
                   <div className={classes.pendingNotaryOptions}>
                     <div className={classes.acceptPendingNotaryButton}>
-                      <PrimaryButton name="Accept" onClick={exitHandler} />
+                      <PrimaryButton
+                        name="Accept"
+                        onClick={acceptNotaryHandler}
+                      />
                     </div>
                     <div className={classes.closePendingNotaryButton}>
                       <PrimaryButton name="Close" onClick={exitHandler} />
@@ -209,13 +286,13 @@ function FullDivorce(props) {
                 <section className={classes.options}>
                   <div className={classes.pendingSpouseOptions}>
                     <div className={classes.acceptedPendingSpouseButton}>
-                      <PrimaryButton name="Accept" onClick={exitHandler} />
+                      <PrimaryButton name="Accept" onClick={acceptHandler} />
                     </div>
                     <div className={classes.rejectedPendingSpouseButton}>
-                      <PrimaryButton name="Reject" onClick={exitHandler} />
+                      <PrimaryButton name="Reject" onClick={rejectHandler} />
                     </div>
                     <div className={classes.objectedPendingSpouseButton}>
-                      <PrimaryButton name="Objection" onClick={exitHandler} />
+                      <PrimaryButton name="Objection" onClick={objectHandler} />
                     </div>
                     <div className={classes.exitPendingSpouseButton}>
                       <PrimaryButton name="Close" onClick={exitHandler} />
@@ -234,6 +311,14 @@ function FullDivorce(props) {
           </div>
         </DivorceLayout>
       </Card>
+      {editIsWatch && (
+        <EditDivorce
+          role={props.role}
+          type={props.type}
+          data={divorceData}
+          formState={openEditForm}
+        />
+      )}
     </Overlay>
   );
 }
