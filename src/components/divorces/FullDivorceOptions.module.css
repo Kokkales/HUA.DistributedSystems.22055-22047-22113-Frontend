@@ -1,0 +1,112 @@
+/* LAWYER OPTIONS */
+
+.draftLawyerOptions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.pendingLawyerOptions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.cancelPendingLawyerButton {
+  grid-area: 1 / 2 / 2 / 3;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exitPendingLawyerButton {
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remindPendingLawyerButton {
+  grid-area: 1 / 3 / 2 / 4;
+  /* background-color: green; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.completedLawyerOptions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* NOTARY OPTIONS */
+
+.pendingNotaryOptions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.acceptPendingNotaryButton {
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+.closePendingNotaryButton {
+  grid-area: 1 / 2 / 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 10px;
+}
+
+/* SPOUSE OPTIONS */
+
+.pendingSpouseOptions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.exitPendingSpouseButton {
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.objectedPendingSpouseButton {
+  grid-area: 1 / 2 / 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rejectedPendingSpouseButton {
+  grid-area: 1 / 3 / 2 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.acceptedPendingSpouseButton {
+  grid-area: 1 / 4 / 2 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ADMIN OPTIONS */

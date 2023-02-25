@@ -1,10 +1,10 @@
 // import classes from './PendingDivorceList.module.css';
 import DivorceItem from './DivorceItem';
-import DivorceList from './DivorceListLayout';
+import DivorceListLayout from './DivorceListLayout';
 
 function PendingDivorceList(props) {
   return (
-    <DivorceList>
+    <DivorceListLayout>
       {props.items.map((divorce) => (
         <DivorceItem
           key={divorce.id}
@@ -18,7 +18,7 @@ function PendingDivorceList(props) {
           type={props.type}
         />
       ))}
-    </DivorceList>
+    </DivorceListLayout>
   );
 }
 

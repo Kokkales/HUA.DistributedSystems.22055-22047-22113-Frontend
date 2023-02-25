@@ -6,6 +6,7 @@ import PrimaryButton from '../ui/PrimaryButton';
 import ReminderButton from '../ui/ReminderButton';
 import { useState, useEffect } from 'react';
 import EditDivorce from '../users/lawyers/EditDivorce';
+import FullDivorceOptions from './FullDivorceOptions';
 // import classes from './WatchDivorce.module.css';
 
 function FullDivorce(props) {
@@ -18,29 +19,29 @@ function FullDivorce(props) {
   console.log('Divorce id: ' + props.divorceId);
 
   // request all the information of the certain divorce
-  // useEffect(() => {
-  //   fetch('http://localhost:8887/divorce/findById?id=' + `${props.divorceId}`)
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log('Returned Data : ' + JSON.stringify(data.status));
-  //       const divorce = {
-  //         id: data.id,
-  //         status: data.status,
-  //         spouseOne: data.spouseOneName,
-  //         spouseTwo: data.spouseTwoName,
-  //         contractDetails: data.contractDetails,
-  //         date: data.date,
-  //         lawyerLeadName: data.lawyerLeadName,
-  //         lawyerSecName: data.lawyerName,
-  //         notaryName: data.notaryName,
-  //       };
-  //       setDivorceData(divorce);
-  //       console.log('Spouse One Check : ' + divorceData);
-  //       // meetups.push(meetup);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch('http://localhost:8887/divorce/findById?id=' + `${props.divorceId}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Returned Data : ' + JSON.stringify(data.status));
+        const divorce = {
+          id: data.id,
+          status: data.status,
+          spouseOne: data.spouseOneName,
+          spouseTwo: data.spouseTwoName,
+          contractDetails: data.contractDetails,
+          date: data.date,
+          lawyerLeadName: data.lawyerLeadName,
+          lawyerSecName: data.lawyerName,
+          notaryName: data.notaryName,
+        };
+        setDivorceData(divorce);
+        console.log('Spouse One Check : ' + divorceData);
+        // meetups.push(meetup);
+      });
+  }, []);
 
   function openEditForm() {
     setEditIsWatch(false);
@@ -98,8 +99,9 @@ function FullDivorce(props) {
       <Card>
         <DivorceLayout>
           <div className={classes.completeDivorce}>
-            <section className={classes.mainCharacters}>
-              {/*}  <div className={classes.divorceNames}>
+            {/* <section className={classes.mainCharacters}>
+              }{' '}
+              <div className={classes.divorceNames}>
                 <div className={classes.spouseOne}>
                   <h1>{divorceData.spouseOne} vs</h1>
                 </div>
@@ -214,99 +216,17 @@ function FullDivorce(props) {
                 <div>
                   <h3>Notorial Deed Number:</h3>
                 </div>
-              </div> */}
-            </section>
+              </div>
+            </section>*/}
             <section className={classes.options}>
-              {/* Lawyer Options */}
-              {props.type == 'draft' && props.role == 'lawyer' && (
-                <section className={classes.options}>
-                  <div className={classes.draftLawyerOptions}>
-                    <div className={classes.cancelPendingLawyerButton}>
-                      <PrimaryButton name="Edit" onClick={editHandler} />
-                    </div>
-                    <div className={classes.exitPendingLawyerButton}>
-                      <PrimaryButton name="Delete" onClick={deleteHandler} />
-                    </div>
-                    <div className={classes.remindPendingLawyerButton}>
-                      <PrimaryButton name="Exit" onClick={exitHandler} />
-                    </div>
-                  </div>
-                </section>
-              )}
-              {props.type == 'pending' && props.role == 'lawyer' && (
-                <section className={classes.options}>
-                  <div className={classes.pendingLawyerOptions}>
-                    <div className={classes.cancelPendingLawyerButton}>
-                      <PrimaryButton
-                        name="Cancel Divorce"
-                        onClick={deleteHandler}
-                      />
-                    </div>
-                    <div className={classes.exitPendingLawyerButton}>
-                      <ReminderButton onClick={reminderHandler} />
-                    </div>
-                    <div className={classes.remindPendingLawyerButton}>
-                      <PrimaryButton name="Exit" onClick={exitHandler} />
-                    </div>
-                  </div>
-                </section>
-              )}
-              {props.type == 'completed' && props.role == 'lawyer' && (
-                <section className={classes.options}>
-                  <div className={classes.completedLawyerOptions}>
-                    <PrimaryButton name="Close" onClick={exitHandler} />
-                  </div>
-                </section>
-              )}
-              {/* Notary options */}
-              {props.type == 'pending' && props.role == 'notary' && (
-                <section className={classes.options}>
-                  <div className={classes.pendingNotaryOptions}>
-                    <div className={classes.acceptPendingNotaryButton}>
-                      <PrimaryButton
-                        name="Accept"
-                        onClick={acceptNotaryHandler}
-                      />
-                    </div>
-                    <div className={classes.closePendingNotaryButton}>
-                      <PrimaryButton name="Close" onClick={exitHandler} />
-                    </div>
-                  </div>
-                </section>
-              )}
-              {props.type == 'completed' && props.role == 'notary' && (
-                <section className={classes.options}>
-                  <div className={classes.completedLawyerOptions}>
-                    <PrimaryButton name="Close" onClick={exitHandler} />
-                  </div>
-                </section>
-              )}
-              {/* Spouse Options */}
-              {props.type == 'pending' && props.role == 'spouse' && (
-                <section className={classes.options}>
-                  <div className={classes.pendingSpouseOptions}>
-                    <div className={classes.acceptedPendingSpouseButton}>
-                      <PrimaryButton name="Accept" onClick={acceptHandler} />
-                    </div>
-                    <div className={classes.rejectedPendingSpouseButton}>
-                      <PrimaryButton name="Reject" onClick={rejectHandler} />
-                    </div>
-                    <div className={classes.objectedPendingSpouseButton}>
-                      <PrimaryButton name="Objection" onClick={objectHandler} />
-                    </div>
-                    <div className={classes.exitPendingSpouseButton}>
-                      <PrimaryButton name="Close" onClick={exitHandler} />
-                    </div>
-                  </div>
-                </section>
-              )}
-              {props.type == 'completed' && props.role == 'spouse' && (
-                <section className={classes.options}>
-                  <div className={classes.completedLawyerOptions}>
-                    <PrimaryButton name="Close" onClick={exitHandler} />
-                  </div>
-                </section>
-              )}
+              <FullDivorceOptions
+                type={props.type}
+                role={props.role}
+                exitHandler={exitHandler}
+                editHandler={editHandler}
+                deleteHandler={deleteHandler}
+                reminderHandler={reminderHandler}
+              />
             </section>
           </div>
         </DivorceLayout>

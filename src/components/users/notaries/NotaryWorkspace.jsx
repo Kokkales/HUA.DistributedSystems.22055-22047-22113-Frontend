@@ -13,42 +13,42 @@ function NotaryWorkspace(props) {
   const navigate = useNavigate();
 
   //GET some divorce information
-  // useEffect(() => {
-  //   // setIsLoading(true);
-  //   fetch(
-  //     'http://localhost:8887/divorce/myDivorces?taxNumber=123456789?faculty=NOTARY'
-  //   )
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log('ok');
-  //       console.log(data);
-  //       const pendings = [];
-  //       const completed = [];
-  //       for (const key in data) {
-  //         const divorce = {
-  //           key: key,
-  //           ...data[key],
-  //         };
-  //         if (data[key].status === 'Pending') {
-  //           pendings.push(divorce);
-  //         }
-  //         if (
-  //           data[key].status === 'Completed' ||
-  //           data[key].status === 'Cancelled'
-  //         ) {
-  //           completed.push(divorce);
-  //         }
-  //         // meetups.push(meetup);
-  //       }
-  //       console.log('Pendings: ' + pendings);
-  //       console.log('Completed: ' + completed);
-  //       // setIsLoading(false);
-  //       setLoadedPending(pendings);
-  //       setLoadedComlpeted(completed);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // setIsLoading(true);
+    fetch(
+      'http://localhost:8887/divorce/myDivorces?taxNumber=30&faculty=NOTARY'
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log('ok');
+        console.log(data);
+        const pendings = [];
+        const completed = [];
+        for (const key in data) {
+          const divorce = {
+            key: key,
+            ...data[key],
+          };
+          if (data[key].status === 'Pending') {
+            pendings.push(divorce);
+          }
+          if (
+            data[key].status === 'Completed' ||
+            data[key].status === 'Cancelled'
+          ) {
+            completed.push(divorce);
+          }
+          // meetups.push(meetup);
+        }
+        console.log('Pendings: ' + pendings);
+        console.log('Completed: ' + completed);
+        // setIsLoading(false);
+        setLoadedPending(pendings);
+        setLoadedComlpeted(completed);
+      });
+  }, []);
 
   function newDivorceHandler(event) {
     event.preventDefault();
@@ -67,19 +67,23 @@ function NotaryWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-          {/* <PendingDivorceList items={loadedPending} /> */}
-          <DivorceItem type="pending" role={props.role} />
+          <PendingDivorceList
+            items={loadedPending}
+            role={props.role}
+            type="pending"
+          />
+          {/* <DivorceItem type="pending" role={props.role} /> */}
         </div>
       </section>
-      <section className={classes.closedDivorces}>
+      <section className={classes.completedDivorces}>
         <h1 className={classes.statusTitle}>Completed</h1>
         <div className={classes.divorceList}>
-          {/* <CompletedDivorceList
+          <CompletedDivorceList
             items={loadedCompleted}
             type="completed"
             role={props.role}
-          /> */}
-          <DivorceItem type="completed" role={props.role} />
+          />
+          {/* <DivorceItem type="completed" role={props.role} /> */}
         </div>
       </section>
     </div>

@@ -1,9 +1,10 @@
 // import classes from './DraftDivorceList.module.css';
 import DivorceItem from './DivorceItem';
+import DivorceListLayout from './DivorceListLayout';
 
 function DraftDivorceList(props) {
   return (
-    <ul>
+    <DivorceListLayout>
       {props.items.map((divorce) => (
         //give the role and type attribute from here
         <DivorceItem
@@ -18,7 +19,7 @@ function DraftDivorceList(props) {
           onClick={props.onClick}
         />
       ))}
-    </ul>
+    </DivorceListLayout>
   );
 }
 

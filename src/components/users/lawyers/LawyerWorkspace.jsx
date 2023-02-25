@@ -15,48 +15,46 @@ function LawyerWorkspace(props) {
   const [loadedCompleted, setLoadedComlpeted] = useState([]);
   console.log(props.role);
   // GET some divorce information
-  // useEffect(() => {
-  //   // setIsLoading(true);
-  //   fetch(
-  //     'http://localhost:8887/divorce/myDivorces?taxNumber=123456789&faculty=SPOUSE_TWO'
-  //   )
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log('ok');
-  //       console.log(data);
-  //       const drafts = [];
-  //       const pendings = [];
-  //       const completed = [];
-  //       for (const key in data) {
-  //         const divorce = {
-  //           key: key,
-  //           ...data[key],
-  //         };
-  //         if (data[key].status === 'Pending') {
-  //           pendings.push(divorce);
-  //         }
-  //         if (data[key].status === 'Draft') {
-  //           drafts.push(divorce);
-  //         }
-  //         if (
-  //           data[key].status === 'Completed' ||
-  //           data[key].status === 'Cancelled'
-  //         ) {
-  //           completed.push(divorce);
-  //         }
-  //         // meetups.push(meetup);
-  //       }
-  //       console.log('Drafts: ' + drafts);
-  //       console.log('Pendings: ' + pendings);
-  //       console.log('Completed: ' + completed);
-  //       // setIsLoading(false);
-  //       setLoadedDraft(drafts);
-  //       setLoadedPending(pendings);
-  //       setLoadedComlpeted(completed);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // setIsLoading(true);
+    fetch('http://localhost:8887/divorce/myDivorces?taxNumber=2&role=LAWYER')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log('ok');
+        console.log(data);
+        const drafts = [];
+        const pendings = [];
+        const completed = [];
+        for (const key in data) {
+          const divorce = {
+            key: key,
+            ...data[key],
+          };
+          if (data[key].status === 'Pending') {
+            pendings.push(divorce);
+          }
+          if (data[key].status === 'Draft') {
+            drafts.push(divorce);
+          }
+          if (
+            data[key].status === 'Completed' ||
+            data[key].status === 'Cancelled'
+          ) {
+            completed.push(divorce);
+          }
+          // meetups.push(meetup);
+        }
+        console.log('Drafts: ' + drafts);
+        console.log('Pendings: ' + pendings);
+        console.log('Completed: ' + completed);
+        // setIsLoading(false);
+        setLoadedDraft(drafts);
+        setLoadedPending(pendings);
+        setLoadedComlpeted(completed);
+      });
+  }, []);
 
   // props.type=
 
@@ -92,20 +90,24 @@ function LawyerWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-          {/* <PendingDivorceList
+          <PendingDivorceList
             items={loadedPending}
             role={props.role}
             type="Pending"
-          /> */}
+          />
           <DivorceItem type="pending" role={props.role} />
           {loadedPending.length === 0 && <p>There are no Pending divorces</p>}
         </div>
       </section>
       <section className={classes.completedDivorces}>
-        <h1 className={classes.satustTitle}>Closed</h1>
+        <h1 className={classes.statusTitle}>Closed</h1>
         <div className={classes.divorceList}>
-          {/* <CompletedDivorceList items={loadedCompleted} /> */}
-          <DivorceItem type="completed" role={props.role} />
+          <CompletedDivorceList
+            items={loadedCompleted}
+            role={props.role}
+            type="Completed"
+          />
+          {/* <DivorceItem type="completed" role={props.role} /> */}
           {loadedCompleted.length === 0 && (
             <p>There are no Completed divorces yet</p>
           )}

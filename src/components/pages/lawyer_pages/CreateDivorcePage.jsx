@@ -3,7 +3,7 @@ import CreateDivorce from '../../users/lawyers/CreateDivorce';
 function CreateDivorcePage(props) {
   return (
     <Layout>
-      <CreateDivorce />
+      <CreateDivorce isEditType={false} />
     </Layout>
   );
 }

@@ -40,7 +40,7 @@ h1 {
   border-right: 1px solid black;
 }
 
-.closedDivorces {
+.completedDivorces {
   grid-area: 2 / 2 / 3 / 3;
   /* background-color: yellow; */
   padding: 20px;
