@@ -12,7 +12,7 @@ import FullDivorceOptions from './FullDivorceOptions';
 function FullDivorce(props) {
   const [editIsWatch, setEditIsWatch] = useState(false);
   const [fullDivorce, setFullDivorce] = useState({});
-  const [divorceData, setDivorceData] = useState();
+  const [divorceData, setDivorceData] = useState({});
   const isShown = props.isShown;
   console.log('Type: ' + props.type);
   console.log('Role' + props.role);
@@ -20,7 +20,7 @@ function FullDivorce(props) {
 
   // request all the information of the certain divorce
   useEffect(() => {
-    fetch('http://localhost:8887/divorce/findById?id=' + `${props.divorceId}`)
+    fetch('http://localhost:8887/divorce/findById?id=1')
       .then((response) => {
         return response.json();
       })
@@ -99,8 +99,7 @@ function FullDivorce(props) {
       <Card>
         <DivorceLayout>
           <div className={classes.completeDivorce}>
-            {/* <section className={classes.mainCharacters}>
-              }{' '}
+            <section className={classes.mainCharacters}>
               <div className={classes.divorceNames}>
                 <div className={classes.spouseOne}>
                   <h1>{divorceData.spouseOne} vs</h1>
@@ -133,7 +132,7 @@ function FullDivorce(props) {
                 <div className={classes.involvedInfo}>
                   <h3 className={classes.label}>Spouse1:</h3>
                   <p className={classes.involvedName}>
-                    {divorceData.lawyerLeadName}
+                    {divorceData.spouseOne}
                   </p>
                   <div className={classes.roleStatus}>
                     {divorceData.spouseOneStatus}ok
@@ -146,7 +145,7 @@ function FullDivorce(props) {
                 <div className={classes.involvedInfo}>
                   <h3 className={classes.label}>Lawyer1:</h3>
                   <p className={classes.involvedName}>
-                    {divorceData.lawyerLeadName}
+                    {divorceData.lawyerLeadName}ok
                   </p>
                   <div className={classes.roleStatus}>
                     {divorceData.spouseOneStatus}ok
@@ -161,7 +160,7 @@ function FullDivorce(props) {
                 <div className={classes.involvedInfo}>
                   <h3 className={classes.label}>Spouse2:</h3>
                   <p className={classes.involvedName}>
-                    {divorceData.lawyerLeadName}
+                    {divorceData.spouseTwo}
                   </p>
                   <div className={classes.roleStatus}>
                     {divorceData.spouseOneStatus}ok
@@ -174,7 +173,7 @@ function FullDivorce(props) {
                 <div className={classes.involvedInfo}>
                   <h3 className={classes.label}>Lawyer2:</h3>
                   <p className={classes.involvedName}>
-                    {divorceData.lawyerLeadName}
+                    {divorceData.lawyerSecName}
                   </p>
                   <div className={classes.roleStatus}>
                     {divorceData.spouseOneStatus}ok
@@ -217,7 +216,7 @@ function FullDivorce(props) {
                   <h3>Notorial Deed Number:</h3>
                 </div>
               </div>
-            </section>*/}
+            </section>
             <section className={classes.options}>
               <FullDivorceOptions
                 type={props.type}

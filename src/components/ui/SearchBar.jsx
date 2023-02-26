@@ -1,4 +1,5 @@
 import classes from './SearchBar.module.css';
+import { useState } from 'react';
 
 function SearchBar(props) {
   return (
@@ -6,6 +7,8 @@ function SearchBar(props) {
       className={classes.searchBar}
       type={props.type}
       placeholder={props.placeholder}
+      // value={searchText}
+      // value={handleChange()}
     >
       {props.children}
     </input>

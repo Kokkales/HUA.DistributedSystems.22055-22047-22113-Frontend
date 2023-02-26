@@ -26,6 +26,7 @@ function DivorceItem(props) {
     <Card>
       <div className={classes.divorceItem} onClick={onClickHandler}>
         <div className={classes.status}>
+          {/*Pending svg*/}
           {props.status === 'Pending' && (
             <svg
               width="30"
@@ -45,7 +46,8 @@ function DivorceItem(props) {
               />
             </svg>
           )}
-          {props.status === 'Accepted' && (
+          {/*Acception svg*/}
+          {props.status === 'Completed' && (
             <svg
               width="30"
               height="30"
@@ -64,7 +66,9 @@ function DivorceItem(props) {
               />
             </svg>
           )}
-          {props.status === 'Rejected' && (
+          {/*rejection svg*/}
+
+          {props.status === 'Cancelled' && (
             <svg
               width="30"
               height="30"
@@ -83,7 +87,8 @@ function DivorceItem(props) {
               />
             </svg>
           )}
-          {props.status === 'Objected' && (
+          {/*Objection svg*/}
+          {props.status === 'Draft' && (
             <svg
               width="30"
               height="30"

@@ -8,16 +8,19 @@ import DraftDivorceList from '../../divorces/DraftDivorceList';
 import PendingDivorceList from '../../divorces/PendingDivorceList';
 import CompletedDivorceList from '../../divorces/CompletedDivorceList';
 import DivorceItem from '../../divorces/DivorceItem';
+import SearchResults from '../SearchResults';
 
 function LawyerWorkspace(props) {
   const [loadedDraft, setLoadedDraft] = useState([]);
   const [loadedPending, setLoadedPending] = useState([]);
   const [loadedCompleted, setLoadedComlpeted] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
   console.log(props.role);
   // GET some divorce information
   useEffect(() => {
     // setIsLoading(true);
-    fetch('http://localhost:8887/divorce/myDivorces?taxNumber=2&role=LAWYER')
+    fetch('http://localhost:8887/divorce/myDivorces?taxNumber=1&role=LAWYER')
       .then((response) => {
         return response.json();
       })
@@ -66,7 +69,43 @@ function LawyerWorkspace(props) {
   }
 
   //TODO search logic
-  function searchDivorceHandler(event) {}
+  function handleChange(event) {
+    event.preventDefault();
+    setSearchText(event.target.value);
+    console.log('Type of: ' + typeof searchText);
+  }
+
+  function searchDivorceHandler(event) {
+    event.preventDefault();
+    console.log('Admin search button clicked');
+    console.log(searchText);
+    async function findDivorces(divorceId) {
+      console.log('find Divorce: ' + typeof divorceId);
+      await fetch(
+        // /divorce/search?query=VTEL&taxNumber=1
+        'http://localhost:8887/divorce/search?query=' +
+          divorceId +
+          '&taxNumber=1'
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log('Found : ' + data);
+          const divorces = [];
+          for (const key in data) {
+            const divorce = {
+              key: key,
+              ...data[key],
+            };
+            divorces.push(divorce);
+          }
+          setSearchResults(divorces);
+          console.log('The results are: ' + searchResults);
+        });
+    }
+    findDivorces(searchText);
+  }
 
   return (
     <div className={classes.workspace}>
@@ -75,16 +114,26 @@ function LawyerWorkspace(props) {
       </section>
       <section className={classes.findDivorces}>
         <div className={classes.searchBox}>
-          <SearchBar type="text" placeholder="Search Divorce" />
+          <input
+            type="text"
+            placeholder="search"
+            onChange={handleChange}
+            value={searchText}
+          />
           <PrimaryButton name="Search" onClick={searchDivorceHandler} />
         </div>
       </section>
       <section className={classes.draftDivorces}>
         <h1 className={classes.satustTitle}>Draft</h1>
         <div className={classes.divorceList}>
-          <DraftDivorceList items={loadedDraft} />
-          <DivorceItem type="draft" role={props.role} id="1" />
-          {/* {loadedDraft.length === 0 && <p>There are no Draft divorces</p>} */}
+          <DraftDivorceList
+            items={loadedDraft}
+            type="draft"
+            role={props.role}
+            id="1"
+          />
+          {/* <DivorceItem /> */}
+          {loadedDraft.length === 0 && <p>There are no Draft divorces</p>}
         </div>
       </section>
       <section className={classes.pendingDivorces}>
@@ -95,7 +144,7 @@ function LawyerWorkspace(props) {
             role={props.role}
             type="Pending"
           />
-          <DivorceItem type="pending" role={props.role} />
+          {/* <DivorceItem type="pending" role={props.role} /> */}
           {loadedPending.length === 0 && <p>There are no Pending divorces</p>}
         </div>
       </section>
@@ -113,6 +162,7 @@ function LawyerWorkspace(props) {
           )}
         </div>
       </section>
+      {searchResults.length != 0 && <SearchResults items={searchResults} />}
     </div>
   );
 }

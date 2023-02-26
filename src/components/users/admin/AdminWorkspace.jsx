@@ -13,29 +13,39 @@ function AdminWorkspace(props) {
   const [loadedUsers, setLoadedUsers] = useState([]);
   const navigate = useNavigate();
 
-  //GET some divorce information
   useEffect(() => {
-    // setIsLoading(true);
-    fetch('http://localhost:8887/divorce/findall', { mode: 'no-cors' })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log('ok');
-        console.log(data);
-        //TODO load users too
-        const divorces = [];
-        for (const key in data) {
-          const divorce = {
-            key: key,
-            ...data[key],
-          };
-          divorces.push(divorce);
-        }
-        console.log('Divorces: ' + divorces);
-        // setIsLoading(false);
+    const divorces = fetch('http://localhost:8887/divorce/findAll').then(
+      (res) => res.json()
+    );
+    const users = fetch('http://localhost:8887/user/findall').then((res) =>
+      res.json()
+    );
+    Promise.all([divorces, users]).then((values) => {
+      const dataOne = values[0];
+      const dataTwo = values[1];
+      console.log('Divorce response: ' + dataOne);
+      console.log('Users response: ' + dataTwo);
+      const divorces = [];
+      for (const key in dataOne) {
+        const divorce = {
+          key: key,
+          ...dataOne[key],
+        };
+        divorces.push(divorce);
         setLoadedDivorces(divorces);
-      });
+      }
+      console.log(divorces);
+      const users = [];
+      for (const key in dataTwo) {
+        const user = {
+          key: key,
+          ...dataTwo[key],
+        };
+        users.push(user);
+      }
+      setLoadedUsers(users);
+      console.log('Loaded Users: ' + loadedUsers);
+    });
   }, []);
 
   function newDivorceHandler(event) {
@@ -64,16 +74,21 @@ function AdminWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Users</h1>
         <div className={classes.divorceList}>
-          <UserList />
+          <UserList items={loadedUsers} role="admin" />
+
           {/* <CompletedDivorceList items={loadedDivorces} /> */}
-          <UserItem />
+          {/* <UserItem /> */}
         </div>
       </section>
       <section className={classes.completedDivorces}>
         <h1 className={classes.statusTitle}>Divorces</h1>
         <div className={classes.divorceList}>
-          <CompletedDivorceList items={loadedDivorces} />
-          <DivorceItem role="admin" type="completed" />
+          <CompletedDivorceList
+            items={loadedDivorces}
+            role="admin"
+            type="completed"
+          />
+          {/* <DivorceItem role="admin" type="completed" /> */}
         </div>
       </section>
     </div>

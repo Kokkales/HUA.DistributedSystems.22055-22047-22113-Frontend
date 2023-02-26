@@ -15,9 +15,7 @@ function NotaryWorkspace(props) {
   //GET some divorce information
   useEffect(() => {
     // setIsLoading(true);
-    fetch(
-      'http://localhost:8887/divorce/myDivorces?taxNumber=30&faculty=NOTARY'
-    )
+    fetch('http://localhost:8887/divorce/myDivorces?taxNumber=31&role=NOTARY')
       .then((response) => {
         return response.json();
       })

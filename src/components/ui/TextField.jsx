@@ -11,6 +11,7 @@ function TextField(props) {
         placeholder={props.inputPlaceholder}
         required
         onBlur={props.onBlur}
+        value={props.value}
       ></input>
       {props.children}
     </div>
