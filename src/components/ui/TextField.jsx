@@ -1,7 +1,6 @@
 import classes from './TextField.module.css';
 
 function TextField(props) {
-  // <TextField labelHtmlFor="password" labelText="Password" inputType="password" inputPlaceholder=""></TextField>
   return (
     <div>
       <label htmlFor={props.labelHtmlFor}>{props.labelText}</label>
@@ -12,6 +11,8 @@ function TextField(props) {
         required
         onBlur={props.onBlur}
         value={props.value}
+        disabled={props.isDisabled ? 'disabled' : ''}
+        onChange={props.onChange}
       ></input>
       {props.children}
     </div>

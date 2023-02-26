@@ -9,22 +9,28 @@ function SearchResults(props) {
   return (
     <Overlay>
       <div className={classes.resultsSection}>
-        <h1>RESULTS</h1>
-        <DivorceListLayout>
-          {props.items.map((divorce) => (
-            <DivorceItem
-              key={divorce.key}
-              id={divorce.id}
-              status={divorce.status}
-              spouseOne={divorce.spouseOneName}
-              spouseTwo={divorce.spouseTwoName}
-              // onClick={props.onClick}
-              role={props.role}
-              type={props.type}
-            />
-          ))}
-        </DivorceListLayout>
-        <PrimaryButton name="Exit" />
+        <div className={classes.title}>
+          <h1>RESULTS</h1>
+        </div>
+        <div className={classes.divorceList}>
+          <DivorceListLayout>
+            {props.items.map((divorce) => (
+              <DivorceItem
+                key={divorce.key}
+                id={divorce.id}
+                status={divorce.status}
+                spouseOne={divorce.spouseOneName}
+                spouseTwo={divorce.spouseTwoName}
+                // onClick={props.onClick}
+                role={props.role}
+                type={props.type}
+              />
+            ))}
+          </DivorceListLayout>
+        </div>
+        <div className={classes.exitX}>
+          <PrimaryButton name="Exit" />
+        </div>
       </div>
     </Overlay>
   );

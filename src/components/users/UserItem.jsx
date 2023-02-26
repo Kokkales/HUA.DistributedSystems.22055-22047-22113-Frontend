@@ -106,7 +106,13 @@ function UserItem(props) {
         </div>
       </div>
       {/* TODO Full User profile */}
-      {isWatch && <FullUser formState={openUser} userId={props.taxNumber} />}
+      {isWatch && (
+        <FullUser
+          formState={openUser}
+          userId={props.taxNumber}
+          fomrSate={openUser}
+        />
+      )}
     </Card>
   );
 }

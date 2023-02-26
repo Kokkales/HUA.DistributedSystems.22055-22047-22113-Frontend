@@ -2,7 +2,7 @@
 import DivorceItem from './DivorceItem';
 import DivorceListLayout from './DivorceListLayout';
 
-function PendingDivorceList(props) {
+function DivorceList(props) {
   return (
     <DivorceListLayout>
       {props.items.map((divorce) => (
@@ -22,4 +22,4 @@ function PendingDivorceList(props) {
   );
 }
 
-export default PendingDivorceList;
+export default DivorceList;

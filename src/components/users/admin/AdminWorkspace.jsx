@@ -1,12 +1,13 @@
 import PrimaryButton from '../../ui/PrimaryButton';
 import SearchBar from '../../ui/SearchBar';
 import classes from './AdminWorkspace.module.css';
-import CompletedDivorceList from '../../divorces/CompletedDivorceList';
+// import CompletedDivorceList from '../../divorces/CompletedDivorceList';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import DivorceItem from '../../divorces/DivorceItem';
 import UserItem from '../UserItem';
 import UserList from '../UserList';
+import DivorceList from '../../divorces/DivorceList';
 
 function AdminWorkspace(props) {
   const [loadedDivorces, setLoadedDivorces] = useState([]);
@@ -83,11 +84,7 @@ function AdminWorkspace(props) {
       <section className={classes.completedDivorces}>
         <h1 className={classes.statusTitle}>Divorces</h1>
         <div className={classes.divorceList}>
-          <CompletedDivorceList
-            items={loadedDivorces}
-            role="admin"
-            type="completed"
-          />
+          <DivorceList items={loadedDivorces} role="admin" type="completed" />
           {/* <DivorceItem role="admin" type="completed" /> */}
         </div>
       </section>

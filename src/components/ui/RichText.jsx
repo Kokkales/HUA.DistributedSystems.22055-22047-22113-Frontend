@@ -5,10 +5,14 @@ import draftToHtml from 'draftjs-to-html';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './styles.css';
 
-function Richtext() {
+function Richtext(props) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [contractDetails, setContractDetails] = useState('');
   const handleChange = (data) => {
     setEditorState(data);
+    // console.log('editor data: ' + editorState.getCurrentContent());
+    console.log(htmlData);
+    props.returnedContractDetails(htmlData);
   };
   var htmlData = useMemo(
     () => draftToHtml(convertToRaw(editorState.getCurrentContent())),
@@ -22,6 +26,11 @@ function Richtext() {
     },
   };
 
+  // function handleChange(event) {
+  //   console.log('The email is: ' + event.target.value);
+  //   setContractDetails(event.target.value);
+  // }
+
   return (
     <div className="app">
       <Editor
@@ -31,6 +40,7 @@ function Richtext() {
         editorClassName="message-editor"
         toolbarClassName="message-toolbar"
         toolbar={toolbarOptions}
+        // onChange={handleChange}
       />
     </div>
   );

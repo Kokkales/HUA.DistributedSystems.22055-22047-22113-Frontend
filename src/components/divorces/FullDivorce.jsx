@@ -7,12 +7,15 @@ import ReminderButton from '../ui/ReminderButton';
 import { useState, useEffect } from 'react';
 import EditDivorce from '../users/lawyers/EditDivorce';
 import FullDivorceOptions from './FullDivorceOptions';
+import ActionPopUp from '../users/notaries/ActionPopUp';
 // import classes from './WatchDivorce.module.css';
 
 function FullDivorce(props) {
   const [editIsWatch, setEditIsWatch] = useState(false);
   const [fullDivorce, setFullDivorce] = useState({});
   const [divorceData, setDivorceData] = useState({});
+  const [isPopUpDivorce, setIsPopUpDivorce] = useState(false);
+  const [actionType, setActionType] = useState();
   const isShown = props.isShown;
   console.log('Type: ' + props.type);
   console.log('Role' + props.role);
@@ -20,7 +23,7 @@ function FullDivorce(props) {
 
   // request all the information of the certain divorce
   useEffect(() => {
-    fetch('http://localhost:8887/divorce/findById?id=1')
+    fetch('http://localhost:8887/divorce/findById?id=' + props.divorceId)
       .then((response) => {
         return response.json();
       })
@@ -47,6 +50,10 @@ function FullDivorce(props) {
     setEditIsWatch(false);
   }
 
+  function openPopUpForm() {
+    setIsPopUpDivorce(false);
+  }
+
   // EXIT BUTTON
   function exitHandler(event) {
     console.log('exit button clicked');
@@ -55,13 +62,19 @@ function FullDivorce(props) {
     if (isShown) {
       console.log('closed the divorce');
     }
-    props.formState(isShown);
+    props.formState(false);
   }
   // EDIT BUTTON
   function editHandler(event) {
     console.log('edit button clicked');
     setEditIsWatch(true);
     event.preventDefault();
+  }
+
+  //EDIT PENDING BUTTON
+  function editPendingHandler(event) {
+    event.preventDefault();
+    //TODO
   }
   //DELETE BUTTON
   function deleteHandler(event) {
@@ -75,23 +88,26 @@ function FullDivorce(props) {
     event.preventDefault();
   }
   //ACCEPT BUTTON
-  function acceptHandler(event) {
+  function acceptDivorceHandler(event) {
     console.log('acception button clicked');
     event.preventDefault();
+    setIsPopUpDivorce(true);
+    setActionType('accept');
   }
+
   //REJECT BUTTON
-  function rejectHandler(event) {
+  function rejectDivorceHandler(event) {
     console.log('rjection button clicked');
     event.preventDefault();
+    setIsPopUpDivorce(true);
+    setActionType('reject');
   }
   //OBJECT BUTTON
-  function objectHandler(event) {
+  function objectDivorceHandler(event) {
     console.log('objection button clicked');
     event.preventDefault();
-  }
-  function acceptNotaryHandler(event) {
-    console.log('notary acception button clicked');
-    event.preventDefault();
+    setIsPopUpDivorce(true);
+    setActionType('object');
   }
 
   return (
@@ -225,6 +241,10 @@ function FullDivorce(props) {
                 editHandler={editHandler}
                 deleteHandler={deleteHandler}
                 reminderHandler={reminderHandler}
+                editPendingHandler={editPendingHandler}
+                acceptDivorceHandler={acceptDivorceHandler}
+                rejectDivorceHandler={rejectDivorceHandler}
+                objectDivorceHandler={objectDivorceHandler}
               />
             </section>
           </div>
@@ -232,10 +252,19 @@ function FullDivorce(props) {
       </Card>
       {editIsWatch && (
         <EditDivorce
+          divorceId={props.divorceId}
           role={props.role}
           type={props.type}
           data={divorceData}
           formState={openEditForm}
+        />
+      )}
+      {isPopUpDivorce && (
+        <ActionPopUp
+          formState={openPopUpForm}
+          divorceId={props.divorceId}
+          role={props.role}
+          actionType={actionType}
         />
       )}
     </Overlay>

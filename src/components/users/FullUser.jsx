@@ -4,7 +4,21 @@ import Card from '../ui/Card';
 import Overlay from '../ui/Overlay';
 import PrimaryButton from '../ui/PrimaryButton';
 
-function FullUser(event) {
+function FullUser(props) {
+  //fetch Full User data
+
+  // EXIT BUTTON
+  function exitHandler(event) {
+    console.log('exit button clicked');
+    event.preventDefault();
+    //POST changes
+    props.formState(false);
+  }
+
+  function acceptRegistrationHandler(event) {
+    event.preventDefault();
+    console.log('Accept registration Butotn clicked');
+  }
   return (
     <Overlay>
       <Card>
@@ -18,7 +32,7 @@ function FullUser(event) {
                 <svg
                   width="50"
                   height="50"
-                  // onClick={exitHandler}
+                  onClick={exitHandler}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -56,6 +70,9 @@ function FullUser(event) {
             </section>
             <section className={classes.options}>
               <PrimaryButton name="disable user" />
+              {props.status == 'PENDING_REGISTRATION' && (
+                <PrimaryButton name="Accept Registration" />
+              )}
             </section>
             {/* {isEdit && (
               <EditProfileForm isShown={isEdit} formState={openForm} />

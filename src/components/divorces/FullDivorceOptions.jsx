@@ -35,6 +35,9 @@ function FullDivorceOptions(props) {
             <div className={classes.remindPendingLawyerButton}>
               <PrimaryButton name="Exit" onClick={props.exitHandler} />
             </div>
+            <div className={classes.editPendingLawyerButton}>
+              <PrimaryButton name="Edit" onClick={props.editHandler} />
+            </div>
           </div>
         </section>
       )}
@@ -52,7 +55,7 @@ function FullDivorceOptions(props) {
             <div className={classes.acceptPendingNotaryButton}>
               <PrimaryButton
                 name="Accept"
-                onClick={props.acceptNotaryHandler}
+                onClick={props.acceptDivorceHandler}
               />
             </div>
             <div className={classes.closePendingNotaryButton}>
@@ -73,13 +76,22 @@ function FullDivorceOptions(props) {
         <section className={classes.options}>
           <div className={classes.pendingSpouseOptions}>
             <div className={classes.acceptedPendingSpouseButton}>
-              <PrimaryButton name="Accept" onClick={props.acceptHandler} />
+              <PrimaryButton
+                name="Accept"
+                onClick={props.acceptDivorceHandler}
+              />
             </div>
             <div className={classes.rejectedPendingSpouseButton}>
-              <PrimaryButton name="Reject" onClick={props.rejectHandler} />
+              <PrimaryButton
+                name="Reject"
+                onClick={props.rejectDivorceHandler}
+              />
             </div>
             <div className={classes.objectedPendingSpouseButton}>
-              <PrimaryButton name="Objection" onClick={props.objectHandler} />
+              <PrimaryButton
+                name="Objection"
+                onClick={props.objectDivorceHandler}
+              />
             </div>
             <div className={classes.exitPendingSpouseButton}>
               <PrimaryButton name="Close" onClick={props.exitHandler} />
@@ -87,14 +99,14 @@ function FullDivorceOptions(props) {
           </div>
         </section>
       )}
-      {(props.type == 'completed' && props.role == 'spouse') ||
-        (props.role == 'admin' && (
+      {props.type == 'completed' &&
+        (props.role == 'spouse' || props.role == 'admin') && (
           <section className={classes.options}>
             <div className={classes.completedLawyerOptions}>
               <PrimaryButton name="Close" onClick={props.exitHandler} />
             </div>
           </section>
-        ))}
+        )}
     </div>
   );
 }

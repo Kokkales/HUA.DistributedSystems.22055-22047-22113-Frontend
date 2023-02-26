@@ -1,0 +1,28 @@
+.involvedCard {
+  /* background-color: red; */
+  border-radius: 6px;
+  padding: 5px;
+  width: 20vw;
+  height: auto;
+  transition: 1s;
+}
+
+.involvedCard:not(:focus) {
+  transition: 1s;
+}
+
+.involvedCard > * {
+  margin: 1vh;
+  transition: 1s;
+}
+
+.emailSection {
+  transition: 1s;
+}
+
+.cardFindButton {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,8 +1,7 @@
 import PrimaryButton from '../../ui/PrimaryButton';
 import SearchBar from '../../ui/SearchBar';
 import classes from './NotaryWorkspace.module.css';
-import PendingDivorceList from '../../divorces/PendingDivorceList';
-import CompletedDivorceList from '../../divorces/CompletedDivorceList';
+import DivorceList from '../../divorces/DivorceList';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import DivorceItem from '../../divorces/DivorceItem';
@@ -65,18 +64,14 @@ function NotaryWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-          <PendingDivorceList
-            items={loadedPending}
-            role={props.role}
-            type="pending"
-          />
+          <DivorceList items={loadedPending} role={props.role} type="pending" />
           {/* <DivorceItem type="pending" role={props.role} /> */}
         </div>
       </section>
       <section className={classes.completedDivorces}>
         <h1 className={classes.statusTitle}>Completed</h1>
         <div className={classes.divorceList}>
-          <CompletedDivorceList
+          <DivorceList
             items={loadedCompleted}
             type="completed"
             role={props.role}

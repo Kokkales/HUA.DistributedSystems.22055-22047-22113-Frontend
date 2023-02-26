@@ -4,11 +4,12 @@ import SearchBar from '../../ui/SearchBar';
 import classes from './LawyerWorkspace.module.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import DraftDivorceList from '../../divorces/DraftDivorceList';
-import PendingDivorceList from '../../divorces/PendingDivorceList';
-import CompletedDivorceList from '../../divorces/CompletedDivorceList';
+// import DraftDivorceList from '../../divorces/DraftDivorceList';
+// import PendingDivorceList from '../../divorces/PendingDivorceList';
+// import CompletedDivorceList from '../../divorces/CompletedDivorceList';
 import DivorceItem from '../../divorces/DivorceItem';
 import SearchResults from '../SearchResults';
+import DivorceList from '../../divorces/DivorceList';
 
 function LawyerWorkspace(props) {
   const [loadedDraft, setLoadedDraft] = useState([]);
@@ -126,7 +127,7 @@ function LawyerWorkspace(props) {
       <section className={classes.draftDivorces}>
         <h1 className={classes.satustTitle}>Draft</h1>
         <div className={classes.divorceList}>
-          <DraftDivorceList
+          <DivorceList
             items={loadedDraft}
             type="draft"
             role={props.role}
@@ -139,11 +140,7 @@ function LawyerWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-          <PendingDivorceList
-            items={loadedPending}
-            role={props.role}
-            type="Pending"
-          />
+          <DivorceList items={loadedPending} role={props.role} type="pending" />
           {/* <DivorceItem type="pending" role={props.role} /> */}
           {loadedPending.length === 0 && <p>There are no Pending divorces</p>}
         </div>
@@ -151,10 +148,10 @@ function LawyerWorkspace(props) {
       <section className={classes.completedDivorces}>
         <h1 className={classes.statusTitle}>Closed</h1>
         <div className={classes.divorceList}>
-          <CompletedDivorceList
+          <DivorceList
             items={loadedCompleted}
             role={props.role}
-            type="Completed"
+            type="completed"
           />
           {/* <DivorceItem type="completed" role={props.role} /> */}
           {loadedCompleted.length === 0 && (
