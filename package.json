@@ -16,6 +16,8 @@
     "react-native-screens": "^3.20.0",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
+    "rumble-charts": "^5.0.0",
+    "victory": "^36.6.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
