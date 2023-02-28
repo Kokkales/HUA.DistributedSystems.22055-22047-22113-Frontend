@@ -6,9 +6,10 @@ import TextField from '../../ui/TextField';
 import classes from './CreateDivorce.module.css';
 import RichText from '../../ui/RichText';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import InvolvedCard from './InvolvedCard';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function CreateDivorce(props) {
   const [isFoundSpouseOne, setIsFoundSpouseOne] = useState(false);
@@ -31,16 +32,6 @@ function CreateDivorce(props) {
     spouseOneTaxNumber: '',
     spouseTwoTaxNumber: '',
     notaryTaxNumber: '',
-  });
-
-  const [saveDivorceData, setSaveDivorceData] = useState({
-    status: 'PENDING',
-    contractDetails: '',
-    lawyerLeadTaxNumber: Number,
-    lawyerTwoTaxNumber: Number,
-    spouseOneTaxNumber: Number,
-    spouseTwoTaxNumber: Number,
-    notaryTaxNumber: Number,
   });
 
   // console.log('Draft option: ' + props.draftOptions);
@@ -146,26 +137,6 @@ function CreateDivorce(props) {
   async function createDivorceHandler(event) {
     event.preventDefault();
     console.log('create new divorce button clicked');
-    console.log('Divorce Data: ' + saveDivorceData);
-    if (roleCounter < 5) {
-      console.log('Yoou should complete all the empty spaces!!!!');
-    }
-    //check if all data needed are ok an then
-    //create the new divorce
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(saveDivorceData), //request pass data
-    };
-    await fetch('http://localhost:8887/divorce/save', requestOptions)
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }
-
-  async function saveDivorceHandler(event) {
-    event.preventDefault();
-    event.preventDefault();
-    console.log('create new divorce button clicked');
     console.log('Divorce Data: ' + createDivorceData);
     if (roleCounter < 5) {
       console.log('Yoou should complete all the empty spaces!!!!');
@@ -179,7 +150,34 @@ function CreateDivorce(props) {
     };
     await fetch('http://localhost:8887/divorce/save', requestOptions)
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        navigate('/lawyer/workspace');
+        console.log(data);
+      });
+  }
+
+  async function saveDivorceHandler(event) {
+    event.preventDefault();
+    event.preventDefault();
+    console.log('create new divorce button clicked');
+    createDivorceData.status = 'DRAFT';
+    console.log('Divorce Data: ' + createDivorceData);
+    if (roleCounter < 5) {
+      console.log('Yoou should complete all the empty spaces!!!!');
+    }
+    //check if all data needed are ok an then
+    //create the new divorce
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(createDivorceData), //request pass data
+    };
+    await fetch('http://localhost:8887/divorce/save', requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        navigate('/lawyer/workspace');
+        console.log(data);
+      });
     console.log('save button clicked');
   }
 

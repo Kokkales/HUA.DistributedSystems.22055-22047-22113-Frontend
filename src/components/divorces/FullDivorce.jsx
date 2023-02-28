@@ -28,7 +28,9 @@ function FullDivorce(props) {
 
   // request all the information of the certain divorce
   useEffect(() => {
-    fetch('http://localhost:8887/divorce/findById?id=' + props.divorceId)
+    fetch(
+      'http://localhost:8887/divorce/taxNumber=1?findById?id=' + props.divorceId
+    )
       .then((response) => {
         return response.json();
       })
