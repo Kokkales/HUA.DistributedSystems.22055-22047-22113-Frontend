@@ -4,9 +4,6 @@ import SearchBar from '../../ui/SearchBar';
 import classes from './LawyerWorkspace.module.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-// import DraftDivorceList from '../../divorces/DraftDivorceList';
-// import PendingDivorceList from '../../divorces/PendingDivorceList';
-// import CompletedDivorceList from '../../divorces/CompletedDivorceList';
 import DivorceItem from '../../divorces/DivorceItem';
 import SearchResults from '../SearchResults';
 import DivorceList from '../../divorces/DivorceList';
@@ -21,7 +18,12 @@ function LawyerWorkspace(props) {
   // GET some divorce information
   useEffect(() => {
     // setIsLoading(true);
-    fetch('http://localhost:8887/divorce/myDivorces?taxNumber=1&role=LAWYER')
+    fetch(
+      'http://localhost:8887/divorce/myDivorces?taxNumber=' +
+        props.taxNumber +
+        '&role=' +
+        props.role
+    )
       .then((response) => {
         return response.json();
       })
@@ -68,6 +70,11 @@ function LawyerWorkspace(props) {
     navigate('/lawyer/workspace/new-divorce');
     console.log('New divorce button clicked');
   }
+  function toResponseHandler(event) {
+    event.preventDefault();
+    navigate('/lawyer/workspace/response');
+    console.log('New divorce button clicked');
+  }
 
   //TODO search logic
   function handleChange(event) {
@@ -112,6 +119,7 @@ function LawyerWorkspace(props) {
     <div className={classes.workspace}>
       <section className={classes.newDivorces}>
         <PrimaryButton name="New Divorce" onClick={newDivorceHandler} />
+        <PrimaryButton name="To Response" onClick={toResponseHandler} />
       </section>
       <section className={classes.findDivorces}>
         <div className={classes.searchBox}>

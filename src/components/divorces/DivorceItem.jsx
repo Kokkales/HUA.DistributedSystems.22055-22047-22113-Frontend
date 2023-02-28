@@ -125,6 +125,7 @@ function DivorceItem(props) {
           // isShown={isWatch}
           formState={openDivorce}
           divorceId={props.id}
+          page={props.page}
         />
       )}
     </Card>

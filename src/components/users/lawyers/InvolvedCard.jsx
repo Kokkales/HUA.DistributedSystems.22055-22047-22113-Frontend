@@ -8,18 +8,6 @@ function InvolvedCard(props) {
   const [taxNumber, setTaxNumber] = useState();
   const [email, setEmail] = useState('');
   const [isFound, setIsFound] = useState(true);
-  function handleTaxNumberChange(event) {
-    // setMessage(event.target.value);
-    console.log('The tax number is: ' + event.target.value);
-    setTaxNumber(event.target.value);
-    //return to create divorce this data
-    props.returnedTaxNumber(taxNumber);
-  }
-  function handleEmailChange(event) {
-    // setMessage(event.target.value);
-    console.log('The email is: ' + event.target.value);
-    setEmail(event.target.value);
-  }
 
   async function sendEmailHandler(event) {
     event.preventDefault();
@@ -32,7 +20,7 @@ function InvolvedCard(props) {
     console.log('Taxnumber to be sent: ' + taxNumber);
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json;charset=UTF-8' },
       body: JSON.stringify(), //request pass data
     };
     await fetch(
@@ -42,18 +30,26 @@ function InvolvedCard(props) {
         email,
       requestOptions
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.text();
+        }
+      })
       .then((data) => console.log(data));
   }
 
   async function onBlurHandler(event) {
     //check if the taxnumber textbox is as it has to be
     event.preventDefault();
-    console.log('Search for this taxNumber if exists:' + taxNumber);
+    const tax = event.target.value;
+    setTaxNumber(tax);
+    props.returnedTaxNumber(event.target.value);
+    console.log('Search for this taxNumber if exists:' + event.target.value);
     //get request if exists setIsFound(true);
-    await fetch('http://localhost:8887/user/find?taxNumber=' + taxNumber)
+    await fetch('http://localhost:8887/user/find?taxNumber=' + tax)
       .then((response) => {
         if (response.ok) {
+          console.log(response.status);
           return response.json();
         } else {
           setIsFound(false);
@@ -61,19 +57,33 @@ function InvolvedCard(props) {
         }
       })
       .then((data) => {
-        console.log('ok');
-        if (
-          data.message ==
-          'User with tax number: ' + taxNumber + "wasn't found"
-        ) {
-          setIsFound(false);
-          // console.log('Data length' +);
-          console.log('not found');
+        console.log(JSON.stringify('Error message: ' + data.message, null, 4));
+        if (data.status == 500) {
+          if (
+            data.message ==
+            'User with tax number: ' + taxNumber + "wasn't found"
+          ) {
+            setIsFound(false);
+            // console.log('Data length' +);
+            console.log('not found');
+          }
+        } else if (data.status == 400) {
+          console.log('BAD REQUEST');
+        } else {
+          console.log('User found');
         }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
+  }
+
+  async function handleEmailBlur(event) {
+    //check if the taxnumber textbox is as it has to be
+    event.preventDefault();
+    const isEmail = event.target.value;
+    setEmail(isEmail);
+    console.log('Blur: ' + email);
+    // props.returnedTaxNumber(event.target.value);
+    //get request if exists setIsFound(true);
   }
   return (
     <Card>
@@ -90,7 +100,8 @@ function InvolvedCard(props) {
             inputPlaceholder="e.g 123456"
             onBlur={onBlurHandler}
             isDisabled={props.isDisabled}
-            onChange={handleTaxNumberChange}
+            value={props.nameValue}
+            // onChange={handleTaxNumberChange}
           />
         </div>
         {(!isFound || props.saved) && (
@@ -101,7 +112,7 @@ function InvolvedCard(props) {
               inputType="email"
               inputPlaceholder="e.g 123456"
               isDisabled={props.isDisabled}
-              onChange={handleEmailChange}
+              onBlur={handleEmailBlur}
             />
             <div className={classes.cardFindButton}>
               <PrimaryButton name="Send" onClick={sendEmailHandler} />

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
@@ -8,7 +8,14 @@ import './styles.css';
 function Richtext(props) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [contractDetails, setContractDetails] = useState('');
+  useEffect(() => {
+    setContractDetails(props.value);
+    console.log('AAAAAAAAAAAAAAA');
+    console.log('I am the frich text: ' + contractDetails);
+    // editorState.set(contractDetails);
+  }, []);
   const handleChange = (data) => {
+    console.log('this is data: ' + data);
     setEditorState(data);
     // console.log('editor data: ' + editorState.getCurrentContent());
     console.log(htmlData);

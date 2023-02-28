@@ -1,0 +1,32 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+      "name": "Launch Extension",
+      "outFiles": ["${workspaceFolder}/out/**/*.js"],
+      "preLaunchTask": "npm",
+      "request": "launch",
+      "type": "extensionHost"
+    },
+    {
+      "name": "Run Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "SWA: Run HUA.DistributedSystems.22055-22047-22113-Frontend",
+      "request": "launch",
+      "type": "pwa-chrome",
+      "url": "http://localhost:4280",
+      "preLaunchTask": "swa: start HUA.DistributedSystems.22055-22047-22113-Frontend",
+      "webRoot": "${workspaceFolder}/",
+      "timeout": 30000
+    }
+  ]
+}

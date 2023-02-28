@@ -14,7 +14,12 @@ function NotaryWorkspace(props) {
   //GET some divorce information
   useEffect(() => {
     // setIsLoading(true);
-    fetch('http://localhost:8887/divorce/myDivorces?taxNumber=31&role=NOTARY')
+    fetch(
+      'http://localhost:8887/divorce/myDivorces?taxNumber=' +
+        props.taxNumber +
+        '&role=' +
+        props.role
+    )
       .then((response) => {
         return response.json();
       })
@@ -46,12 +51,6 @@ function NotaryWorkspace(props) {
         setLoadedComlpeted(completed);
       });
   }, []);
-
-  function newDivorceHandler(event) {
-    event.preventDefault();
-    navigate('/lawyer/workspace/new-divorce');
-    console.log('New divorce button clicked');
-  }
 
   function searchDivorceHandler(event) {}
 

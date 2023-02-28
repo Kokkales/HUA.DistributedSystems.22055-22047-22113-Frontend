@@ -9,14 +9,21 @@ import AdminWorkspacePage from './components/pages/admin_pages/AdminWorkspacePag
 import EditProfileForm from './components/users/EditProfileForm';
 import CreateDivorcePage from './components/pages/lawyer_pages/CreateDivorcePage';
 import StatisticsPage from './components/pages/admin_pages/StatisticsPage';
+import ChooseRegistryPage from './components/pages/ChooseRegistryPage';
+import ResponseDivorcePage from './components/pages/lawyer_pages/ResponseDivorcePage';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />{' '}
       <Route path="register" element={<RegistrationPage />} />{' '}
+      <Route path="chooseRegister" element={<ChooseRegistryPage />} />{' '}
       <Route path="lawyer/workspace" element={<LawyerWorkspacePage />} />
       {''}
+      <Route
+        path="lawyer/workspace/response"
+        element={<ResponseDivorcePage />}
+      />
       <Route
         path="lawyer/workspace/new-divorce"
         element={<CreateDivorcePage />}

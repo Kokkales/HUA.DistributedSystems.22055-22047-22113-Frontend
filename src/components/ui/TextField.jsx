@@ -7,10 +7,10 @@ function TextField(props) {
       <input
         className={classes.inputTextBox}
         type={props.inputType}
-        placeholder={props.inputPlaceholder}
+        placeholder={props.value}
         required
         onBlur={props.onBlur}
-        value={props.value}
+        // value={props.value}
         disabled={props.isDisabled ? 'disabled' : ''}
         onChange={props.onChange}
       ></input>
