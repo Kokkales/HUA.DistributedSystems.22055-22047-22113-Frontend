@@ -16,6 +16,11 @@ function FullDivorce(props) {
   const [divorceData, setDivorceData] = useState({});
   const [isPopUpDivorce, setIsPopUpDivorce] = useState(false);
   const [actionType, setActionType] = useState();
+  const [statements, setStatements] = useState([{}]);
+  const [spouseOneStatementData, setSpouseOneStatementData] = useState({});
+  const [spouseTwoStatementData, setSpouseTwoStatementData] = useState({});
+  const [lawyerTwoStatementData, setLawyerTwoStatementData] = useState({});
+  const [notaryStatementData, setNotaryStatementData] = useState({});
   const isShown = props.isShown;
   console.log('Type: ' + props.type);
   console.log('Role' + props.role);
@@ -32,14 +37,35 @@ function FullDivorce(props) {
         const divorce = {
           id: data.id,
           status: data.status,
-          spouseOne: data.spouseOneName,
-          spouseTwo: data.spouseTwoName,
           contractDetails: data.contractDetails,
           date: data.date,
-          lawyerLeadName: data.lawyerLeadName,
-          lawyerSecName: data.lawyerName,
-          notaryName: data.notaryName,
+          givenStatements: data.statements,
         };
+        for (const key in divorce.givenStatements) {
+          const user = {
+            key: key,
+            fullName: divorce.givenStatements[key].fullName,
+            faculty: divorce.givenStatements[key].faculty,
+            choice: divorce.givenStatements[key].choice,
+            timestamp: divorce.givenStatements[key].timestamp,
+            comment: divorce.givenStatements[key].comment,
+          };
+          console.log('FAculty: ' + user.faculty);
+          console.log('ok');
+          if (user.faculty == 'LAWYER_TWO') {
+            setLawyerTwoStatementData(user);
+          }
+          if (user.faculty === 'SPOUSE_ONE') {
+            setSpouseOneStatementData(user);
+          }
+          if (user.faculty == 'SPOUSE_TWO') {
+            setSpouseTwoStatementData(user);
+          }
+          if (user.faculty == 'NOTARY') {
+            setNotaryStatementData(user);
+          }
+        }
+
         setDivorceData(divorce);
         console.log('Spouse One Check : ' + divorceData);
         // meetups.push(meetup);
@@ -115,121 +141,117 @@ function FullDivorce(props) {
       <Card>
         <DivorceLayout>
           <div className={classes.completeDivorce}>
-            <section className={classes.mainCharacters}>
-              <div className={classes.divorceNames}>
-                <div className={classes.spouseOne}>
-                  <h1>{divorceData.spouseOne} vs</h1>
-                </div>
-                <div className={classes.spouseTwo}>
-                  <h1>{divorceData.spouseTwo}</h1>
-                </div>
+            <section className={classes.seperators}>
+              <div className={classes.seperateOne}>
+                <h1>{spouseOneStatementData.fullName}</h1>
               </div>
-              <div className={classes.exitX}>
-                <svg
-                  width="50"
-                  height="50"
-                  onClick={exitHandler}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+              <div className={classes.seperateTwo}>
+                <h1>{spouseTwoStatementData.fullName}</h1>
               </div>
+              <div className={classes.exitX}>{/* SVG */}</div>
             </section>
-            <section className={classes.involvedParties}>
-              <h2>Parties</h2>
-              <div className={classes.ones}>
-                <div className={classes.involvedInfo}>
-                  <h3 className={classes.label}>Spouse1:</h3>
-                  <p className={classes.involvedName}>
-                    {divorceData.spouseOne}
-                  </p>
-                  <div className={classes.roleStatus}>
-                    {divorceData.spouseOneStatus}ok
+            <section className={classes.allInfo}>
+              <div className={classes.involvedParties}>
+                <div className={classes.user}>
+                  <div className={classes.fullName}>
+                    <h3>{spouseOneStatementData.fullName}</h3>
+                    <div className={classes.faculty}>
+                      <h2>Spouse One</h2>
+                    </div>
+                  </div>
+                  <div className={classes.statement}>
+                    <p>{spouseOneStatementData.choice}</p>
                   </div>
                   <div className={classes.comment}>
-                    <h4>Comment</h4>
-                    <p> blah blah </p>
+                    <h3 className={classes.commentTitle}>Comment:</h3>
+                    <div className={classes.commentInfo}>
+                      {spouseOneStatementData.comment}
+                    </div>
                   </div>
                 </div>
-                <div className={classes.involvedInfo}>
-                  <h3 className={classes.label}>Lawyer1:</h3>
-                  <p className={classes.involvedName}>
-                    {divorceData.lawyerLeadName}ok
-                  </p>
-                  <div className={classes.roleStatus}>
-                    {divorceData.spouseOneStatus}ok
+                <div className={classes.user}>
+                  <div className={classes.fullName}>
+                    <h3>{spouseTwoStatementData.fullName}</h3>
+                    <div className={classes.faculty}>
+                      <h2>Spouse Two</h2>
+                    </div>
+                  </div>
+                  <div className={classes.statement}>
+                    <p>{spouseTwoStatementData.choice}</p>
                   </div>
                   <div className={classes.comment}>
-                    <h4>Comment</h4>
-                    <p> blah blah </p>
+                    <h3 className={classes.commentTitle}>Comment:</h3>
+                    <div className={classes.commentInfo}>
+                      {spouseOneStatementData.comment}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className={classes.twos}>
-                <div className={classes.involvedInfo}>
-                  <h3 className={classes.label}>Spouse2:</h3>
-                  <p className={classes.involvedName}>
-                    {divorceData.spouseTwo}
-                  </p>
-                  <div className={classes.roleStatus}>
-                    {divorceData.spouseOneStatus}ok
+                <div className={classes.user}>
+                  <div className={classes.fullName}>
+                    <h3>{spouseOneStatementData.fullName}</h3>
+                    <div className={classes.faculty}>
+                      <h2>Lead lawyer</h2>
+                    </div>
+                  </div>
+                  <div className={classes.statement}>
+                    <p>{spouseOneStatementData.choice}</p>
                   </div>
                   <div className={classes.comment}>
-                    <h4>Comment</h4>
-                    <p> blah blah </p>
+                    <h3 className={classes.commentTitle}>Comment:</h3>
+                    <div className={classes.commentInfo}>
+                      {spouseOneStatementData.comment}
+                    </div>
                   </div>
                 </div>
-                <div className={classes.involvedInfo}>
-                  <h3 className={classes.label}>Lawyer2:</h3>
-                  <p className={classes.involvedName}>
-                    {divorceData.lawyerSecName}
-                  </p>
-                  <div className={classes.roleStatus}>
-                    {divorceData.spouseOneStatus}ok
+                <div className={classes.user}>
+                  <div className={classes.fullName}>
+                    <h3>{spouseOneStatementData.fullName}</h3>
+                    <div className={classes.faculty}>
+                      <h2>Second Lwayer</h2>
+                    </div>
+                  </div>
+                  <div className={classes.statement}>
+                    <p>{lawyerTwoStatementData.choice}</p>
                   </div>
                   <div className={classes.comment}>
-                    <h4>Comment</h4>
-                    <p> blah blah </p>
+                    <h3 className={classes.commentTitle}>Comment:</h3>
+                    <div className={classes.commentInfo}>
+                      {lawyerTwoStatementData.comment}
+                    </div>
                   </div>
                 </div>
               </div>
-            </section>
-            <section className={classes.contractDetails}>
-              <h2>Details</h2>
-              <div>
-                <h3 className={classes.label}>Application Date:</h3>
-                <div className={classes.info}>{divorceData.date}</div>
-              </div>
-              <div>
-                <h3 className={classes.label}>Contract Details:</h3>
-                <h3 className={classes.info}>{divorceData.contractDetails}</h3>
-              </div>
-            </section>
-            <section className={classes.status}>
-              <h2>Result</h2>
-              <div>
-                <h3>Status</h3>
-                <div className={classes.info}>{divorceData.status}</div>
-              </div>
-              <div className={classes.externals}>
-                <div className={classes.notaryInfo}>
-                  <h3 className={classes.label}>Notary:</h3>
-                  <p className={classes.involvedName}>
-                    {divorceData.lawyerLeadName}
-                  </p>
-                  <div className={classes.roleStatus}>
-                    {divorceData.spouseOneStatus}ok
+              <div className={classes.moreInfo}>
+                <div className={classes.dateInfo}>
+                  <h3 className={classes.dateTitle}>Date</h3>
+                  <div className={classes.date}>{divorceData.date}</div>
+                </div>
+                <div className={classes.details}>
+                  <h2 className={classes.contractTitle}>Contract Details</h2>
+                  <div className={classes.contractDetails}>
+                    {divorceData.contractDetails}
                   </div>
                 </div>
+              </div>
+              <div className={classes.statusInfo}>
+                <h2>Result</h2>
                 <div>
-                  <h3>Notorial Deed Number:</h3>
+                  <h3>Status</h3>
+                  <div className={classes.info}>{divorceData.status}</div>
+                </div>
+                <div className={classes.externals}>
+                  <div className={classes.notaryInfo}>
+                    <h3 className={classes.label}>Notary:</h3>
+                    <p className={classes.involvedName}>
+                      {notaryStatementData.fullName}
+                    </p>
+                    <div className={classes.roleStatus}>
+                      {notaryStatementData.choice}
+                    </div>
+                  </div>
+                  <div>
+                    <h3>Notorial Deed Number:{notaryStatementData.comment}</h3>
+                  </div>
                 </div>
               </div>
             </section>
@@ -272,3 +294,43 @@ function FullDivorce(props) {
 }
 
 export default FullDivorce;
+// {
+//     "id": 10,
+//     "status": "Pending",
+//     "spouseOneName": "Kip Ettels",
+//     "spouseTwoName": "Merwyn Jemmett",
+//     "contractDetails": "orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis dui",
+//     "date": "2021-08-13T15:53:19.000+00:00",
+//     "lawyerLeadName": "Kenyon De Gogay",
+//     "notarialDeedNumber": null,
+//     "statements": [
+//         {
+//             "fullName": "Kip Ettels",
+//             "faculty": "SPOUSE_ONE",
+//             "choice": "ACCEPTED",
+//             "timestamp": "2021-08-13T15:53:19.000+00:00",
+//             "comment": "posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer"
+//         },
+//         {
+//             "fullName": "Merwyn Jemmett",
+//             "faculty": "SPOUSE_TWO",
+//             "choice": "ACCEPTED",
+//             "timestamp": "2021-08-13T15:53:19.000+00:00",
+//             "comment": "dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer"
+//         },
+//         {
+//             "fullName": "Nicole Avieson",
+//             "faculty": "LAWYER_TWO",
+//             "choice": "OBJECTED",
+//             "timestamp": "2021-08-13T15:53:19.000+00:00",
+//             "comment": "eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in"
+//         },
+//         {
+//             "fullName": "Barde Cancellor",
+//             "faculty": "NOTARY",
+//             "choice": "PENDING",
+//             "timestamp": "2021-08-13T15:53:19.000+00:00",
+//             "comment": "JO77075"
+//         }
+//     ]
+// }
