@@ -1,0 +1,86 @@
+.completeDivorce {
+  /* background-color: red; */
+  height: 100%;
+  /* border-radius: 8px; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 10% 80% 10%;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding: 10px;
+}
+
+.mainCharacters {
+  border-radius: 8px;
+  /* background-color: red; */
+  grid-area: 1 / 1 / 2 / 4;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 40% 10% 40%;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.spouseOne {
+  border-radius: 8px;
+  /* background-color: aqua; */
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seperator {
+  /* background-color: green; */
+  grid-area: 1 / 2 / 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spouseTwo {
+  /* background-color: purple; */
+  grid-area: 1 / 3 / 2 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.involvedParties {
+  background-color: pink;
+  grid-area: 2 / 1 / 3 / 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.category {
+  background-color: brown;
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.ones {
+  background-color: yellow;
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+.twos {
+  background-color: aquamarine;
+  grid-area: 3 / 1 / 4 / 2;
+}
+
+.contractDetails {
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+.status {
+  grid-area: 2 / 3 / 3 / 4;
+}
+
+.options {
+  grid-area: 3 / 1 / 4 / 4;
+}

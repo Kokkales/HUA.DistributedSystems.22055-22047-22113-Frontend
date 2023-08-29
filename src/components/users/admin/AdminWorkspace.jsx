@@ -8,6 +8,8 @@ import DivorceItem from '../../divorces/DivorceItem';
 import UserItem from '../UserItem';
 import UserList from '../UserList';
 import DivorceList from '../../divorces/DivorceList';
+import ErrorNotification from '../../ui/ErrorNotification';
+import SuccesfullMessageNotification from '../../ui/SuccesfullMessageNotification';
 
 function AdminWorkspace(props) {
   const [loadedDivorces, setLoadedDivorces] = useState([]);
@@ -88,6 +90,8 @@ function AdminWorkspace(props) {
           {/* <DivorceItem role="admin" type="completed" /> */}
         </div>
       </section>
+      {/* {true && <ErrorNotification />} */}
+      {true && <SuccesfullMessageNotification />}
     </div>
   );
 }

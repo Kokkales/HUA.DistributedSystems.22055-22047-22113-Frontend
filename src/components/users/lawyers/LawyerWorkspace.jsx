@@ -124,6 +124,7 @@ function LawyerWorkspace(props) {
       <section className={classes.findDivorces}>
         <div className={classes.searchBox}>
           <input
+            className={classes.searchBar}
             type="text"
             placeholder="search"
             onChange={handleChange}

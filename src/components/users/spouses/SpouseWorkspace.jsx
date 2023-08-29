@@ -15,7 +15,7 @@ function SpouseWorkspace(props) {
   //GET some divorce information
   useEffect(() => {
     // setIsLoading(true);
-    fetch('http://localhost:8887/divorce/myDivorces?role=SPOUSE&taxNumber=12')
+    fetch('http://localhost:8887/divorce/myDivorces?role=SPOUSE&taxNumber=10')
       .then((response) => {
         return response.json();
       })
@@ -58,7 +58,7 @@ function SpouseWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-        <DivorceList items={loadedPending} role={props.role} type="pending" />
+          <DivorceList items={loadedPending} role={props.role} type="pending" />
           {/* <DivorceList items={loadedPending} role="spouse" type="pending" /> */}
           <DivorceItem role={props.role} type="pending" />
         </div>

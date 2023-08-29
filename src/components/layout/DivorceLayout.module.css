@@ -1,6 +1,8 @@
 .divorceLayout {
+  /* margin: 50px; */
   background-color: var(--card-bg-color);
+  border-radius: 8px;
   width: 150vh;
-  height: 80vh;
+  height: 90vh;
   border-radius: 8px;
 }

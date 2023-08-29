@@ -1,4 +1,5 @@
-import classes from './FullDivorce.module.css';
+// import classes from './FullDivorceA.module.css';
+import classes from './test.module.css';
 import Overlay from '../ui/Overlay';
 import Card from '../ui/Card';
 import DivorceLayout from '../layout/DivorceLayout';
@@ -144,21 +145,20 @@ function FullDivorce(props) {
         <DivorceLayout>
           <div className={classes.completeDivorce}>
             <section className={classes.mainCharacters}>
-              <div className={classes.divorceNames}>
-                <div className={classes.spouseOne}>
-                  <h1>{divorceData.spouseOne} vs</h1>
-                </div>
-                <div className={classes.spouseTwo}>
-                  <h1>{divorceData.spouseTwo}</h1>
-                </div>
+              <div className={classes.spouseTwo}>
+                <h1>{spouseOneStatementData.fullName}</h1>
               </div>
-              <div className={classes.seperateTwo}>
+              <div className={classes.seperator}>
+                <h1>VS </h1>
+              </div>
+              <div className={classes.spouseOne}>
                 <h1>{spouseTwoStatementData.fullName}</h1>
               </div>
-              <div className={classes.exitX}>{/* SVG */}</div>
             </section>
             <section className={classes.involvedParties}>
-              <h2>Parties</h2>
+              <div className={classes.category}>
+                <h2>Parties</h2>
+              </div>
               <div className={classes.ones}>
                 <div className={classes.involvedInfo}>
                   <h3 className={classes.label}>Spouse1:</h3>
@@ -181,7 +181,7 @@ function FullDivorce(props) {
                   <div className={classes.roleStatus}>ACCEPT</div>
                   <div className={classes.comment}>
                     <h4>Comment</h4>
-                    <p> ----- </p>
+                    <p> No comment </p>
                   </div>
                 </div>
               </div>
@@ -196,7 +196,7 @@ function FullDivorce(props) {
                   </div>
                   <div className={classes.comment}>
                     <h4>Comment</h4>
-                    <p> -------- </p>
+                    <p> {spouseTwoStatementData.comment} </p>
                   </div>
                 </div>
                 <div className={classes.involvedInfo}>
@@ -215,7 +215,9 @@ function FullDivorce(props) {
               </div>
             </section>
             <section className={classes.contractDetails}>
-              <h2>Details</h2>
+              <div className={classes.category}>
+                <h2>Details</h2>
+              </div>
               <div>
                 <h3 className={classes.label}>Application Date:</h3>
                 <div className={classes.info}>{divorceData.date}</div>
@@ -226,7 +228,9 @@ function FullDivorce(props) {
               </div>
             </section>
             <section className={classes.status}>
-              <h2>Result</h2>
+              <div className={classes.category}>
+                <h2>Result</h2>
+              </div>
               <div>
                 <h3>Status</h3>
                 <div className={classes.info}>{divorceData.status}</div>
@@ -243,7 +247,6 @@ function FullDivorce(props) {
                 </div>
               </div>
               <div className={classes.statusInfo}>
-                <h2>Result</h2>
                 <div>
                   <h3>Notorial Deed Number:{notaryStatementData.comment}</h3>
                 </div>

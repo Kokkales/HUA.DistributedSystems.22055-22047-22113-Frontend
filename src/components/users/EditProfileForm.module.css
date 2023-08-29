@@ -1,26 +1,26 @@
 .editForm {
-    background-color: var(--form-bg-color);
-    border-radius: 6px;
-    width: 25rem;
-    height: auto;
-    padding: 20px;
+  background-color: var(--form-bg-color);
+  border-radius: 6px;
+  width: 25rem;
+  height: auto;
+  padding: 20px;
 }
 
 .loginHeader,
 .submitBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 20px;
 }
 
 .taxNumberInput,
 .passwordInput {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: column;
-    display: block;
-    margin: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  display: block;
+  margin: 20px;
 }
