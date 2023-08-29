@@ -33,7 +33,7 @@ function FullDivorce(props) {
   // request all the information of the certain divorce
   useEffect(() => {
     fetch(
-      'http://localhost:8887/divorce/taxNumber=1?findById?id=' + props.divorceId
+      'http://localhost:8887/divorce/findById?id='+ props.divorceId+'&taxNumber=1'
     )
       .then((response) => {
         return response.json();
@@ -156,9 +156,14 @@ function FullDivorce(props) {
       <Card>
         <DivorceLayout>
           <div className={classes.completeDivorce}>
-            <section className={classes.seperators}>
-              <div className={classes.seperateOne}>
-                <h1>{spouseOneStatementData.fullName}</h1>
+            <section className={classes.mainCharacters}>
+              <div className={classes.divorceNames}>
+                <div className={classes.spouseOne}>
+                  <h1>{divorceData.spouseOne} vs</h1>
+                </div>
+                <div className={classes.spouseTwo}>
+                  <h1>{divorceData.spouseTwo}</h1>
+                </div>
               </div>
               <div className={classes.seperateTwo}>
                 <h1>{spouseTwoStatementData.fullName}</h1>
