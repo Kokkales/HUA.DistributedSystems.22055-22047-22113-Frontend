@@ -17,10 +17,7 @@ function FullDivorce(props) {
   const [statements, setStatements] = useState([{}]);
   const [isPopUpDivorce, setIsPopUpDivorce] = useState(false);
   const [actionType, setActionType] = useState();
-<<<<<<< Updated upstream
-  const [statements, setStatements] = useState([{}]);
-=======
->>>>>>> Stashed changes
+  // const [statements, setStatements] = useState([{}]);
   const [spouseOneStatementData, setSpouseOneStatementData] = useState({});
   const [spouseTwoStatementData, setSpouseTwoStatementData] = useState({});
   const [lawyerTwoStatementData, setLawyerTwoStatementData] = useState({});
@@ -33,7 +30,9 @@ function FullDivorce(props) {
   // request all the information of the certain divorce
   useEffect(() => {
     fetch(
-      'http://localhost:8887/divorce/findById?id='+ props.divorceId+'&taxNumber=1'
+      'http://localhost:8887/divorce/findById?id=' +
+        props.divorceId +
+        '&taxNumber=1'
     )
       .then((response) => {
         return response.json();
@@ -45,16 +44,8 @@ function FullDivorce(props) {
           status: data.status,
           contractDetails: data.contractDetails,
           date: data.date,
-<<<<<<< Updated upstream
           givenStatements: data.statements,
         };
-=======
-          lawyerLeadName: data.lawyerLeadName,
-          notaryName: data.notaryName,
-          givenStatements: data.statements,
-        };
-
->>>>>>> Stashed changes
         for (const key in divorce.givenStatements) {
           const user = {
             key: key,
@@ -79,10 +70,6 @@ function FullDivorce(props) {
             setNotaryStatementData(user);
           }
         }
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         setDivorceData(divorce);
       });
   }, []);
@@ -170,7 +157,6 @@ function FullDivorce(props) {
               </div>
               <div className={classes.exitX}>{/* SVG */}</div>
             </section>
-<<<<<<< Updated upstream
             <section className={classes.involvedParties}>
               <h2>Parties</h2>
               <div className={classes.ones}>
@@ -253,115 +239,13 @@ function FullDivorce(props) {
                   </p>
                   <div className={classes.roleStatus}>
                     {notaryStatementData.choice}
-=======
-            <section className={classes.allInfo}>
-              <div className={classes.involvedParties}>
-                <div className={classes.user}>
-                  <div className={classes.fullName}>
-                    <h3>{spouseOneStatementData.fullName}</h3>
-                    <div className={classes.faculty}>
-                      <h2>Spouse One</h2>
-                    </div>
-                  </div>
-                  <div className={classes.statement}>
-                    <p>{spouseOneStatementData.choice}</p>
-                  </div>
-                  <div className={classes.comment}>
-                    <h3 className={classes.commentTitle}>Comment:</h3>
-                    <div className={classes.commentInfo}>
-                      {spouseOneStatementData.comment}
-                    </div>
-                  </div>
-                </div>
-                <div className={classes.user}>
-                  <div className={classes.fullName}>
-                    <h3>{spouseTwoStatementData.fullName}</h3>
-                    <div className={classes.faculty}>
-                      <h2>Spouse Two</h2>
-                    </div>
-                  </div>
-                  <div className={classes.statement}>
-                    <p>{spouseTwoStatementData.choice}</p>
-                  </div>
-                  <div className={classes.comment}>
-                    <h3 className={classes.commentTitle}>Comment:</h3>
-                    <div className={classes.commentInfo}>
-                      {spouseOneStatementData.comment}
-                    </div>
-                  </div>
-                </div>
-                <div className={classes.user}>
-                  <div className={classes.fullName}>
-                    <h3>{spouseOneStatementData.fullName}</h3>
-                    <div className={classes.faculty}>
-                      <h2>Lead lawyer</h2>
-                    </div>
-                  </div>
-                  <div className={classes.statement}>
-                    <p>{spouseOneStatementData.choice}</p>
-                  </div>
-                  <div className={classes.comment}>
-                    <h3 className={classes.commentTitle}>Comment:</h3>
-                    <div className={classes.commentInfo}>
-                      {spouseOneStatementData.comment}
-                    </div>
-                  </div>
-                </div>
-                <div className={classes.user}>
-                  <div className={classes.fullName}>
-                    <h3>{spouseOneStatementData.fullName}</h3>
-                    <div className={classes.faculty}>
-                      <h2>Second Lwayer</h2>
-                    </div>
-                  </div>
-                  <div className={classes.statement}>
-                    <p>{lawyerTwoStatementData.choice}</p>
-                  </div>
-                  <div className={classes.comment}>
-                    <h3 className={classes.commentTitle}>Comment:</h3>
-                    <div className={classes.commentInfo}>
-                      {lawyerTwoStatementData.comment}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={classes.moreInfo}>
-                <div className={classes.dateInfo}>
-                  <h3 className={classes.dateTitle}>Date</h3>
-                  <div className={classes.date}>{divorceData.date}</div>
-                </div>
-                <div className={classes.details}>
-                  <h2 className={classes.contractTitle}>Contract Details</h2>
-                  <div className={classes.contractDetails}>
-                    {divorceData.contractDetails}
->>>>>>> Stashed changes
                   </div>
                 </div>
               </div>
               <div className={classes.statusInfo}>
                 <h2>Result</h2>
                 <div>
-<<<<<<< Updated upstream
                   <h3>Notorial Deed Number:{notaryStatementData.comment}</h3>
-=======
-                  <h3>Status</h3>
-                  <div className={classes.info}>{divorceData.status}</div>
-                </div>
-
-                <div className={classes.externals}>
-                  <div className={classes.notaryInfo}>
-                    <h3 className={classes.label}>Notary:</h3>
-                    <p className={classes.involvedName}>
-                      {divorceData.lawyerLeadName}
-                    </p>
-                    <div className={classes.roleStatus}>
-                      {divorceData.spouseOneStatus}ok
-                    </div>
-                  </div>
-                  <div>
-                    <h3>Notorial Deed Number:</h3>
-                  </div>
->>>>>>> Stashed changes
                 </div>
               </div>
             </section>

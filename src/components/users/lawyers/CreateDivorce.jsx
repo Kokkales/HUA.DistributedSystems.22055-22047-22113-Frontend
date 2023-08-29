@@ -9,11 +9,7 @@ import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import InvolvedCard from './InvolvedCard';
 import { useEffect } from 'react';
-<<<<<<< Updated upstream
 import { useNavigate } from 'react-router-dom';
-=======
-import ErrorNotification from '../../ui/ErrorNotification';
->>>>>>> Stashed changes
 
 function CreateDivorce(props) {
   const [requestStatus, seRequestStatus] = useState();
@@ -43,60 +39,6 @@ function CreateDivorce(props) {
     notaryTaxNumber: '',
   });
 
-<<<<<<< Updated upstream
-=======
-  const [saveDivorceData, setSaveDivorceData] = useState({
-    status: 'DRAFT',
-    contractDetails: '',
-    lawyerLeadTaxNumber: '',
-    lawyerTwoTaxNumber: '',
-    spouseOneTaxNumber: '',
-    spouseTwoTaxNumber: '',
-    notaryTaxNumber: '',
-  });
-
-  //if props.role=admin and props.type=draft
-  console.log('Divorce Type:' + props.type);
-  console.log('Divorce DivorceId:' + props.divorceId);
-  console.log('Divorce is Saved:' + props.saved);
-
-  useEffect(() => {
-    if (props.divorceId != undefined) {
-      console.log('load data');
-      // fetch /divorce/findById?id=1
-      fetch('http://localhost:8887/divorce/findById?id=' + props.divorceId)
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log('Returned Data : ' + JSON.stringify(data.status));
-          const divorce = {
-            id: data.id,
-            status: data.status,
-            spouseOne: data.spouseOneName,
-            spouseTwo: data.spouseTwoName,
-            contractDetails: data.contractDetails,
-            date: data.date,
-            lawyerLeadName: data.lawyerLeadName,
-            lawyerSecName: data.lawyerName,
-            notaryName: data.notaryName,
-          };
-          setDivorceData(divorce);
-          saveDivorceData.status = divorce.status;
-          saveDivorceData.spouseOneTaxNumber = divorce.spouseOne;
-          saveDivorceData.spouseTwoTaxNumber = divorce.spouseTwo;
-          saveDivorceData.contractDetails = divorce.contractDetails;
-          saveDivorceData.lawyerLeadTaxNumber = divorce.lawyerLeadName;
-          saveDivorceData.lawyerTwoTaxNumber = divorce.lawyerSecName;
-          saveDivorceData.notaryTaxNumber = divorce.notaryName;
-          console.log('Save DIVORCE DATA' + saveDivorceData);
-          console.log('Spouse One Check : ' + divorceData);
-          // meetups.push(meetup);
-        });
-    }
-  }, []);
-
->>>>>>> Stashed changes
   // console.log('Draft option: ' + props.draftOptions);
   useEffect(() => {
     setLeadLawyer(1);
@@ -139,11 +81,8 @@ function CreateDivorce(props) {
 
   async function createDivorceHandler(event) {
     event.preventDefault();
-<<<<<<< Updated upstream
     console.log('create new divorce button clicked');
     console.log('Divorce Data: ' + createDivorceData);
-=======
-    console.log('What is sent: ' + JSON.stringify(createDivorceData));
     if (roleCounter < 5) {
       console.log('Yoou should complete all the empty spaces!!!!');
     }
@@ -153,44 +92,6 @@ function CreateDivorce(props) {
       body: JSON.stringify(createDivorceData), //request pass data
     };
     await fetch('http://localhost:8887/divorce/save', requestOptions)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        if (data.status == 500) {
-          console.log(
-            JSON.stringify('Error message create: ' + data.message, null, 4)
-          );
-          setIsError(true);
-          setErrorMessage(data.message);
-          console.log(data.message);
-          console.log('Is error: ' + isError);
-        }
-        if (requestStatus == 400) {
-          console.log('Bad request');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  async function saveDivorceHandler(event) {
-    event.preventDefault();
-    event.preventDefault();
-    createDivorceData.status = 'DRAFT';
-    console.log('What is sent: ' + JSON.stringify(createDivorceData));
->>>>>>> Stashed changes
-    if (roleCounter < 5) {
-      console.log('Yoou should complete all the empty spaces!!!!');
-    }
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json;charset=UTF-8' },
-      body: JSON.stringify(createDivorceData), //request pass data
-    };
-    await fetch('http://localhost:8887/divorce/save', requestOptions)
-<<<<<<< Updated upstream
       .then((response) => response.json())
       .then((data) => {
         navigate('/lawyer/workspace');
@@ -221,30 +122,6 @@ function CreateDivorce(props) {
         console.log(data);
       });
     console.log('save button clicked');
-=======
-      .then((response) => {
-        console.log(JSON.stringify(response, null, 4));
-        seRequestStatus(response.status);
-        console.log(errorMessage);
-        return response.json();
-      })
-      .then((data) => {
-        if (data.status == 500) {
-          // console.log(
-          //   JSON.stringify('Error message create: ' + data.message, null, 4)
-          // );
-          setErrorMessage(data.message);
-          setIsError(true);
-          console.log(data.message);
-        }
-        if (data.status == 400) {
-          console.log('Bad request');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
->>>>>>> Stashed changes
   }
 
   return (
@@ -261,7 +138,7 @@ function CreateDivorce(props) {
             isDisabled={props.isDisabled}
             saved={props.saved}
             returnedTaxNumber={handleSpouseOneTaxNumber}
-            nameValue={saveDivorceData.spouseOneTaxNumber}
+            // nameValue={saveDivorceData.spouseOneTaxNumber}
           />
         </div>
         <div className={classes.spouseTwoCard}>
@@ -321,7 +198,7 @@ function CreateDivorce(props) {
           )}
         </div>
       </section>
-      {isError && <ErrorNotification message={errorMessage} />}
+      {/* {isError && <ErrorNotification message={errorMessage} />} */}
     </div>
   );
 }
