@@ -29,7 +29,7 @@ function UserProfile(props) {
           <p>123456</p>
         </div>
         <div className={classes.infoContext}>
-          <label>Identity Card Number</label>
+          <label>ID Number</label>
           <p>AG 3456</p>
         </div>
         <div className={classes.infoContext}>
@@ -44,10 +44,8 @@ function UserProfile(props) {
           <label>Role</label>
           <p>Lawyer</p>
         </div>
-        <div className={classes.infoContext}>
-          <div className={classes.editButton}>
-            <PrimaryButton name="Edit Profile" onClick={editProfileHandler} />
-          </div>
+        <div className={classes.editButton}>
+          <PrimaryButton name="Edit Profile" onClick={editProfileHandler} />
         </div>
       </section>
       {isEdit && <EditProfileForm isShown={isEdit} formState={openForm} />}

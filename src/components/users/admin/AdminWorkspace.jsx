@@ -70,9 +70,13 @@ function AdminWorkspace(props) {
   return (
     <div className={classes.spouseWorkspace}>
       <section className={classes.options}>
-        <SearchBar type="text" placeholder="Search Divorce" />
-        <PrimaryButton name="Search" onClick={searchDivorceHandler} />
-        <PrimaryButton name="Statistics" onClick={statisticsPageSender} />
+        <div className={classes.statisticsBox}>
+          <PrimaryButton name="Statistics" onClick={statisticsPageSender} />
+        </div>
+        <div className={classes.searchDivorceBox}>
+          <SearchBar type="text" placeholder="Search Divorce" />
+          <PrimaryButton name="Search" onClick={searchDivorceHandler} />
+        </div>
       </section>
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Users</h1>
