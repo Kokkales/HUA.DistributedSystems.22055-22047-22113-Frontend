@@ -3,7 +3,9 @@
 /* General styles */
 
 .completeDivorce {
+  z-index: 2;
   background-color: #f0f4f8;
+  /* background-color: red; */
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);

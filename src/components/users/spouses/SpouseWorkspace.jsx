@@ -6,20 +6,21 @@ import classes from './SpouseWorkspace.module.css';
 import DivorceList from '../../divorces/DivorceList';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import DivorceItem from '../../divorces/DivorceItem';
 
 function SpouseWorkspace(props) {
   const [loadedPending, setLoadedPending] = useState([]);
   const [loadedCompleted, setLoadedComlpeted] = useState([]);
 
-  //GET some divorce information
   useEffect(() => {
-    // setIsLoading(true);
-    fetch('http://localhost:8887/divorce/myDivorces?role=SPOUSE&taxNumber=10')
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8887/divorce/myDivorces?role=SPOUSE&taxNumber=10'
+        );
+        const data = response.data;
+        // console.log(data);
         console.log('ok');
         console.log(data);
         const pendings = [];
@@ -45,7 +46,11 @@ function SpouseWorkspace(props) {
         // setIsLoading(false);
         setLoadedPending(pendings);
         setLoadedComlpeted(completed);
-      });
+      } catch (error) {
+        console.log('ERROR: ', error);
+      }
+    }
+    fetchData();
   }, []);
 
   function searchDivorceHandler(event) {}
@@ -60,7 +65,7 @@ function SpouseWorkspace(props) {
         <div className={classes.divorceList}>
           <DivorceList items={loadedPending} role={props.role} type="pending" />
           {/* <DivorceList items={loadedPending} role="spouse" type="pending" /> */}
-          <DivorceItem role={props.role} type="pending" />
+          {/* <DivorceItem role={props.role} type="pending" /> */}
         </div>
       </section>
       <section className={classes.completedDivorces}>
@@ -72,7 +77,7 @@ function SpouseWorkspace(props) {
             type="completed"
           />
 
-          <DivorceItem role={props.role} type="completed" />
+          {/* <DivorceItem role={props.role} type="completed" /> */}
         </div>
       </section>
     </div>

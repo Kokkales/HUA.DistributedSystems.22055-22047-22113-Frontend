@@ -4,6 +4,7 @@ import classes from './NotaryWorkspace.module.css';
 import DivorceList from '../../divorces/DivorceList';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import DivorceItem from '../../divorces/DivorceItem';
 
 function NotaryWorkspace(props) {
@@ -13,17 +14,13 @@ function NotaryWorkspace(props) {
 
   //GET some divorce information
   useEffect(() => {
-    // setIsLoading(true);
-    fetch(
-      'http://localhost:8887/divorce/myDivorces?taxNumber=' +
-        props.taxNumber +
-        '&role=' +
-        props.role
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8887/divorce/myDivorces?role=NOTARY&taxNumber=30'
+        );
+        const data = response.data;
+        // console.log(data);
         console.log('ok');
         console.log(data);
         const pendings = [];
@@ -49,7 +46,11 @@ function NotaryWorkspace(props) {
         // setIsLoading(false);
         setLoadedPending(pendings);
         setLoadedComlpeted(completed);
-      });
+      } catch (error) {
+        console.log('ERROR: ', error);
+      }
+    }
+    fetchData();
   }, []);
 
   function searchDivorceHandler(event) {}

@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import DivorceItem from '../../divorces/DivorceItem';
 import SearchResults from '../SearchResults';
 import DivorceList from '../../divorces/DivorceList';
+import axios from 'axios';
 
 function LawyerWorkspace(props) {
   const [loadedDraft, setLoadedDraft] = useState([]);
@@ -17,17 +18,13 @@ function LawyerWorkspace(props) {
   console.log(props.role);
   // GET some divorce information
   useEffect(() => {
-    // setIsLoading(true);
-    fetch(
-      'http://localhost:8887/divorce/myDivorces?taxNumber=' +
-        props.taxNumber +
-        '&role=' +
-        props.role
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8887/divorce/myDivorces?role=LAWYER&taxNumber=1'
+        );
+        const data = response.data;
+        // console.log(data);
         console.log('ok');
         console.log(data);
         const drafts = [];
@@ -59,10 +56,12 @@ function LawyerWorkspace(props) {
         setLoadedDraft(drafts);
         setLoadedPending(pendings);
         setLoadedComlpeted(completed);
-      });
+      } catch (error) {
+        console.log('ERROR: ', error);
+      }
+    }
+    fetchData();
   }, []);
-
-  // props.type=
 
   const navigate = useNavigate();
   function newDivorceHandler(event) {

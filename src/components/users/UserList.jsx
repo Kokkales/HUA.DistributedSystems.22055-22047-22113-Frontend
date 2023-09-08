@@ -9,6 +9,7 @@ function UserList(props) {
       {props.items.map((user) => (
         <UserItem
           key={user.key}
+          user={user.id}
           taxNumber={user.taxNumber}
           status={user.userStatus}
           userFirstName={user.firstName}

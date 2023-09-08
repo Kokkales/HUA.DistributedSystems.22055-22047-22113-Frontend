@@ -112,7 +112,7 @@ function InvolvedCard(props) {
               inputType="email"
               inputPlaceholder="e.g 123456"
               isDisabled={props.isDisabled}
-              onBlur={handleEmailBlur}
+              // onBlur={handleEmailBlur}
             />
             <div className={classes.cardFindButton}>
               <PrimaryButton name="Send" onClick={sendEmailHandler} />

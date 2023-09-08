@@ -1,12 +1,39 @@
 import PrimaryButton from '../ui/PrimaryButton';
 import classes from './UserProfile.module.css';
 import EditProfileForm from './EditProfileForm.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function UserProfile(props) {
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
+
+  // GET profile data
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8887/user/?taxNumber=1'
+        );
+        const data = response.data;
+        // console.log(data);
+        const divorces = [];
+        for (const key in data) {
+          const divorce = {
+            key: key,
+            ...data[key],
+          };
+          divorces.push(divorce);
+          // setLoadedDivorces(divorces);
+        }
+      } catch (error) {
+        console.log('ERROR: ', error);
+      }
+    }
+    fetchData();
+  }, []);
+
   function editProfileHandler(event) {
     event.preventDefault();
     //link to edit profile form

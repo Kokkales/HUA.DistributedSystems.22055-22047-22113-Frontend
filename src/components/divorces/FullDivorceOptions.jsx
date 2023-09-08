@@ -11,7 +11,9 @@ function FullDivorceOptions(props) {
           <section className={classes.options}>
             <div className={classes.draftLawyerOptions}>
               <div className={classes.cancelPendingLawyerButton}>
-                <PrimaryButton name="Edit" onClick={props.editHandler} />
+                {props.edit == true && (
+                  <PrimaryButton name="Edit" onClick={props.editHandler} />
+                )}
               </div>
               <div className={classes.exitPendingLawyerButton}>
                 <PrimaryButton name="Delete" onClick={props.deleteHandler} />

@@ -7,6 +7,7 @@ import PrimaryButton from '../ui/PrimaryButton';
 import ReminderButton from '../ui/ReminderButton';
 import { useState, useEffect } from 'react';
 import EditDivorce from '../users/lawyers/EditDivorce';
+// import EditDivorce from './EditDivorce';
 import FullDivorceOptions from './FullDivorceOptions';
 import ActionPopUp from '../users/notaries/ActionPopUp';
 // import classes from './WatchDivorce.module.css';
@@ -92,17 +93,23 @@ function FullDivorce(props) {
       console.log('closed the divorce');
     }
     props.formState(false);
+    // props.formEditState(false);
   }
   // EDIT BUTTON
   function editHandler(event) {
     console.log('edit button clicked');
-    setEditIsWatch(true);
+    // props.divorceFullData = divorceData;
+    // setEditIsWatch(true);
+    // setFullDivorce(false);
+    props.formState(false);
+    props.formEditState(true);
     event.preventDefault();
   }
 
   //EDIT PENDING BUTTON
   function editPendingHandler(event) {
     event.preventDefault();
+
     //TODO
   }
   //DELETE BUTTON
@@ -140,6 +147,7 @@ function FullDivorce(props) {
   }
 
   return (
+    // <div>
     <Overlay>
       <Card>
         <DivorceLayout>
@@ -254,6 +262,7 @@ function FullDivorce(props) {
             </section>
             <section className={classes.options}>
               <FullDivorceOptions
+                edit={true}
                 type={props.type}
                 role={props.role}
                 page={props.page}
@@ -270,15 +279,15 @@ function FullDivorce(props) {
           </div>
         </DivorceLayout>
       </Card>
-      {editIsWatch && (
+      {/* {editIsWatch && (
+        // <div>
         <EditDivorce
           divorceId={props.divorceId}
           role={props.role}
           type={props.type}
           data={divorceData}
-          formState={openEditForm}
         />
-      )}
+      )} */}
       {isPopUpDivorce && (
         <ActionPopUp
           formState={openPopUpForm}

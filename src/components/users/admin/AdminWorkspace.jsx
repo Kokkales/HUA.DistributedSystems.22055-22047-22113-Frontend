@@ -1,7 +1,6 @@
 import PrimaryButton from '../../ui/PrimaryButton';
 import SearchBar from '../../ui/SearchBar';
 import classes from './AdminWorkspace.module.css';
-// import CompletedDivorceList from '../../divorces/CompletedDivorceList';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import DivorceItem from '../../divorces/DivorceItem';
@@ -10,6 +9,7 @@ import UserList from '../UserList';
 import DivorceList from '../../divorces/DivorceList';
 import ErrorNotification from '../../ui/ErrorNotification';
 import SuccesfullMessageNotification from '../../ui/SuccesfullMessageNotification';
+import axios from 'axios';
 
 function AdminWorkspace(props) {
   const [loadedDivorces, setLoadedDivorces] = useState([]);
@@ -17,38 +17,50 @@ function AdminWorkspace(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const divorces = fetch('http://localhost:8887/divorce/findAll').then(
-      (res) => res.json()
-    );
-    const users = fetch('http://localhost:8887/user/findall').then((res) =>
-      res.json()
-    );
-    Promise.all([divorces, users]).then((values) => {
-      const dataOne = values[0];
-      const dataTwo = values[1];
-      console.log('Divorce response: ' + dataOne);
-      console.log('Users response: ' + dataTwo);
-      const divorces = [];
-      for (const key in dataOne) {
-        const divorce = {
-          key: key,
-          ...dataOne[key],
-        };
-        divorces.push(divorce);
-        setLoadedDivorces(divorces);
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8887/divorce/findAll'
+        );
+        const data = response.data;
+        // console.log(data);
+        const divorces = [];
+        for (const key in data) {
+          const divorce = {
+            key: key,
+            ...data[key],
+          };
+          divorces.push(divorce);
+          setLoadedDivorces(divorces);
+        }
+      } catch (error) {
+        console.log('ERROR: ', error);
       }
-      console.log(divorces);
-      const users = [];
-      for (const key in dataTwo) {
-        const user = {
-          key: key,
-          ...dataTwo[key],
-        };
-        users.push(user);
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get('http://localhost:8887/user/findall');
+        const data = response.data;
+        // console.log(data);
+        const users = [];
+        for (const key in data) {
+          const user = {
+            key: key,
+            ...data[key],
+          };
+          users.push(user);
+        }
+        setLoadedUsers(users);
+        console.log('Loaded Users: ' + loadedUsers);
+      } catch (error) {
+        console.log('ERROR: ', error);
       }
-      setLoadedUsers(users);
-      console.log('Loaded Users: ' + loadedUsers);
-    });
+    }
+    fetchData();
   }, []);
 
   function newDivorceHandler(event) {

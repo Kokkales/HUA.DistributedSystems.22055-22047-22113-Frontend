@@ -2,15 +2,31 @@ import Card from '../ui/Card';
 import classes from './DivorceItem.module.css';
 import { useState } from 'react';
 import FullDivorce from './FullDivorce';
+import EditDivorce from '../users/lawyers/EditDivorce';
 
 function DivorceItem(props) {
   const [isWatch, setIsWatch] = useState(false);
-
+  const [editIsWatch, setEditIsWatch] = useState(false);
+  const [fullData, setFullData] = useState({});
+  // setEditIsWatch(childProperty);
   console.log('Item id= ' + props.id);
 
   function openDivorce() {
     setIsWatch(false);
   }
+
+  function closeEditDivorce() {
+    setEditIsWatch(false);
+  }
+
+  function openEditDivorce() {
+    setEditIsWatch(true);
+    setIsWatch(false);
+  }
+
+  // function handleDivorceFullData(data) {
+  //   setFullData(data);
+  // }
 
   async function onClickHandler(event) {
     event.preventDefault();
@@ -124,8 +140,21 @@ function DivorceItem(props) {
           type={props.type}
           // isShown={isWatch}
           formState={openDivorce}
+          formEditState={openEditDivorce}
+          // divorceFullData={handleDivorceFullData}
           divorceId={props.id}
           page={props.page}
+        />
+      )}
+      {editIsWatch && (
+        // <div>
+        <EditDivorce
+          divorceId={props.id}
+          role={props.role}
+          type={props.type}
+          // data={fullData}
+          formEditState={closeEditDivorce}
+          // isEditShown={isShown}
         />
       )}
     </Card>
