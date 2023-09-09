@@ -19,4 +19,19 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  display: none;
+  /* Initially, hide the element */
+  animation: fadeInOut 3s;
+  /* Animation duration: 3 seconds */
+}
+
+@keyframes fadeInOut {
+  from {
+    display: none;
+    /* Start with the element hidden */
+  }
+  to {
+    display: block;
+    /* End with the element visible */
+  }
 }

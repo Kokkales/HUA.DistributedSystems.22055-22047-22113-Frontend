@@ -17,11 +17,20 @@ function LawyerWorkspace(props) {
   const [searchResults, setSearchResults] = useState([]);
   console.log(props.role);
   // GET some divorce information
+
+  const token = localStorage.getItem('jwtToken');
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (token) {
+      //code
+    } else {
+      navigate('http://localhost:3000/');
+    }
     async function fetchData() {
       try {
         const response = await axios.get(
-          'http://localhost:8887/divorce/myDivorces?role=LAWYER&taxNumber=1'
+          'http://localhost:8887/divorce/myDivorces?role=LAWYER&tax'
         );
         const data = response.data;
         // console.log(data);
@@ -63,7 +72,6 @@ function LawyerWorkspace(props) {
     fetchData();
   }, []);
 
-  const navigate = useNavigate();
   function newDivorceHandler(event) {
     event.preventDefault();
     navigate('/lawyer/workspace/new-divorce');
@@ -88,29 +96,27 @@ function LawyerWorkspace(props) {
     console.log(searchText);
     async function findDivorces(divorceId) {
       console.log('find Divorce: ' + typeof divorceId);
-      await fetch(
-        // /divorce/search?query=VTEL&taxNumber=1
-        'http://localhost:8887/divorce/search?query=' +
-          divorceId +
-          '&taxNumber=1'
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log('Found : ' + data);
-          const divorces = [];
-          for (const key in data) {
-            const divorce = {
-              key: key,
-              ...data[key],
-            };
-            divorces.push(divorce);
-          }
-          setSearchResults(divorces);
-          console.log('The results are: ' + searchResults);
-        });
+      try {
+        const response = await axios.get(
+          'http://localhost:8887/divorce/findById?id=' + searchText
+        );
+        const data = response.data;
+        console.log('Found : ' + data);
+        const divorces = [];
+        for (const key in data) {
+          const divorce = {
+            key: key,
+            ...data[key],
+          };
+          divorces.push(divorce);
+        }
+        setSearchResults(divorces);
+        console.log('The results are: ' + searchResults);
+      } catch (error) {
+        console.log('ERROR: ', error);
+      }
     }
+    findDivorces();
     findDivorces(searchText);
   }
 

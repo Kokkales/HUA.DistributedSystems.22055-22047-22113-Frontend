@@ -6,7 +6,7 @@ function ErrorNotification(props) {
     <Card>
       <div className={classes.notificationCard}>
         <div>
-          <p>{props.message}Wrong Password</p>
+          <p>{props.message}</p>
         </div>
       </div>
     </Card>

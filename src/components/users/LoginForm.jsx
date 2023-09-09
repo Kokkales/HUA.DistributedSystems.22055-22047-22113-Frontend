@@ -8,40 +8,19 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import Error from '../ui/ErrorNotification';
+import ErrorNotification from '../ui/ErrorNotification';
 
 function LoginForm(props) {
+  const history = createBrowserHistory();
   const navigate = useNavigate();
-
   const [taxNumber, setTaxNumber] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  function LoginHandler(event) {
-    event.preventDefault();
-    console.log('Login button clicked');
-    console.log('Tax Number: ' + taxNumber);
-    console.log('Password: ' + password);
-    //take the data and send request for authentication
-    //save the tax number and the faculty
-    //depending on the faculty render the apprpopriate page
-    // signIn();
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ taxNumber: taxNumber, password: password }),
-    };
-    fetch('https://reqres.in/api/posts', requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status == 500) {
-          alert('user with this data bot found');
-        } else if (data.status == 400) {
-        } else {
-          console.log(data);
-          navigate('/chooseRegister', { state: data });
-        }
-      });
-  }
+  const [isError, setIsError] = useState(false, '');
 
   function taxNumberOnChangeHandler(event) {
     const value = event.target.value;
@@ -51,6 +30,44 @@ function LoginForm(props) {
     const value = event.target.value;
     setPassword(value);
   }
+
+  function LoginHandler(event) {
+    console.log('Tax Number: ' + taxNumber);
+    async function login() {
+      event.preventDefault();
+      console.log('Login button clicked');
+      console.log('Password: ' + password);
+      try {
+        //todo change the path
+        const response = await axios.post(
+          'http://localhost:8887/api/v1/auth/authenticate',
+          {
+            taxNumber,
+            password,
+          },
+          {
+            headers: 'Access-Control-Allow-Origin',
+            withCredentials: 'true',
+            // Content_Type: 'application/x-www-form-urlencoded',
+          }
+        );
+        const token = response.data.token;
+        // const other = response.data;
+        localStorage.setItem('jwtToken', token);
+        history.push('/user/profile');
+        navigate('/user/profile');
+        // You'll need to set up routing for this.
+      } catch (error) {
+        console.error('Login failed', error);
+        setIsError(true, error);
+      }
+    }
+    login();
+  }
+  // console.log(taxNumber);
+  // function LoginHandler(event) {
+  // }
+
   return (
     <Card>
       <form className={classes.loginForm}>
@@ -85,6 +102,7 @@ function LoginForm(props) {
           <SecondaryLink linkTo="/" text="Forgot My Password" />
         </div>
       </form>
+      {isError && <ErrorNotification message="Wrong Credentials" />}
     </Card>
   );
 }

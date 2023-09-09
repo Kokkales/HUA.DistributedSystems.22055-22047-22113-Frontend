@@ -2,31 +2,60 @@ import PrimaryButton from '../ui/PrimaryButton';
 import classes from './UserProfile.module.css';
 import EditProfileForm from './EditProfileForm.jsx';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { createBrowserHistory } from 'history';
+import { Redirect } from 'react-router-dom';
+import { RedirectFunction } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 function UserProfile(props) {
   const navigate = useNavigate();
+  const history = createBrowserHistory();
   const [isEdit, setIsEdit] = useState(false);
+  const token = localStorage.getItem('jwtToken');
+  const [userData, setUserData] = useState({});
 
+  // Check if the token is not present (user is not authenticated)
   // GET profile data
   useEffect(() => {
+    console.log('tthe token is:' + token);
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      console.log('ANSWER: ' + JSON.stringify(decodedToken));
+    } else {
+      // Redirect to the login page if the token is not present
+      // history.push('http://localhost:3000/');
+      navigate('http://localhost:3000/');
+    }
     async function fetchData() {
       try {
-        const response = await axios.get(
-          'http://localhost:8887/user/?taxNumber=1'
-        );
+        const response = await axios.get('http://localhost:8887/user', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json', // Correct header name
+          },
+          withCredentials: true, // Correct usage: Boolean value
+        });
         const data = response.data;
-        // console.log(data);
-        const divorces = [];
-        for (const key in data) {
-          const divorce = {
-            key: key,
-            ...data[key],
-          };
-          divorces.push(divorce);
-          // setLoadedDivorces(divorces);
-        }
+        console.log('OK I AM MAD: ' + JSON.stringify(data));
+        // const stats = [];
+        // for (const key in data) {
+        //   const stat = {
+        //     key: key,
+        //     taxNumber: 1,
+        //     firstName: data.firstName,
+        //     lastName: data.lastName,
+        //     identityCardNumber: data.identityCardNumber,
+        //     email: data.email,
+        //     phoneNumber: data.phoneNumber,
+        //     role: data.role,
+        //     userStatus: data.userStatus,
+        //   };
+        //   stats.push(stat);
+        // }
+        setUserData(data);
+        // setLoadedDivorces(divorces);
       } catch (error) {
         console.log('ERROR: ', error);
       }
@@ -48,28 +77,30 @@ function UserProfile(props) {
   return (
     <div className={classes.profile}>
       {/* <div className={classes.fullName}> */}
-      <h1>Katerina Konstantidi</h1>
+      <h1>
+        {userData.lastName} {userData.firstName}
+      </h1>
       {/* </div> */}
       <section className={classes.userData}>
         <div className={classes.infoContext}>
           <label>Tax Number</label>
-          <p>123456</p>
+          <p>{userData.taxNumber}</p>
         </div>
         <div className={classes.infoContext}>
           <label>ID Number</label>
-          <p>AG 3456</p>
+          <p>{userData.identityCardNumber}</p>
         </div>
         <div className={classes.infoContext}>
           <label>Email</label>
-          <p>123456</p>
+          <p>{userData.email}</p>
         </div>
         <div className={classes.infoContext}>
           <label>Phone Number</label>
-          <p>6985637584</p>
+          <p>{userData.phoneNumber}</p>
         </div>
         <div className={classes.infoContext}>
           <label>Role</label>
-          <p>Lawyer</p>
+          <p>{userData.role}</p>
         </div>
         <div className={classes.editButton}>
           <PrimaryButton name="Edit Profile" onClick={editProfileHandler} />
