@@ -8,7 +8,7 @@ function UserItem(props) {
   const [isWatch, setIsWatch] = useState(false);
   const [fullName, setFullName] = useState('');
   useEffect(() => {
-    console.log(props.taxNumber);
+    // console.log();
     setFullName(props.userFirstName + ' ' + props.userLastName);
   });
   function onClickHandler(event) {

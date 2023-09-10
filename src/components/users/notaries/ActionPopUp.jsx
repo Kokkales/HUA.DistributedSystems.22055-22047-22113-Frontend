@@ -5,22 +5,70 @@ import PrimaryButton from '../../ui/PrimaryButton';
 import TextField from '../../ui/TextField';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import e from 'cors';
+import axios from 'axios';
 
 function ActionPopUp(props) {
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem('jwtToken');
+  if (token) {
+    //code
+  } else {
+    navigate('/');
+  }
   // const [isWatch, setIsWatch] = useState;
-  function finishAcceptionHandler(event) {
+  const [isComment, setIsComment] = useState('');
+  // const [addStatement, setAddStatement] = useState({})
+  async function finishAcceptionHandler(event) {
     event.preventDefault();
     console.log('Finish Acception Button Clicked');
     props.formState(false);
+    // setAddStatement({
+    //   divorceID: props.divorceId,
+    //   role: props.role,
+    //   comment: '',
+    //   choice: 'ACCEPTED',
+    // });
+    const myComment = isComment;
+    console.log('Comment: ' + myComment);
+    props.data.comment = myComment;
+    console.log('Data: ' + JSON.stringify(props.data));
+    //call the api and post props.data http://localhost:8887/divorce/addStatement
+    try {
+      const response = await axios.post(
+        'http://localhost:8887/divorce/addStatement',
+        props.data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json', // Correct header name
+          },
+          withCredentials: true, // Correct usage: Boolean value
+        }
+      );
+      const data = response.data;
+    } catch (error) {
+      if (error.message == 'Request failed with status code 500') {
+        console.log('Statement failed to be added');
+        // setIsFound(false);
+      }
+    }
   }
 
-  const navigate = useNavigate();
   function exitHandler(event) {
     event.preventDefault();
     console.log('exit Acception Button Clicked');
     props.formState(false);
 
     // navigate('/notary/workspace');
+  }
+
+  async function onChangeHandler(event) {
+    //check if the taxnumber textbox is as it has to be
+    console.log(event.target.value);
+    event.preventDefault();
+    setIsComment(event.target.value);
   }
 
   return (
@@ -57,9 +105,14 @@ function ActionPopUp(props) {
           </div>
           <div className={classes.notorialDeedNumber}>
             {props.role == 'notary' && (
-              <TextField labelText="Notorial Deed number" />
+              <TextField
+                labelText="Notorial Deed number"
+                onChange={onChangeHandler}
+              />
             )}
-            {props.role != 'notary' && <TextField labelText="Comment" />}
+            {props.role != 'notary' && (
+              <TextField labelText="Comment" onChange={onChangeHandler} />
+            )}
           </div>
           <div className={classes.finish}>
             <PrimaryButton name="Submit" onClick={finishAcceptionHandler} />

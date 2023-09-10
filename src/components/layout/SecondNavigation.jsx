@@ -1,7 +1,19 @@
 import classes from './SecondNavigation.module.css';
 import PageLink from '../ui/PageLink';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function SecondNavigation(props) {
+  const token = localStorage.getItem('jwtToken');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      //code
+    } else {
+      navigate('/');
+    }
+  }, []);
   return (
     <nav className={classes.navBar}>
       <ul>

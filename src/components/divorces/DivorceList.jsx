@@ -3,6 +3,10 @@ import DivorceItem from './DivorceItem';
 import DivorceListLayout from './DivorceListLayout';
 
 function DivorceList(props) {
+  console.log('FROM DIVORCE LIST:');
+  console.log('Type: ' + props.type);
+  console.log('Role: ' + props.role);
+  console.log('Page: ' + props.page);
   return (
     <DivorceListLayout>
       {props.items.map((divorce) => (
@@ -16,6 +20,7 @@ function DivorceList(props) {
           onClick={props.onClick}
           role={props.role}
           type={props.type}
+          page={props.page}
         />
       ))}
     </DivorceListLayout>

@@ -40,6 +40,10 @@ function DivorceItem(props) {
     setIsWatch(true);
   }
   // onClick={props.onClick}
+  console.log('FROM DIVORCE ITEM:');
+  console.log('Type: ' + props.type);
+  console.log('Role: ' + props.role);
+  console.log('Page: ' + props.page);
   return (
     <Card>
       <div className={classes.divorceItem} onClick={onClickHandler}>

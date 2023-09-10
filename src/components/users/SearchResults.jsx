@@ -3,9 +3,16 @@ import classes from './SearchResults.module.css';
 import DivorceListLayout from '../divorces/DivorceListLayout';
 import DivorceItem from '../divorces/DivorceItem';
 import PrimaryButton from '../ui/PrimaryButton';
+import { useNavigate } from 'react-router-dom';
 
 function SearchResults(props) {
+  const navigate = useNavigate();
   console.log('Talking from serch results comp: ' + props.items);
+  function exitHandler() {
+    //exit the search results
+    console.log('Exit button clicked');
+    props.closeResults(true);
+  }
   return (
     <Overlay>
       <div className={classes.resultsSection}>
@@ -29,7 +36,7 @@ function SearchResults(props) {
           </DivorceListLayout>
         </div>
         <div className={classes.exitX}>
-          <PrimaryButton name="Exit" />
+          <PrimaryButton name="Exit" onClick={exitHandler} />
         </div>
       </div>
     </Overlay>

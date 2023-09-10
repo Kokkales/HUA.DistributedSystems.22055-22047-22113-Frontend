@@ -15,7 +15,7 @@ function LawyerWorkspacePage(props) {
   //   }
   // }, []);
   return (
-    <Layout>
+    <Layout userRole="lawyer">
       <LawyerWorkspace role="lawyer" />
     </Layout>
   );

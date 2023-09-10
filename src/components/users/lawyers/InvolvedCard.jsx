@@ -25,6 +25,11 @@ function InvolvedCard(props) {
   }, []);
 
   function sendEmailHandler(event) {
+    if (token) {
+      console.log('token os good');
+    } else {
+      navigate('/');
+    }
     console.log('TOKEN: ' + token);
     event.preventDefault();
     //check if the email textbox is empty
@@ -43,10 +48,6 @@ function InvolvedCard(props) {
             taxNumber +
             '&email=' +
             email,
-          {
-            // taxNumber: taxNumber,
-            // email: email,
-          },
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -71,6 +72,7 @@ function InvolvedCard(props) {
     const tax = event.target.value;
     console.log('Tax Number is set: ' + tax);
     setTaxNumber(tax);
+    props.returnedTaxNumber(tax);
     props.returnedTaxNumber(event.target.value);
     console.log('Search for this taxNumber if exists:' + event.target.value);
     //get request if exists setIsFound(true);

@@ -27,6 +27,16 @@ function EditDivorce(props) {
   const [spouseTwoStatementData, setSpouseTwoStatementData] = useState({});
   const [lawyerTwoStatementData, setLawyerTwoStatementData] = useState({});
   const [notaryStatementData, setNotaryStatementData] = useState({});
+  const [editData, setEditData] = useState({
+    id: null,
+    status: 'PENDING',
+    contractDetails: '',
+    lawyerLeadTaxNumber: '',
+    lawyerTwoTaxNumber: '',
+    spouseOneTaxNumber: '',
+    spouseTwoTaxNumber: '',
+    notaryTaxNumber: '',
+  });
   // const isShown = props.isEditShown;
   console.log('Type: ' + props.type);
   console.log('Role' + props.role);
@@ -130,10 +140,54 @@ function EditDivorce(props) {
     event.preventDefault();
     //TODO
   }
-  //DELETE BUTTON
-  function deleteHandler(event) {
-    console.log('delete button clicked');
+  //SAVE EDIT BUTTON
+  //   {
+  // "id": 79,
+  //   "status": "PENDING",
+  // "contractDetails": "Contrakqweqweqwejnct Details",
+  // "lawyerLeadTaxNumber": "1",
+  // "lawyerTwoTaxNumber": "2",
+  // "spouseOneTaxNumber": "18",
+  // "spouseTwoTaxNumber": "14",
+  // "notaryTaxNumber": "30"
+  // }
+  function setValuesToObject() {
+    setEditData({
+      id: divorceData.id,
+      status: divorceData.status,
+      contractDetails: divorceData.contractDetails,
+      date: divorceData.date,
+      givenStatements: divorceData.statements,
+    });
+  }
+  async function saveHandler(event) {
+    console.log('save button clicked');
     //send divorce_id
+    event.preventDefault();
+    console.log('create new divorce button clicked');
+    console.log('Divorce Data that were edited: ' + JSON.stringify(editData));
+    try {
+      const response = await axios.post(
+        'http://localhost:8887/divorce/edit',
+        editData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json', // Correct header name
+          },
+          withCredentials: true, // Correct usage: Boolean value
+        }
+      );
+      const data = response.data;
+    } catch (error) {
+      if (error.message == 'Request failed with status code 500') {
+        console.log('User not found invotation to send');
+        console.log('Edit failed');
+        // setIsFound(false);
+      }
+      // console.log('Find User with Tax error: ', error);
+    }
+
     event.preventDefault();
   }
   //REMINDER BUTTON
@@ -182,6 +236,10 @@ function EditDivorce(props) {
     setNotaryInput(event.target.value);
   }
 
+  function stripHtml(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || '';
+  }
   return (
     <Overlay>
       <div className={classes.editDivorceForm}>
@@ -190,21 +248,13 @@ function EditDivorce(props) {
             <div className={classes.completeDivorce}>
               <section className={classes.mainCharacters}>
                 <div className={classes.spouseTwo}>
-                  <input
-                    type="text"
-                    value={spouseOneStatementData.fullName}
-                    onChange={(e) => setSpouseOneInput(e.target.value)}
-                  />
+                  <h1>{spouseOneStatementData.fullName}</h1>
                 </div>
                 <div className={classes.seperator}>
                   <h1>VS </h1>
                 </div>
                 <div className={classes.spouseOne}>
-                  <input
-                    type="text"
-                    value={spouseTwoStatementData.fullName}
-                    onChange={(e) => setSpouseTwoInput(e.target.value)}
-                  />
+                  <h1>{spouseTwoStatementData.fullName}</h1>
                 </div>
               </section>
               <section className={classes.involvedParties}>
@@ -214,31 +264,22 @@ function EditDivorce(props) {
                 <div className={classes.ones}>
                   <div className={classes.involvedInfo}>
                     <h3 className={classes.label}>Spouse1:</h3>
-                    <input
-                      type="text"
-                      value={spouseOneStatementData.fullName}
-                      onChange={(e) => setSpouseOneInput(e.target.value)}
-                    />
+                    <p className={classes.involvedName}>
+                      {spouseOneStatementData.fullName}
+                    </p>
                     <div className={classes.roleStatus}>
                       {spouseOneStatementData.choice}
                     </div>
                     <div className={classes.comment}>
                       <h4>Comment</h4>
-                      <input
-                        className={classes.commentInput}
-                        type="text"
-                        value={spouseOneStatementData.comment}
-                        onChange={(e) => setSpouseOneInput(e.target.value)}
-                      />
+                      <p> {spouseOneStatementData.comment} </p>
                     </div>
                   </div>
                   <div className={classes.involvedInfo}>
                     <h3 className={classes.label}>Lawyer1:</h3>
-                    <input
-                      type="text"
-                      value={divorceData.lawyerLeadName}
-                      onChange={(e) => setSpouseOneLawyerInput(e.target.value)}
-                    />
+                    <p className={classes.involvedName}>
+                      {divorceData.lawyerLeadName}
+                    </p>
                     <div className={classes.roleStatus}>ACCEPT</div>
                     <div className={classes.comment}>
                       <h4>Comment</h4>
@@ -249,42 +290,28 @@ function EditDivorce(props) {
                 <div className={classes.twos}>
                   <div className={classes.involvedInfo}>
                     <h3 className={classes.label}>Spouse2:</h3>
-                    <input
-                      type="text"
-                      value={spouseTwoStatementData.fullName}
-                      onChange={(e) => setSpouseTwoInput(e.target.value)}
-                    />
+                    <p className={classes.involvedName}>
+                      {spouseTwoStatementData.fullName}
+                    </p>
                     <div className={classes.roleStatus}>
                       {spouseTwoStatementData.choice}
                     </div>
                     <div className={classes.comment}>
                       <h4>Comment</h4>
-                      <input
-                        className={classes.commentInput}
-                        type="text"
-                        value={spouseTwoStatementData.comment}
-                        onChange={(e) => setSpouseOneInput(e.target.value)}
-                      />
+                      <p> {stripHtml(spouseTwoStatementData.comment)} </p>
                     </div>
                   </div>
                   <div className={classes.involvedInfo}>
                     <h3 className={classes.label}>Lawyer2:</h3>
-                    <input
-                      type="text"
-                      value={lawyerTwoStatementData.fullName}
-                      onChange={(e) => setSpouseTwoLawyerInput(e.target.value)}
-                    />
+                    <p className={classes.involvedName}>
+                      {lawyerTwoStatementData.fullName}
+                    </p>
                     <div className={classes.roleStatus}>
                       {lawyerTwoStatementData.choice}
                     </div>
                     <div className={classes.comment}>
                       <h4>Comment</h4>
-                      <input
-                        className={classes.commentInput}
-                        type="text"
-                        value={lawyerTwoStatementData.comment}
-                        onChange={(e) => setNotaryInput(e.target.value)}
-                      />
+                      <p> {stripHtml(lawyerTwoStatementData.comment)} </p>
                     </div>
                   </div>
                 </div>
@@ -322,11 +349,7 @@ function EditDivorce(props) {
                 <div className={classes.externals}>
                   <div className={classes.notaryInfo}>
                     <h3 className={classes.label}>Notary:</h3>
-                    <input
-                      type="text"
-                      value={notaryStatementData.fullName}
-                      onChange={(e) => setNotaryInput(e.target.value)}
-                    />
+                    <p> {notaryStatementData.fullName}</p>
                     <div className={classes.roleStatus}>
                       {notaryStatementData.choice}
                     </div>
@@ -347,12 +370,13 @@ function EditDivorce(props) {
                   page={props.page}
                   exitHandler={exitHandler}
                   editHandler={editHandler}
-                  deleteHandler={deleteHandler}
+                  saveHandler={saveHandler}
                   reminderHandler={reminderHandler}
                   editPendingHandler={editPendingHandler}
                   acceptDivorceHandler={acceptDivorceHandler}
                   rejectDivorceHandler={rejectDivorceHandler}
                   objectDivorceHandler={objectDivorceHandler}
+                  saveEditHandler={props.saveEditHandler}
                 />
               </section>
             </div>

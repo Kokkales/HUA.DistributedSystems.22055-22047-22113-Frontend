@@ -8,6 +8,7 @@ import DivorceItem from '../../divorces/DivorceItem';
 import SearchResults from '../SearchResults';
 import DivorceList from '../../divorces/DivorceList';
 import axios from 'axios';
+import ErrorNotification from '../../ui/ErrorNotification';
 
 function LawyerWorkspace(props) {
   const [loadedDraft, setLoadedDraft] = useState([]);
@@ -15,6 +16,9 @@ function LawyerWorkspace(props) {
   const [loadedCompleted, setLoadedComlpeted] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [isResults, setIsResults] = useState(false);
+  const [isError, setIsError] = useState('');
+  const [isSuccesfull, setIsSuccesfull] = useState(false);
   console.log(props.role);
   // GET some divorce information
 
@@ -98,14 +102,26 @@ function LawyerWorkspace(props) {
   }
 
   function searchDivorceHandler(event) {
+    if (token) {
+      //code
+    } else {
+      navigate('/');
+    }
     event.preventDefault();
     console.log('Admin search button clicked');
     console.log(searchText);
-    async function findDivorces(divorceId) {
-      console.log('find Divorce: ' + typeof divorceId);
+    async function findDivorces() {
       try {
         const response = await axios.get(
-          'http://localhost:8887/divorce/findById?id=' + searchText
+          'http://localhost:8887/divorce/search?query=' +
+            encodeURIComponent(searchText),
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              // 'Content-Type': 'application/json', // Correct header name
+            },
+            withCredentials: true, // Correct usage: Boolean value
+          }
         );
         const data = response.data;
         console.log('Found : ' + data);
@@ -118,13 +134,27 @@ function LawyerWorkspace(props) {
           divorces.push(divorce);
         }
         setSearchResults(divorces);
+        console.log('resuults' + searchResults.length);
+        if (searchResults.length != 0) {
+          setIsResults(true);
+        }
         console.log('The results are: ' + searchResults);
       } catch (error) {
         console.log('ERROR: ', error);
+        setIsError('No Results');
+        const timer = setTimeout(() => {
+          setIsError('');
+        }, 3000);
+
+        return () => clearTimeout(timer);
       }
     }
     findDivorces();
-    findDivorces(searchText);
+    // findDivorces(searchText);
+  }
+
+  function closeResults(event) {
+    setIsResults(false);
   }
 
   return (
@@ -145,14 +175,14 @@ function LawyerWorkspace(props) {
           <PrimaryButton name="Search" onClick={searchDivorceHandler} />
         </div>
       </section>
-      <section className={classes.draftDivorces}>
+      {/* <section className={classes.draftDivorces}>
         <h1 className={classes.satustTitle}>Draft</h1>
         <div className={classes.divorceList}>
           <DivorceList items={loadedDraft} type="draft" role="lawyer" id="1" />
           {/* <DivorceItem /> */}
-          {loadedDraft.length === 0 && <p>There are no Draft divorces</p>}
-        </div>
-      </section>
+      {/* {loadedDraft.length === 0 && <p>There are no Draft divorces</p>} */}
+      {/* </div> */}
+      {/* // </section > * /} */}
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
@@ -171,7 +201,14 @@ function LawyerWorkspace(props) {
           )}
         </div>
       </section>
-      {searchResults.length != 0 && <SearchResults items={searchResults} />}
+      {isResults && (
+        <SearchResults
+          role="lawyer"
+          items={searchResults}
+          closeResults={closeResults}
+        />
+      )}
+      {isError == 'No Results' && <ErrorNotification message="No Results" />}
     </div>
   );
 }

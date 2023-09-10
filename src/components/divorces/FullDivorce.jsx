@@ -44,7 +44,8 @@ function FullDivorce(props) {
     async function fetchData() {
       try {
         const response = await axios.get(
-          'http://localhost:8887/divorce/findById?id=' + props.divorceId,
+          'http://localhost:8887/divorce/findById?id=' +
+            encodeURIComponent(props.divorceId),
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -137,17 +138,55 @@ function FullDivorce(props) {
 
     //TODO
   }
-  //DELETE BUTTON
-  function deleteHandler(event) {
-    console.log('delete button clicked');
-    //send divorce_id
-    event.preventDefault();
+
+  {
+    /*{
+    "divorceID": 9,
+      "role": "SPOUSE",
+        "comment": "blah blah",
+          "choice": "ACCEPTED"
+  }*/
   }
+
+  //TODO
+  //CREATE HANDLER
+  async function saveHandler(event) {
+    event.preventDefault();
+    console.log('create new divorce button clicked');
+    // console.log('Divorce Data: ' + JSON.stringify(createDivorceData));
+    // try {
+    //   const response = await axios.post(
+    //     'http://localhost:8887/divorce/save',
+    //     createDivorceData,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         'Content-Type': 'application/json', // Correct header name
+    //       },
+    //       withCredentials: true, // Correct usage: Boolean value
+    //     }
+    //   );
+    //   const data = response.data;
+    // } catch (error) {
+    //   if (error.message == 'Request failed with status code 500') {
+    //     console.log('User not found invotation to send');
+    //     // setIsFound(false);
+    //   }
+    //   // console.log('Find User with Tax error: ', error);
+    // }
+  }
+
   //REMINDER BUTTON
   function reminderHandler(event) {
     console.log('reminder button clicked');
     event.preventDefault();
   }
+  const [addStatement, setAddStatement] = useState({
+    divorceID: props.divorceId,
+    role: '',
+    comment: '',
+    choice: 'ACCEPTED',
+  });
   //ACCEPT BUTTON
   function acceptDivorceHandler(event) {
     console.log('acception button clicked');
@@ -156,6 +195,12 @@ function FullDivorce(props) {
     // setIsPopUpShown(true);
     setActionType('accept');
     // props.formState(false);
+    setAddStatement({
+      divorceID: props.divorceId,
+      role: props.role.toUpperCase(),
+      comment: '',
+      choice: 'ACCEPTED',
+    });
   }
 
   //REJECT BUTTON
@@ -164,6 +209,12 @@ function FullDivorce(props) {
     event.preventDefault();
     setIsPopUpDivorce(true);
     setActionType('reject');
+    setAddStatement({
+      divorceID: props.divorceId,
+      role: props.role.toUpperCase(),
+      comment: '',
+      choice: 'REJECTED',
+    });
   }
   //OBJECT BUTTON
   function objectDivorceHandler(event) {
@@ -172,7 +223,19 @@ function FullDivorce(props) {
     setIsPopUpDivorce(true);
     setActionType('object');
     // props.formEditState(true);
+    setAddStatement({
+      divorceID: props.divorceId,
+      role: props.role.toUpperCase(),
+      comment: '',
+      choice: 'OBJECTED',
+    });
   }
+  function stripHtml(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || '';
+  }
+
+  // const plainText = stripHtml(htmlText);
 
   return (
     <div>
@@ -232,7 +295,7 @@ function FullDivorce(props) {
                     </div>
                     <div className={classes.comment}>
                       <h4>Comment</h4>
-                      <p> {spouseTwoStatementData.comment} </p>
+                      <p> {stripHtml(spouseTwoStatementData.comment)} </p>
                     </div>
                   </div>
                   <div className={classes.involvedInfo}>
@@ -245,7 +308,7 @@ function FullDivorce(props) {
                     </div>
                     <div className={classes.comment}>
                       <h4>Comment</h4>
-                      <p> {lawyerTwoStatementData.comment} </p>
+                      <p> {stripHtml(lawyerTwoStatementData.comment)} </p>
                     </div>
                   </div>
                 </div>
@@ -261,7 +324,7 @@ function FullDivorce(props) {
                 <div>
                   <h3 className={classes.label}>Contract Details:</h3>
                   <h3 className={classes.info}>
-                    {divorceData.contractDetails}
+                    {stripHtml(divorceData.contractDetails)}
                   </h3>
                 </div>
               </section>
@@ -286,7 +349,10 @@ function FullDivorce(props) {
                 </div>
                 <div className={classes.statusInfo}>
                   <div>
-                    <h3>Notorial Deed Number:{notaryStatementData.comment}</h3>
+                    <h3>
+                      Notorial Deed Number:
+                      {stripHtml(notaryStatementData.comment)}
+                    </h3>
                   </div>
                 </div>
               </section>
@@ -298,7 +364,7 @@ function FullDivorce(props) {
                   page={props.page}
                   exitHandler={exitHandler}
                   editHandler={editHandler}
-                  deleteHandler={deleteHandler}
+                  saveHandler={saveHandler}
                   reminderHandler={reminderHandler}
                   editPendingHandler={editPendingHandler}
                   acceptDivorceHandler={acceptDivorceHandler}
@@ -317,6 +383,7 @@ function FullDivorce(props) {
           divorceId={props.divorceId}
           role={props.role}
           actionType={actionType}
+          data={addStatement}
         />
       )}
     </div>

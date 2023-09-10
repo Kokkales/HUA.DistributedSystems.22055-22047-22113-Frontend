@@ -30,22 +30,55 @@ function CreateDivorce(props) {
   const [notaryTaxNumber, setNotaryTaxNumber] = useState();
   const [contractDetails, setContractDetails] = useState();
   const [divorceData, setDivorceData] = useState({});
+
+  const [userData, setUserData] = useState({});
   const [createDivorceData, setCreateDivorceData] = useState({
     status: 'PENDING',
     contractDetails: '',
-    lawyerLeadTaxNumber: '',
     lawyerTwoTaxNumber: '',
     spouseOneTaxNumber: '',
     spouseTwoTaxNumber: '',
     notaryTaxNumber: '',
   });
-  const token = localStorage.getItem('jwtToken');
 
+  const token = localStorage.getItem('jwtToken');
   // console.log('Draft option: ' + props.draftOptions);
   useEffect(() => {
-    setLeadLawyer(1);
-    createDivorceData.lawyerLeadTaxNumber = '1';
-    console.log('LEAD LAWYER: ' + createDivorceData.lawyerLeadTaxNumber);
+    console.log('tthe token is:' + token);
+    if (token) {
+      //nothing
+    } else {
+      // Redirect to the login page if the token is not present
+      // history.push('http://localhost:3000/');
+      navigate('/');
+      console.log('TOKEN ERROR');
+    }
+    // async function fetchData() {
+    //   try {
+    //     const response = await axios.get('http://localhost:8887/user', {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         'Content-Type': 'application/json', // Correct header name
+    //       },
+    //       withCredentials: true, // Correct usage: Boolean value
+    //     });
+    //     const data = response.data;
+    //     console.log('OK I AM MAD: ' + JSON.stringify(data));
+    //     setUserData(data);
+    //     // props.takeUserRole(data.role);
+    //     // console.log('THE ROLE IS: ' + data.role);
+    //     // setLoadedDivorces(divorces);
+    //   } catch (error) {
+    //     console.log('ERROR: ', error);
+    //   }
+    // }
+    // fetchData();
+    // // setCreateDivorceData({
+    //   ...createDivorceData,
+    //   lawyerLeadTaxNumber: userData.taxNumber,
+    // });
+    // createDivorceData.lawyerLeadTaxNumber = userData.taxNumber;
+    // console.log('LEAD LAWYER: ' + userData.taxNumber);
   }, []);
 
   function handleSpouseOneTaxNumber(value) {
@@ -71,7 +104,9 @@ function CreateDivorce(props) {
   function handleNotaryTaxNumber(value) {
     setNotaryTaxNumber(value);
     createDivorceData.notaryTaxNumber = value;
-    console.log('I am the parent and notary is: ' + value);
+    console.log(
+      'I am the parent and notary is: ' + createDivorceData.notaryTaxNumber
+    );
   }
 
   function handleContractDetails(value) {
@@ -85,52 +120,59 @@ function CreateDivorce(props) {
   async function createDivorceHandler(event) {
     event.preventDefault();
     console.log('create new divorce button clicked');
-    console.log('Divorce Data: ' + createDivorceData);
+    console.log('Divorce Data: ' + JSON.stringify(createDivorceData));
     if (roleCounter < 5) {
       console.log('Yoou should complete all the empty spaces!!!!');
     }
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json;charset=UTF-8' },
-      body: JSON.stringify(createDivorceData), //request pass data
-    };
-    await fetch('http://localhost:8887/divorce/save', requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        navigate('/lawyer/workspace');
-        console.log(data);
-      });
+    try {
+      const response = await axios.post(
+        'http://localhost:8887/divorce/save',
+        createDivorceData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json', // Correct header name
+          },
+          withCredentials: true, // Correct usage: Boolean value
+        }
+      );
+      const data = response.data;
+    } catch (error) {
+      if (error.message == 'Request failed with status code 500') {
+        console.log('User not found invotation to send');
+        // setIsFound(false);
+      }
+      // console.log('Find User with Tax error: ', error);
+    }
   }
 
   async function saveDivorceHandler(event) {
     event.preventDefault();
-    event.preventDefault();
     console.log('create new divorce button clicked');
+    console.log('Divorce Data: ' + JSON.stringify(createDivorceData));
     createDivorceData.status = 'DRAFT';
-    console.log('Divorce Data: ' + createDivorceData);
     if (roleCounter < 5) {
       console.log('Yoou should complete all the empty spaces!!!!');
     }
-    // SAVE DATA
     try {
-      //todo change the path
       const response = await axios.post(
         'http://localhost:8887/divorce/save',
+        createDivorceData,
         {
-          createDivorceData,
-        },
-        {
-          headers: 'Access-Control-Allow-Origin',
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          // Content_Type: 'application/x-www-form-urlencoded',
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json', // Correct header name
+          },
+          withCredentials: true, // Correct usage: Boolean value
         }
       );
-      const token = response.data;
-      navigate('/lawyer/workspace');
+      const data = response.data;
     } catch (error) {
-      console.log('Create Divorce failed: ', error);
+      if (error.message == 'Request failed with status code 500') {
+        console.log('User not found invotation to send');
+        // setIsFound(false);
+      }
+      // console.log('Find User with Tax error: ', error);
     }
   }
 
@@ -219,9 +261,9 @@ function CreateDivorce(props) {
         </div>
         <div className={classes.options}>
           <div className={classes.draftButton}>
-            {props.draftOptions != false && (
+            {/* {props.draftOptions != false && (
               <PrimaryButton name="Draft" onClick={saveDivorceHandler} />
-            )}
+            )} */}
           </div>
           <div className={classes.createButton}>
             <PrimaryButton name="Create" onClick={createDivorceHandler} />

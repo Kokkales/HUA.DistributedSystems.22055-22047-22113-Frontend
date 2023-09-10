@@ -11,12 +11,12 @@ function FullDivorceOptions(props) {
           <section className={classes.options}>
             <div className={classes.draftLawyerOptions}>
               <div className={classes.cancelPendingLawyerButton}>
-                {props.edit == true && (
+                {/* {props.edit == true && (
                   <PrimaryButton name="Edit" onClick={props.editHandler} />
-                )}
+                )} */}
               </div>
               <div className={classes.exitPendingLawyerButton}>
-                <PrimaryButton name="Delete" onClick={props.deleteHandler} />
+                <PrimaryButton name="save" onClick={props.saveHandler} />
               </div>
               <div className={classes.remindPendingLawyerButton}>
                 <PrimaryButton name="Exit" onClick={props.exitHandler} />
@@ -29,10 +29,10 @@ function FullDivorceOptions(props) {
         <section className={classes.options}>
           <div className={classes.pendingLawyerOptions}>
             <div className={classes.cancelPendingLawyerButton}>
-              <PrimaryButton
+              {/* <PrimaryButton
                 name="Cancel Divorce"
                 onClick={props.deleteHandler}
-              />
+              /> */}
             </div>
             <div className={classes.exitPendingLawyerButton}>
               <ReminderButton onClick={props.reminderHandler} />
@@ -41,12 +41,12 @@ function FullDivorceOptions(props) {
               <PrimaryButton name="Exit" onClick={props.exitHandler} />
             </div>
             <div className={classes.editPendingLawyerButton}>
-              <PrimaryButton name="Edit" onClick={props.editHandler} />
+              {/* <PrimaryButton name="Edit" onClick={props.editHandler} /> */}
             </div>
           </div>
         </section>
       )}
-      {props.type == 'completed' &&
+      {(props.type == 'completed' || props.type == undefined) &&
         props.role == 'lawyer' &&
         props.page != 'responsePage' && (
           <section className={classes.options}>
@@ -80,41 +80,47 @@ function FullDivorceOptions(props) {
       )}
       {/* Spouse Options */}
       {(props.type == 'pending' && props.role == 'spouse') ||
-        (props.page == 'responsePage' && props.role == 'lawyer' && (
-          <section className={classes.options}>
-            <div className={classes.pendingSpouseOptions}>
-              <div className={classes.acceptedPendingSpouseButton}>
-                <PrimaryButton
-                  name="Accept"
-                  onClick={props.acceptDivorceHandler}
-                />
+        (props.type == 'toRespond' &&
+          props.page == 'responsePage' &&
+          props.role == 'lawyer' && (
+            <section className={classes.options}>
+              <div className={classes.pendingSpouseOptions}>
+                <div className={classes.acceptedPendingSpouseButton}>
+                  <PrimaryButton
+                    name="Accept"
+                    onClick={props.acceptDivorceHandler}
+                  />
+                </div>
+                <div className={classes.rejectedPendingSpouseButton}>
+                  <PrimaryButton
+                    name="Reject"
+                    onClick={props.rejectDivorceHandler}
+                  />
+                </div>
+                <div className={classes.objectedPendingSpouseButton}>
+                  <PrimaryButton
+                    name="Objection"
+                    onClick={props.objectDivorceHandler}
+                  />
+                </div>
+                <div className={classes.exitPendingSpouseButton}>
+                  <PrimaryButton name="Close" onClick={props.exitHandler} />
+                </div>
               </div>
-              <div className={classes.rejectedPendingSpouseButton}>
-                <PrimaryButton
-                  name="Reject"
-                  onClick={props.rejectDivorceHandler}
-                />
-              </div>
-              <div className={classes.objectedPendingSpouseButton}>
-                <PrimaryButton
-                  name="Objection"
-                  onClick={props.objectDivorceHandler}
-                />
-              </div>
-              <div className={classes.exitPendingSpouseButton}>
+            </section>
+          ))}
+      {/* ADMIN OPTIONS */}
+      {
+        (props.type == 'completed' || props.type == undefined) &&
+          (props.role == 'spouse' || props.role == 'admin') && (
+            <section className={classes.options}>
+              <div className={classes.completedLawyerOptions}>
                 <PrimaryButton name="Close" onClick={props.exitHandler} />
               </div>
-            </div>
-          </section>
-        ))}
-      {props.type == 'completed' &&
-        (props.role == 'spouse' || props.role == 'admin') && (
-          <section className={classes.options}>
-            <div className={classes.completedLawyerOptions}>
-              <PrimaryButton name="Close" onClick={props.exitHandler} />
-            </div>
-          </section>
-        )}
+            </section>
+          )
+        // )
+      }
     </div>
   );
 }

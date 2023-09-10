@@ -5,8 +5,9 @@ import PrimaryButton from '../ui/PrimaryButton';
 import LoginLayout from '../layout/auth_layout/LoginLayout';
 import Overlay from '../ui/Overlay';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useEffect } from 'babel-plugin-react-html-attrs';
 
 function EditProfileForm(props) {
   const isShown = props.isShown;
@@ -14,6 +15,19 @@ function EditProfileForm(props) {
   const [newPhoneNumber, setNewPhoneNumber] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState('');
+  const navigate = useNavigate();
+  const token = localStorage.getItem('jwtToken');
+  // console.log('Draft option: ' + props.draftOptions);
+  // useEffect(() => {
+  console.log('tthe token is:' + token);
+  if (token) {
+    //nothing
+  } else {
+    navigate('/');
+    console.log('TOKEN ERROR');
+  }
+  console.log('ok');
+  // }, []);
 
   async function saveEditHandler(event) {
     console.log(props.data.firstName);
@@ -23,36 +37,39 @@ function EditProfileForm(props) {
       alert("Passwords don't match");
       return;
     }
+    console.log('NEW PHONE NUMBER: ' + newPhoneNumber);
+    //     {
+    //     "taxNumber": 28,
+    //     "email": "kdegogay1@redcross.org",
+    //     "phoneNumber": "8222214093",
+    //     "password": "test"
+    // }
     const updatedUser = {
+      taxNumber: props.data.taxNumber,
       email: newEmail,
       password: newPassword,
       taxNumber: props.data.taxNumber,
-      identityCard: props.data.identityCard,
       phoneNumber: newPhoneNumber,
-      firstname: props.data.firstname,
-      lastname: props.data.lastname,
-      role: props.data.role,
     };
     console.log('Register button clicked');
     console.log('Password: ' + updatedUser.firstname);
+    console.log('firstName: ' + updatedUser.firstname);
+    console.log('lastName: ' + updatedUser.lastname);
+    console.log('taxNumber: ' + updatedUser.taxNumber);
+    console.log('identityCard: ' + updatedUser.identityCard);
+    console.log('phoneNumber: ' + updatedUser.phoneNumber);
     try {
+      console.log("Update user's data" + JSON.stringify(updatedUser));
       //todo change the path
       const response = await axios.post(
         'http://localhost:8887/user/edit',
+        updatedUser,
         {
-          email: newEmail,
-          // password: newPassword,
-          taxNumber: props.data.taxNumber,
-          identityCardNumber: props.data.identityCardNumber,
-          phoneNumber: newPhoneNumber,
-          firstName: props.data.firstName,
-          lastName: props.data.lastName,
-          // role: props.data.role,
-        },
-        {
-          headers: 'Access-Control-Allow-Origin',
-          withCredentials: 'true',
-          // Content_Type: 'application/x-www-form-urlencoded',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
+            'Content-Type': 'application/json', // Correct header name
+          },
+          withCredentials: true, // Correct usage: Boolean value
         }
       );
       const token = response.data.token;
@@ -105,7 +122,8 @@ function EditProfileForm(props) {
               labelHtmlFor="email"
               labelText="Email"
               inputType="text"
-              value={props.data.email}
+              // value={props.data.email}
+              // isDisabled={false}
               // inputPlaceholder=" something@xxxx.xxx"
               onChange={setEmailInput}
             ></TextField>
@@ -115,7 +133,7 @@ function EditProfileForm(props) {
               labelHtmlFor="phoneNumber"
               labelText="Phone Number"
               inputType="tel"
-              value={props.data.phoneNumber}
+              // value={props.data.phoneNumber}
               onChange={setPhoneNumberInput}
               // inputPlaceholder="e.g 6985637584"
             ></TextField>
@@ -125,7 +143,7 @@ function EditProfileForm(props) {
               labelHtmlFor="password"
               labelText="Password"
               inputType="password"
-              value={props.data.password}
+              // value={props.data.password}
               inputPlaceholder=""
               onChange={setPasswordInput}
             ></TextField>

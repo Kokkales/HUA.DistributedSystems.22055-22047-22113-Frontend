@@ -1,5 +1,5 @@
 .resultsSection {
-  /* background-color: red; */
+  background-color: none;
   width: 50vh;
   height: 85vh;
   display: grid;
@@ -19,7 +19,7 @@
 }
 
 .divorceList {
-  /* background-color: yellow; */
+  background-color: none;
   grid-area: 2 / 1 / 3 / 2;
   overflow: scroll;
   scrollbar-width: none;

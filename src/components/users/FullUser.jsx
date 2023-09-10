@@ -88,6 +88,8 @@ function FullUser(props) {
       setIsAccept(false);
       setIsEnable(false);
       setIsDisable(true);
+      // navigate('');
+      window.location.reload();
     } catch (error) {
       console.log('ERROR: ', error);
     }
@@ -112,6 +114,8 @@ function FullUser(props) {
       setIsAccept(false);
       setIsEnable(true);
       setIsDisable(false);
+      // navigate('');
+      window.location.reload();
     } catch (error) {
       console.log('ERROR: ', error);
     }
