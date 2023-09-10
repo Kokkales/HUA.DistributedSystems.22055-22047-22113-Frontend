@@ -27,6 +27,7 @@ function RegistrationForm(props) {
   const token = localStorage.getItem('jwtToken');
   const [isError, setIsError] = useState(false);
   const [isSuccesfull, setIsSuccesfull] = useState(false);
+  // const navigate = useNavigate();
 
   async function signUp() {
     if (password !== confirmPassword) {
@@ -66,6 +67,7 @@ function RegistrationForm(props) {
         }
       );
       const token = response.data.token;
+      navigate('/');
     } catch (error) {
       console.log('Register: ', error);
     }

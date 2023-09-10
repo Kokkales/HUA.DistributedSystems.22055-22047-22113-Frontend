@@ -1,21 +1,22 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-const PieChart = () => {
+const PieChart = (props) => {
+  const data = props.data;
+  // console.log(data);
   const chartData = {
-    series: [25, 15, 44, 55, 41, 17],
+    series: [data[0], data[1], data[2], data[3], data[4]],
     options: {
       chart: {
         width: '100%',
         type: 'pie',
       },
       labels: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
+        'Users',
+        'Enabled',
+        'Disabled',
+        'Pending Approval',
+        'Pending Registration',
       ],
       theme: {
         monochrome: {
@@ -30,7 +31,7 @@ const PieChart = () => {
         },
       },
       title: {
-        text: 'Monochrome Pie',
+        text: 'Users',
       },
       dataLabels: {
         formatter(val, opts) {

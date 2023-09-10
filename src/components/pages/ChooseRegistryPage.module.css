@@ -47,7 +47,7 @@
 .spouse:hover,
 .notary:hover {
   cursor: pointer;
-  background-color: brown;
+  background-color: #343a403e;
 }
 
 .facultySvg {

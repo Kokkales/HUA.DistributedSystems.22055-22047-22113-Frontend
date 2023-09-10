@@ -129,7 +129,7 @@ function LoginForm(props) {
           <PrimaryLink linkTo="/register" text="Register Here!" />
         </div>
         <div className={classes.forgotMyPasswordLink}>
-          <SecondaryLink linkTo="/" text="Forgot My Password" />
+          {/* <SecondaryLink linkTo="/" text="Forgot My Password" /> */}
         </div>
       </form>
       {isError && <ErrorNotification message="Wrong Credentials" />}
