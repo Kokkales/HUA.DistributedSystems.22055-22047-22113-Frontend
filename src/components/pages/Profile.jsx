@@ -8,18 +8,25 @@ import { useState } from 'react';
 
 function ProfilePage(props) {
   // Retrieve the JWT token from local storage
-  const history = createBrowserHistory();
+  // const history = createBrowserHistory();
   const navigate = useNavigate();
   const token = localStorage.getItem('jwtToken');
   useEffect(() => {
     if (!token) {
-      history.push('/');
+      // history.push('/');
       navigate('/');
     }
   }, []);
+
+  // recieve user role from user profile
+  const [userRole, setUserRole] = useState();
+  function handleUserRole(answer) {
+    console.log('RETURNED USER ROLE: ' + userRole);
+    setUserRole(answer);
+  }
   return (
-    <Layout>
-      <UserProfile />
+    <Layout userRole={userRole}>
+      <UserProfile takeUserRole={handleUserRole} />
     </Layout>
   );
 }

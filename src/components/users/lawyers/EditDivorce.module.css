@@ -122,3 +122,15 @@
 .ReminderButton:hover {
   background-color: #0056b3;
 }
+
+.commentInput {
+  width: 70%;
+  height: 10em;
+  resize: 'none';
+  overflow: hidden;
+  width: 100%;
+  min-height: 1.5em;
+  max-height: 10em;
+  text-align: left;
+  text-align: start;
+}

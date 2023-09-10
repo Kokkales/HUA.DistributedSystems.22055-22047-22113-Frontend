@@ -19,4 +19,20 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  animation: fade 6s ease-in-out;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

@@ -14,14 +14,28 @@ import axios from 'axios';
 function AdminWorkspace(props) {
   const [loadedDivorces, setLoadedDivorces] = useState([]);
   const [loadedUsers, setLoadedUsers] = useState([]);
+  const token = localStorage.getItem('jwtToken');
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (token) {
+      //code
+    } else {
+      navigate('/');
+    }
     async function fetchData() {
       try {
         const response = await axios.get(
-          'http://localhost:8887/divorce/findAll'
+          'http://localhost:8887/divorce/findAll',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json', // Correct header name
+            },
+            withCredentials: true, // Correct usage: Boolean value
+          }
         );
+        // http://localhost:8887/divorce/findAll
         const data = response.data;
         // console.log(data);
         const divorces = [];
@@ -43,7 +57,16 @@ function AdminWorkspace(props) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get('http://localhost:8887/user/findall');
+        const response = await axios.get(
+          'http://localhost:8887/user/findall?=',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json', // Correct header name
+            },
+            withCredentials: true, // Correct usage: Boolean value
+          }
+        );
         const data = response.data;
         // console.log(data);
         const users = [];

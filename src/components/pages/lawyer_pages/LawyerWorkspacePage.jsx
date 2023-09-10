@@ -10,8 +10,8 @@ function LawyerWorkspacePage(props) {
   // const token = localStorage.getItem('jwtToken');
   // useEffect(() => {
   //   if (!token) {
-  //     history.push('/');
-  //     navigate('http://localhost:3000/');
+  //     // history.push('/');
+  //     navigate('/');
   //   }
   // }, []);
   return (

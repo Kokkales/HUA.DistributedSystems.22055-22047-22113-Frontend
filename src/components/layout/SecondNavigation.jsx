@@ -1,19 +1,20 @@
 import classes from './SecondNavigation.module.css';
 import PageLink from '../ui/PageLink';
 
-function SecondNavigation() {
+function SecondNavigation(props) {
   return (
     <nav className={classes.navBar}>
       <ul>
         <li>
           <PageLink
             className="linkStyle"
-            linkTo="/lawyer/workspace" //variable in the place of spouse
+            linkTo={'/' + props.userRole + '/workspace'} //variable in the place of spouse
             text="Workspace"
+            userRole={props.userRole}
           />
         </li>
         <li>
-          <PageLink linkTo="/user/profile" text="Profile" />
+          <PageLink linkTo="/profile" text="Profile" />
         </li>
       </ul>
     </nav>

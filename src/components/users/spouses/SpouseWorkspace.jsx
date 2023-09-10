@@ -8,20 +8,32 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import DivorceItem from '../../divorces/DivorceItem';
-
+// import { useNavigate } from 'react-router-dom';
 function SpouseWorkspace(props) {
   const [loadedPending, setLoadedPending] = useState([]);
   const [loadedCompleted, setLoadedComlpeted] = useState([]);
+  const token = localStorage.getItem('jwtToken');
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (token) {
+      //code
+    } else {
+      navigate('/');
+    }
     async function fetchData() {
       try {
         const response = await axios.get(
-          'http://localhost:8887/divorce/myDivorces?role=SPOUSE&taxNumber=10'
+          'http://localhost:8887/divorce/myDivorces?role=SPOUSE%0A',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json', // Correct header name
+            },
+            withCredentials: true, // Correct usage: Boolean value
+          }
         );
         const data = response.data;
-        // console.log(data);
-        console.log('ok');
         console.log(data);
         const pendings = [];
         const completed = [];
@@ -50,6 +62,7 @@ function SpouseWorkspace(props) {
         console.log('ERROR: ', error);
       }
     }
+
     fetchData();
   }, []);
 
@@ -63,7 +76,7 @@ function SpouseWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-          <DivorceList items={loadedPending} role={props.role} type="pending" />
+          <DivorceList items={loadedPending} role="spouse" type="pending" />
           {/* <DivorceList items={loadedPending} role="spouse" type="pending" /> */}
           {/* <DivorceItem role={props.role} type="pending" /> */}
         </div>
@@ -71,11 +84,7 @@ function SpouseWorkspace(props) {
       <section className={classes.completedDivorces}>
         <h1 className={classes.statusTitle}>Completed</h1>
         <div className={classes.divorceList}>
-          <DivorceList
-            items={loadedCompleted}
-            role={props.role}
-            type="completed"
-          />
+          <DivorceList items={loadedCompleted} role="spouse" type="completed" />
 
           {/* <DivorceItem role={props.role} type="completed" /> */}
         </div>

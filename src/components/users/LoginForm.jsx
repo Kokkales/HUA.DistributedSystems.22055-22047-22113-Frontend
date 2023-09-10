@@ -6,13 +6,15 @@ import PrimaryLink from '../ui/PrimaryLink';
 import SecondaryLink from '../ui/SecondaryLink';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Error from '../ui/ErrorNotification';
 import ErrorNotification from '../ui/ErrorNotification';
+import { isVisible } from '@testing-library/user-event/dist/utils';
+import SuccesfullMesageNotification from '../ui/SuccesfullMessageNotification';
 
 function LoginForm(props) {
   const history = createBrowserHistory();
@@ -20,7 +22,21 @@ function LoginForm(props) {
   const [taxNumber, setTaxNumber] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false, '');
+  const [isError, setIsError] = useState(false);
+  const [isSuccesfull, setIsSuccesfull] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // useEffect(() => {
+  //   // Show the element for 3 seconds
+  //   setIsError(false);
+
+  //   // Hide the element after 3 seconds
+  //   const timer = setTimeout(() => {
+  //     setIsError(false);
+  //   }, 3000);
+
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   function taxNumberOnChangeHandler(event) {
     const value = event.target.value;
@@ -30,6 +46,9 @@ function LoginForm(props) {
     const value = event.target.value;
     setPassword(value);
   }
+  // if (isError === true) {
+  //   setInterval(setIsError(false), 3000);
+  // }
 
   function LoginHandler(event) {
     console.log('Tax Number: ' + taxNumber);
@@ -52,14 +71,25 @@ function LoginForm(props) {
           }
         );
         const token = response.data.token;
+
         // const other = response.data;
         localStorage.setItem('jwtToken', token);
-        history.push('/user/profile');
-        navigate('/user/profile');
+        history.push('/chooseRegister');
+        navigate('/chooseRegister');
+        setIsSuccesfull(true);
+        const timer = setTimeout(() => {
+          setIsSuccesfull(false);
+        }, 3000);
         // You'll need to set up routing for this.
+        return () => clearTimeout(timer);
       } catch (error) {
         console.error('Login failed', error);
-        setIsError(true, error);
+        setIsError(true);
+        const timer = setTimeout(() => {
+          setIsError(false);
+        }, 3000);
+
+        return () => clearTimeout(timer);
       }
     }
     login();
@@ -103,6 +133,7 @@ function LoginForm(props) {
         </div>
       </form>
       {isError && <ErrorNotification message="Wrong Credentials" />}
+      {isSuccesfull && <SuccesfullMesageNotification message="Welcome!" />}
     </Card>
   );
 }

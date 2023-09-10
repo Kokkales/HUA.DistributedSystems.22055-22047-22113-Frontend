@@ -25,12 +25,19 @@ function LawyerWorkspace(props) {
     if (token) {
       //code
     } else {
-      navigate('http://localhost:3000/');
+      navigate('/');
     }
     async function fetchData() {
       try {
         const response = await axios.get(
-          'http://localhost:8887/divorce/myDivorces?role=LAWYER&tax'
+          'http://localhost:8887/divorce/myDivorces?role=LAWYER',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json', // Correct header name
+            },
+            withCredentials: true, // Correct usage: Boolean value
+          }
         );
         const data = response.data;
         // console.log(data);
@@ -141,12 +148,7 @@ function LawyerWorkspace(props) {
       <section className={classes.draftDivorces}>
         <h1 className={classes.satustTitle}>Draft</h1>
         <div className={classes.divorceList}>
-          <DivorceList
-            items={loadedDraft}
-            type="draft"
-            role={props.role}
-            id="1"
-          />
+          <DivorceList items={loadedDraft} type="draft" role="lawyer" id="1" />
           {/* <DivorceItem /> */}
           {loadedDraft.length === 0 && <p>There are no Draft divorces</p>}
         </div>
@@ -154,7 +156,7 @@ function LawyerWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-          <DivorceList items={loadedPending} role={props.role} type="pending" />
+          <DivorceList items={loadedPending} role="lawyer" type="pending" />
           {/* <DivorceItem type="pending" role={props.role} /> */}
           {loadedPending.length === 0 && <p>There are no Pending divorces</p>}
         </div>
@@ -162,11 +164,7 @@ function LawyerWorkspace(props) {
       <section className={classes.completedDivorces}>
         <h1 className={classes.statusTitle}>Closed</h1>
         <div className={classes.divorceList}>
-          <DivorceList
-            items={loadedCompleted}
-            role={props.role}
-            type="completed"
-          />
+          <DivorceList items={loadedCompleted} role="lawyer" type="completed" />
           {/* <DivorceItem type="completed" role={props.role} /> */}
           {loadedCompleted.length === 0 && (
             <p>There are no Completed divorces yet</p>

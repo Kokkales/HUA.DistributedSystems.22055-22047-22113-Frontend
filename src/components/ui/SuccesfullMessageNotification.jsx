@@ -6,7 +6,7 @@ function SuccesfullMessageNotification(props) {
     <Card>
       <div className={classes.notificationCard}>
         <div>
-          <p>{props.message}Succesfully Submited</p>
+          <p>{props.message}</p>
         </div>
       </div>
     </Card>

@@ -5,10 +5,62 @@ import Overlay from '../ui/Overlay';
 import PrimaryButton from '../ui/PrimaryButton';
 import EditProfileForm from './EditProfileForm';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+
 function FullUser(props) {
   const [isEdit, setIsEdit] = useState(false);
   //fetch Full User data
+  const token = localStorage.getItem('jwtToken');
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
+  const [isEnable, setIsEnable] = useState(false);
+  const [isDisable, setIsDisable] = useState(false);
+  const [isAccept, setIsAccept] = useState(false);
 
+  // Check if the token is not present (user is not authenticated)
+  // GET profile data
+  useEffect(() => {
+    console.log('tthe token is:' + token);
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      console.log('ANSWER: ' + JSON.stringify(decodedToken));
+    } else {
+      // Redirect to the login page if the token is not present
+      // history.push('http://localhost:3000/');
+      navigate('http://localhost:3000/');
+    }
+    console.log('USER ID: ' + props.userId);
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          'http://localhost:8887/user/find?taxNumber=' + props.userId,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json', // Correct header name
+            },
+            withCredentials: true, // Correct usage: Boolean value
+          }
+        );
+        const data = response.data;
+        console.log('OK I AM MAD: ' + JSON.stringify(data));
+        setUserData(data);
+        // props.takeUserRole(data.role);
+        console.log('THE ROLE IS: ' + data.role);
+        console.log(data.userStatus);
+        setIsDisable(data.userStatus === 'ENABLED');
+        setIsEnable(data.userStatus === 'DISABLED');
+        setIsAccept(data.userStatus === 'PENDING_APPROVAL');
+        // setLoadedDivorces(divorces);
+      } catch (error) {
+        console.log('ERROR: ', error);
+      }
+    }
+    fetchData();
+  }, []);
   // EXIT BUTTON
   function exitHandler(event) {
     console.log('exit button clicked');
@@ -17,10 +69,54 @@ function FullUser(props) {
     props.formState(false);
   }
 
-  function acceptRegistrationHandler(event) {
+  async function acceptRegistrationHandler(event) {
     event.preventDefault();
     console.log('Accept registration Butotn clicked');
+    try {
+      const response = await axios.post(
+        'http://localhost:8887/user/enableAccess?taxNumber=' + props.userId,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json', // Correct header name
+          },
+          withCredentials: true, // Correct usage: Boolean value
+        }
+      );
+      const data = response.data;
+      setIsAccept(false);
+      setIsEnable(false);
+      setIsDisable(true);
+    } catch (error) {
+      console.log('ERROR: ', error);
+    }
   }
+
+  async function disableHandler(event) {
+    event.preventDefault();
+    console.log('Disable button clicked');
+    try {
+      const response = await axios.post(
+        'http://localhost:8887/user/disableAccess?taxNumber=' + props.userId,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json', // Correct header name
+          },
+          withCredentials: true, // Correct usage: Boolean value
+        }
+      );
+      const data = response.data;
+      setIsAccept(false);
+      setIsEnable(true);
+      setIsDisable(false);
+    } catch (error) {
+      console.log('ERROR: ', error);
+    }
+  }
+
   function openForm() {
     setIsEdit(false);
   }
@@ -37,7 +133,7 @@ function FullUser(props) {
         <div className={classes.fullUser}>
           <section className={classes.user}>
             <div className={classes.fullName}>
-              <h1>Katerina Konstantidi</h1>
+              <h1>{userData.firstName + ' ' + userData.lastName}</h1>
             </div>
             <div className={classes.exitX}>
               <svg
@@ -60,34 +156,52 @@ function FullUser(props) {
           <section className={classes.userData}>
             <div className={classes.infoContext}>
               <label>Tax Number</label>
-              <p>123456</p>
+              <p>{userData.taxNumber}</p>
             </div>
             <div className={classes.infoContext}>
               <label>Identity Card Number</label>
-              <p>AG 3456</p>
+              <p>{userData.identityCardNumber} </p>
             </div>
             <div className={classes.infoContext}>
               <label>Email</label>
-              <p>123456</p>
+              <p>{userData.email}</p>
             </div>
             <div className={classes.infoContext}>
               <label>Phone Number</label>
-              <p>6985637584</p>
+              <p>{userData.phoneNumber}</p>
             </div>
             <div className={classes.infoContext}>
               <label>Role</label>
-              <p>Lawyer</p>
+              <p>{userData.role}</p>
             </div>
           </section>
           <section className={classes.options}>
-            <PrimaryButton name="Disable" />
-            <PrimaryButton name="Enable" />
+            {isDisable && (
+              <PrimaryButton name="Disable" onClick={disableHandler} />
+            )}
+            {isEnable && (
+              <PrimaryButton
+                name="Enable"
+                onClick={acceptRegistrationHandler}
+              />
+            )}
             {/* {props.status == 'PENDING_REGISTRATION' && ( */}
-            <PrimaryButton name="Accept" />
+            {isAccept && (
+              <PrimaryButton
+                name="Accept"
+                onClick={acceptRegistrationHandler}
+              />
+            )}
             {/* )} */}
             <PrimaryButton name="Edit" onClick={editProfileHandler} />
           </section>
-          {isEdit && <EditProfileForm isShown={isEdit} formState={openForm} />}
+          {isEdit && (
+            <EditProfileForm
+              isShown={isEdit}
+              formState={openForm}
+              data={userData}
+            />
+          )}
         </div>
         {/* </DivorceLayout> */}
       </Card>

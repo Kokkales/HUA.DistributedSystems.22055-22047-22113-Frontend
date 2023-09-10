@@ -10,6 +10,7 @@ import { useState } from 'react';
 import InvolvedCard from './InvolvedCard';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function CreateDivorce(props) {
   const [requestStatus, seRequestStatus] = useState();
@@ -38,6 +39,7 @@ function CreateDivorce(props) {
     spouseTwoTaxNumber: '',
     notaryTaxNumber: '',
   });
+  const token = localStorage.getItem('jwtToken');
 
   // console.log('Draft option: ' + props.draftOptions);
   useEffect(() => {
@@ -45,6 +47,7 @@ function CreateDivorce(props) {
     createDivorceData.lawyerLeadTaxNumber = '1';
     console.log('LEAD LAWYER: ' + createDivorceData.lawyerLeadTaxNumber);
   }, []);
+
   function handleSpouseOneTaxNumber(value) {
     console.log('The value is: ' + value);
     // setSpouseOneTaxNumber(value);
@@ -108,21 +111,53 @@ function CreateDivorce(props) {
     if (roleCounter < 5) {
       console.log('Yoou should complete all the empty spaces!!!!');
     }
-    //check if all data needed are ok an then
-    //create the new divorce
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(createDivorceData), //request pass data
-    };
-    await fetch('http://localhost:8887/divorce/save', requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        navigate('/lawyer/workspace');
-        console.log(data);
-      });
-    console.log('save button clicked');
+    // SAVE DATA
+    try {
+      //todo change the path
+      const response = await axios.post(
+        'http://localhost:8887/divorce/save',
+        {
+          createDivorceData,
+        },
+        {
+          headers: 'Access-Control-Allow-Origin',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          // Content_Type: 'application/x-www-form-urlencoded',
+          withCredentials: true,
+        }
+      );
+      const token = response.data;
+      navigate('/lawyer/workspace');
+    } catch (error) {
+      console.log('Create Divorce failed: ', error);
+    }
   }
+
+  // async function saveDivorceHandler(event) {
+  //   event.preventDefault();
+  //   event.preventDefault();
+  //   console.log('create new divorce button clicked');
+  //   createDivorceData.status = 'DRAFT';
+  //   console.log('Divorce Data: ' + createDivorceData);
+  //   if (roleCounter < 5) {
+  //     console.log('Yoou should complete all the empty spaces!!!!');
+  //   }
+  //   //check if all data needed are ok an then
+  //   //create the new divorce
+  //   const requestOptions = {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(createDivorceData), //request pass data
+  //   };
+  //   await fetch('http://localhost:8887/divorce/save', requestOptions)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       navigate('/lawyer/workspace');
+  //       console.log(data);
+  //     });
+  //   console.log('save button clicked');
+  // }
 
   return (
     <div className={classes.createDivorce}>

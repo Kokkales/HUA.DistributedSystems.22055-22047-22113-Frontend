@@ -11,6 +11,7 @@ function ActionPopUp(props) {
   function finishAcceptionHandler(event) {
     event.preventDefault();
     console.log('Finish Acception Button Clicked');
+    props.formState(false);
   }
 
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function ActionPopUp(props) {
     event.preventDefault();
     console.log('exit Acception Button Clicked');
     props.formState(false);
+
     // navigate('/notary/workspace');
   }
 
@@ -60,7 +62,7 @@ function ActionPopUp(props) {
             {props.role != 'notary' && <TextField labelText="Comment" />}
           </div>
           <div className={classes.finish}>
-            <PrimaryButton name="finish" onClick={finishAcceptionHandler} />
+            <PrimaryButton name="Submit" onClick={finishAcceptionHandler} />
           </div>
         </div>
       </Card>

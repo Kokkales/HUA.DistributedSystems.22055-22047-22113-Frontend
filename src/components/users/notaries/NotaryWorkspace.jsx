@@ -10,14 +10,27 @@ import DivorceItem from '../../divorces/DivorceItem';
 function NotaryWorkspace(props) {
   const [loadedPending, setLoadedPending] = useState([]);
   const [loadedCompleted, setLoadedComlpeted] = useState([]);
+  const token = localStorage.getItem('jwtToken');
   const navigate = useNavigate();
 
   //GET some divorce information
   useEffect(() => {
+    if (token) {
+      //code
+    } else {
+      navigate('/');
+    }
     async function fetchData() {
       try {
         const response = await axios.get(
-          'http://localhost:8887/divorce/myDivorces?role=NOTARY&taxNumber=30'
+          'http://localhost:8887/divorce/myDivorces?role=NOTARY',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json', // Correct header name
+            },
+            withCredentials: true, // Correct usage: Boolean value
+          }
         );
         const data = response.data;
         // console.log(data);
@@ -64,18 +77,14 @@ function NotaryWorkspace(props) {
       <section className={classes.pendingDivorces}>
         <h1 className={classes.statusTitle}>Pending</h1>
         <div className={classes.divorceList}>
-          <DivorceList items={loadedPending} role={props.role} type="pending" />
+          <DivorceList items={loadedPending} role="notary" type="pending" />
           {/* <DivorceItem type="pending" role={props.role} /> */}
         </div>
       </section>
       <section className={classes.completedDivorces}>
         <h1 className={classes.statusTitle}>Completed</h1>
         <div className={classes.divorceList}>
-          <DivorceList
-            items={loadedCompleted}
-            type="completed"
-            role={props.role}
-          />
+          <DivorceList items={loadedCompleted} type="completed" role="notary" />
           {/* <DivorceItem type="completed" role={props.role} /> */}
         </div>
       </section>

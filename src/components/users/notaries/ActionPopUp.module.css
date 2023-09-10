@@ -1,7 +1,9 @@
 .acceptForm {
+  /* background-color: red; */
   width: 50vh;
   height: 30vh;
   padding: 10px;
+  border-radius: 8px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 20% 60% 20%;

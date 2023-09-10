@@ -32,8 +32,8 @@ function App() {
       <Route path="spouse/workspace" element={<SpouseWorkspacePage />} />{' '}
       <Route path="admin/workspace" element={<AdminWorkspacePage />} />{' '}
       <Route path="admin/workspace/statistics" element={<StatisticsPage />} />{' '}
-      <Route path="user/profile" element={<ProfilePage />} />{' '}
-      <Route path="user/editProfileForm" element={<EditProfileForm />} />{' '}
+      <Route path="profile" element={<ProfilePage />} />{' '}
+      {/* <Route path="profile/editProfileForm" element={<EditProfileForm />} />{' '} */}
     </Routes>
   );
 }

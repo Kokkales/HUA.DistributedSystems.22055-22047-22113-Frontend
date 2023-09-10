@@ -24,30 +24,28 @@ function FullDivorceOptions(props) {
             </div>
           </section>
         )}
-      {props.type == 'pending' &&
-        props.role == 'lawyer' &&
-        props.page !=
-          'responsePage'(
-            <section className={classes.options}>
-              <div className={classes.pendingLawyerOptions}>
-                <div className={classes.cancelPendingLawyerButton}>
-                  <PrimaryButton
-                    name="Cancel Divorce"
-                    onClick={props.deleteHandler}
-                  />
-                </div>
-                <div className={classes.exitPendingLawyerButton}>
-                  <ReminderButton onClick={props.reminderHandler} />
-                </div>
-                <div className={classes.remindPendingLawyerButton}>
-                  <PrimaryButton name="Exit" onClick={props.exitHandler} />
-                </div>
-                <div className={classes.editPendingLawyerButton}>
-                  <PrimaryButton name="Edit" onClick={props.editHandler} />
-                </div>
-              </div>
-            </section>
-          )}
+      {props.type == 'pending' && props.role == 'lawyer' && (
+        // props.page !='responsePage'
+        <section className={classes.options}>
+          <div className={classes.pendingLawyerOptions}>
+            <div className={classes.cancelPendingLawyerButton}>
+              <PrimaryButton
+                name="Cancel Divorce"
+                onClick={props.deleteHandler}
+              />
+            </div>
+            <div className={classes.exitPendingLawyerButton}>
+              <ReminderButton onClick={props.reminderHandler} />
+            </div>
+            <div className={classes.remindPendingLawyerButton}>
+              <PrimaryButton name="Exit" onClick={props.exitHandler} />
+            </div>
+            <div className={classes.editPendingLawyerButton}>
+              <PrimaryButton name="Edit" onClick={props.editHandler} />
+            </div>
+          </div>
+        </section>
+      )}
       {props.type == 'completed' &&
         props.role == 'lawyer' &&
         props.page != 'responsePage' && (

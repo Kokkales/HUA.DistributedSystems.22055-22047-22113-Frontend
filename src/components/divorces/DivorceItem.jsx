@@ -10,6 +10,7 @@ function DivorceItem(props) {
   const [fullData, setFullData] = useState({});
   // setEditIsWatch(childProperty);
   console.log('Item id= ' + props.id);
+  console.log('Divorce type: ' + props.type);
 
   function openDivorce() {
     setIsWatch(false);

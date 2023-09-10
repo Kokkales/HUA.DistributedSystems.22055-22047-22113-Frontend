@@ -39,22 +39,9 @@ function UserProfile(props) {
         });
         const data = response.data;
         console.log('OK I AM MAD: ' + JSON.stringify(data));
-        // const stats = [];
-        // for (const key in data) {
-        //   const stat = {
-        //     key: key,
-        //     taxNumber: 1,
-        //     firstName: data.firstName,
-        //     lastName: data.lastName,
-        //     identityCardNumber: data.identityCardNumber,
-        //     email: data.email,
-        //     phoneNumber: data.phoneNumber,
-        //     role: data.role,
-        //     userStatus: data.userStatus,
-        //   };
-        //   stats.push(stat);
-        // }
         setUserData(data);
+        props.takeUserRole(data.role);
+        console.log('THE ROLE IS: ' + data.role);
         // setLoadedDivorces(divorces);
       } catch (error) {
         console.log('ERROR: ', error);
@@ -106,7 +93,13 @@ function UserProfile(props) {
           <PrimaryButton name="Edit Profile" onClick={editProfileHandler} />
         </div>
       </section>
-      {isEdit && <EditProfileForm isShown={isEdit} formState={openForm} />}
+      {isEdit && (
+        <EditProfileForm
+          isShown={isEdit}
+          formState={openForm}
+          data={userData}
+        />
+      )}
     </div>
   );
 }
