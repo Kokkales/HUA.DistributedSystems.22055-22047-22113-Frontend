@@ -5,6 +5,7 @@ import PrimaryButton from '../../ui/PrimaryButton';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import SuccesfullMesageNotification from '../../ui/SuccesfullMessageNotification';
 
 function InvolvedCard(props) {
   // const token = localStorage.getItem('jwtToken');
@@ -12,6 +13,7 @@ function InvolvedCard(props) {
   const [taxNumber, setTaxNumber] = useState();
   const [email, setEmail] = useState('');
   const [isFound, setIsFound] = useState(true);
+  const [isSuccesfull, setIsSuccesfull] = useState(false);
 
   const navigate = useNavigate();
 
@@ -55,6 +57,11 @@ function InvolvedCard(props) {
             withCredentials: true, // Correct usage: Boolean value
           }
         );
+        setIsSuccesfull(true);
+        const timer = setTimeout(() => {
+          setIsSuccesfull(false);
+        }, 3000);
+        return () => clearTimeout(timer);
         console.log('TOKEN2: ' + response.data);
         // const token = response.data.token;
       } catch (error) {
@@ -160,6 +167,10 @@ function InvolvedCard(props) {
           </div>
         )}
       </div>
+
+      {isSuccesfull && (
+        <SuccesfullMesageNotification message="Invitation has been sent!" />
+      )}
     </Card>
   );
 }
