@@ -8,8 +8,7 @@ import axios from 'axios';
 
 function InvolvedCard(props) {
   // const token = localStorage.getItem('jwtToken');
-  const token =
-    'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk0MzA0MTAxLCJleHAiOjE2OTQzOTA1MDF9.z-QDQU_GuI1HiAEH0Omz2YzeffP9BAW_sd8sNYRTLUo';
+  const token = localStorage.getItem('jwtToken');
   const [taxNumber, setTaxNumber] = useState();
   const [email, setEmail] = useState('');
   const [isFound, setIsFound] = useState(true);
@@ -76,6 +75,7 @@ function InvolvedCard(props) {
     props.returnedTaxNumber(event.target.value);
     console.log('Search for this taxNumber if exists:' + event.target.value);
     //get request if exists setIsFound(true);
+    console.log('TOKEN: ' + token);
     try {
       const response = await axios.get(
         'http://localhost:8887/user/find?taxNumber=' + tax,
@@ -83,6 +83,7 @@ function InvolvedCard(props) {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json', // Correct header name
+            //to do put this  header 'Access-Control-Allow-Origin': '*',
           },
           withCredentials: true, // Correct usage: Boolean value
         }
