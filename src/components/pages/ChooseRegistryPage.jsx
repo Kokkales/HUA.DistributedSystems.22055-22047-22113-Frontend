@@ -47,6 +47,10 @@ function ChooseRegistryPage(props) {
     navigate('/profile');
   }
 
+  // TODO in each Faculty codition instead of checking for the faculty in the variable I will check if the faculty is contained in the array of roles of the user
+  //TODO then for each user I will have a different handleFunction to redirect so I can set before the faculty the user choose
+  //TODO in navigate now I will also sent the role the user is logged in as
+
   return (
     <LoginLayout>
       <div className={classes.chooseFacultyForm}>

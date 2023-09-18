@@ -40,6 +40,7 @@ function UserProfile(props) {
         const data = response.data;
         console.log('OK I AM MAD: ' + JSON.stringify(data));
         setUserData(data);
+        //TODO now in user Data in the role I have to put the parameter that the choose registry page sent me
         props.takeUserRole(data.role);
         console.log('THE ROLE IS: ' + data.role);
         // setLoadedDivorces(divorces);

@@ -20,7 +20,7 @@ function SecondNavigation(props) {
         <li>
           <PageLink
             className="linkStyle"
-            linkTo={'/' + props.userRole + '/workspace'} //variable in the place of spouse
+            linkTo={'/' + props.userRole + '/workspace'} //TODO Instead of props.userRole I will use the navigation parameter from choose registry
             text="Workspace"
             userRole={props.userRole}
           />
