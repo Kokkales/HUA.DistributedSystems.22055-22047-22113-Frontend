@@ -5,13 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { createBrowserHistory } from 'history';
 function NotaryWorkspacePage(props) {
-  const token = localStorage.getItem('jwtToken');
   const navigate = useNavigate();
-
+  const token = localStorage.getItem('jwtToken');
   useEffect(() => {
-    if (token) {
-      //code
-    } else {
+    if (!token) {
+      // history.push('/');
       navigate('/');
     }
   }, []);

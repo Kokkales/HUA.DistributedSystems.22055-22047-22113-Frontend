@@ -32,7 +32,7 @@ function ChooseRegistryPage(props) {
         const data = response.data;
         console.log('OK I AM MAD: ' + JSON.stringify(data));
         setUserData(data);
-        props.takeUserRole(data.role);
+        // props.takeUserRole(data.role);
         console.log('THE ROLE IS: ' + data.role);
         // setLoadedDivorces(divorces);
       } catch (error) {
@@ -42,14 +42,26 @@ function ChooseRegistryPage(props) {
     fetchData();
   }, []);
 
-  function sentToProfileHandler(event) {
+  function sentToLAWYERProfileHandler(event) {
     event.preventDefault();
-    navigate('/profile');
+    localStorage.setItem('userRole', 'lawyer');
+    navigate('/profile/lawyer');
   }
-
-  // TODO in each Faculty codition instead of checking for the faculty in the variable I will check if the faculty is contained in the array of roles of the user
-  //TODO then for each user I will have a different handleFunction to redirect so I can set before the faculty the user choose
-  //TODO in navigate now I will also sent the role the user is logged in as
+  function sentToSPOUSEProfileHandler(event) {
+    event.preventDefault();
+    localStorage.setItem('userRole', 'spouse');
+    navigate('/profile/spouse');
+  }
+  function sentToNOTARYProfileHandler(event) {
+    event.preventDefault();
+    localStorage.setItem('userRole', 'notary');
+    navigate('/profile/notary');
+  }
+  function sentToADMINProfileHandler(event) {
+    event.preventDefault();
+    localStorage.setItem('userRole', 'admin');
+    navigate('/profile/admin');
+  }
 
   return (
     <LoginLayout>
@@ -58,7 +70,7 @@ function ChooseRegistryPage(props) {
           <h1>Choose Faculty</h1>
         </div>
         {userData.role == 'LAWYER' && (
-          <div className={classes.lawyer} onClick={sentToProfileHandler}>
+          <div className={classes.lawyer} onClick={sentToLAWYERProfileHandler}>
             <div className={classes.facultySvg}>
               <svg
                 width="40"
@@ -83,7 +95,7 @@ function ChooseRegistryPage(props) {
           </div>
         )}
         {userData.role == 'NOTARY' && (
-          <div className={classes.notary} onClick={sentToProfileHandler}>
+          <div className={classes.notary} onClick={sentToNOTARYProfileHandler}>
             <div className={classes.facultySvg}>
               <svg
                 width="40"
@@ -107,8 +119,8 @@ function ChooseRegistryPage(props) {
             </div>
           </div>
         )}
-        {userData.role == 'SPOUSE' && (
-          <div className={classes.spouse} onClick={sentToProfileHandler}>
+        {(userData.role == 'SPOUSE' || userData.role == 'SPOUSE_ADMIN') && (
+          <div className={classes.spouse} onClick={sentToSPOUSEProfileHandler}>
             <div className={classes.facultySvg}>
               <svg
                 width="40"
@@ -132,8 +144,8 @@ function ChooseRegistryPage(props) {
             </div>
           </div>
         )}
-        {userData.role == 'ADMIN' && (
-          <div className={classes.lawyer} onClick={sentToProfileHandler}>
+        {(userData.role == 'ADMIN' || userData.role == 'SPOUSE_ADMIN') && (
+          <div className={classes.lawyer} onClick={sentToADMINProfileHandler}>
             <div className={classes.facultySvg}>
               <svg
                 width="40"

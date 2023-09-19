@@ -31,7 +31,7 @@ function ResponseDivorce(props) {
         const data = response.data;
         // console.log(data);
         console.log('ok');
-        console.log(data);
+        console.log('What is this?', data);
         const pendings = [];
         for (const key in data) {
           const divorce = {

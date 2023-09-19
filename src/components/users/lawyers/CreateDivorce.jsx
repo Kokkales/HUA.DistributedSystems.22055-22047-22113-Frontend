@@ -137,6 +137,7 @@ function CreateDivorce(props) {
         }
       );
       const data = response.data;
+      navigate('/lawyer/workspace');
     } catch (error) {
       if (error.message == 'Request failed with status code 500') {
         console.log('User not found invotation to send');

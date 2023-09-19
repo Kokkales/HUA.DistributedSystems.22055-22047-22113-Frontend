@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import LoginPage from './components/pages/LoginPage';
 import RegistrationPage from './components/pages/RegistrationPage';
-import ProfilePage from './components/pages/Profile';
+// import ProfilePage from './components/pages/Profile';
 import LawyerWorkspacePage from './components/pages/lawyer_pages/LawyerWorkspacePage';
 import SpouseWorkspacePage from './components/pages/spouse_pages/SpouseWorkspacePage';
 import NotaryWorkspacePage from './components/pages/notary_pages/NotaryWorkspacePage';
@@ -11,7 +11,7 @@ import CreateDivorcePage from './components/pages/lawyer_pages/CreateDivorcePage
 import StatisticsPage from './components/pages/admin_pages/StatisticsPage';
 import ChooseRegistryPage from './components/pages/ChooseRegistryPage';
 import ResponseDivorcePage from './components/pages/lawyer_pages/ResponseDivorcePage';
-
+import Profile from './components/pages/Profile';
 function App() {
   return (
     <Routes>
@@ -32,7 +32,7 @@ function App() {
       <Route path="spouse/workspace" element={<SpouseWorkspacePage />} />{' '}
       <Route path="admin/workspace" element={<AdminWorkspacePage />} />{' '}
       <Route path="admin/workspace/statistics" element={<StatisticsPage />} />{' '}
-      <Route path="profile" element={<ProfilePage />} />{' '}
+      <Route path="profile/:userChosenRole" element={<Profile />} />{' '}
       {/* <Route path="profile/editProfileForm" element={<EditProfileForm />} />{' '} */}
     </Routes>
   );
