@@ -64,7 +64,7 @@ function ResponseDivorce(props) {
         <div className={classes.divorceList}>
           <DivorceList
             items={loadedPending}
-            // type="toRespond"
+            type="pending"
             role="lawyer"
             page="responsePage"
           />
