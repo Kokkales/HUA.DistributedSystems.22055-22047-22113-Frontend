@@ -84,7 +84,12 @@ function SpouseWorkspace(props) {
       <section className={classes.completedDivorces}>
         <h1 className={classes.statusTitle}>Completed</h1>
         <div className={classes.divorceList}>
-          <DivorceList items={loadedCompleted} role="spouse" type="completed" />
+          <DivorceList
+            items={loadedCompleted}
+            role="spouse"
+            type="completed"
+            page="responsePage"
+          />
 
           {/* <DivorceItem role={props.role} type="completed" /> */}
         </div>

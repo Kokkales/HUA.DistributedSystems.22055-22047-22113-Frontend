@@ -69,7 +69,7 @@ function ChooseRegistryPage(props) {
         <div className={classes.title}>
           <h1>Choose Faculty</h1>
         </div>
-        {userData.role == 'LAWYER' && (
+        {(userData.role == 'LAWYER' || userData.role == 'SPOUSE_LAWYER') && (
           <div className={classes.lawyer} onClick={sentToLAWYERProfileHandler}>
             <div className={classes.facultySvg}>
               <svg
@@ -94,7 +94,7 @@ function ChooseRegistryPage(props) {
             </div>
           </div>
         )}
-        {userData.role == 'NOTARY' && (
+        {(userData.role == 'NOTARY' || userData.role == 'SPOUSE_NOTARY') && (
           <div className={classes.notary} onClick={sentToNOTARYProfileHandler}>
             <div className={classes.facultySvg}>
               <svg
@@ -119,7 +119,10 @@ function ChooseRegistryPage(props) {
             </div>
           </div>
         )}
-        {(userData.role == 'SPOUSE' || userData.role == 'SPOUSE_ADMIN') && (
+        {(userData.role == 'SPOUSE' ||
+          userData.role == 'SPOUSE_ADMIN' ||
+          userData.role == 'SPOUSE_LAWYER' ||
+          userData.role == 'SPOUSE_NOTARY') && (
           <div className={classes.spouse} onClick={sentToSPOUSEProfileHandler}>
             <div className={classes.facultySvg}>
               <svg
