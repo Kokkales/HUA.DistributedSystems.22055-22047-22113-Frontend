@@ -4,7 +4,7 @@ function MainFooter(props) {
   return (
     <footer>
       <div className={classes.fullName}>
-        <p>Katerina Konstantidi</p>
+        <p>Team 44</p>
       </div>
       <div className={classes.copyright}>
         <p>@Copyright</p>
